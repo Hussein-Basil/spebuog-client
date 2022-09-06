@@ -5,7 +5,7 @@ const Benefits = () => {
     return (
         <Flex flexDir="column" align="center" gap="3em" my="2em">
             <HStack gap="2em" fontWeight="semibold">
-                <Flex flexDir="column" gap="1em" align="center">
+                <Flex flexDir="column" gap="2.5em" align="center">
                     {/* <Image src={book}  bg="none" objectFit="contain" /> */}
                     <Image
                         loading="lazy"
@@ -16,11 +16,11 @@ const Benefits = () => {
                         width="220px"
                         height="219px"
                     />
-                    <Flex justify="center" textAlign="center" border="1px" bo3rderColor="gray.200" p="1em" mt="-60px" zIndex={-1} w="300px">
+                    <Flex justify="center" textAlign="center" bo3rderColor="gray.200" p="1em" mt="-60px" zIndex={-1} w="300px">
                         <Text>Gain <strong>world-class education</strong><br />to expand your technical knowledge</Text>
                     </Flex>
                 </Flex>
-                <Flex flexDir="column" gap="1em" align="center">
+                <Flex flexDir="column" gap="2em" align="center">
                     <Image
                         loading="lazy"
                         src="https://www.deeplearning.ai/wp-content/uploads/2020/12/icon-community.svg"
@@ -31,7 +31,7 @@ const Benefits = () => {
                         width="220px"
                         height="219px"
                     />
-                    <Flex justify="center" textAlign="center" border="1px" borderColor="gray.200" p="1em" mt="-60px" zIndex={-1} w="300px">
+                    <Flex justify="center" textAlign="center" borderColor="gray.200" p="1em" mt="-60px" zIndex={-1} w="300px">
                         <Text>Learn from a<br /><strong>collaborative community</strong><br />of peers and mentors</Text>
                     </Flex>
                 </Flex>
