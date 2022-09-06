@@ -42,10 +42,10 @@ const Footer = () => {
                     <Flex flexDir="column" rowGap="20px">
                         <Heading as="h3" size="md">Follow us</Heading>
                         <Flex columnGap="20px">
-                            <Link href="https://fb.com/basketful"><Icon as={Facebook} w="40px" h="40px" fill="white" /></Link>
+                            <Link href="https://fb.com/spebuog"><Icon as={Facebook} w="40px" h="40px" fill="white" /></Link>
                             <Link href="https://www.instagram.com/spebuog"><Icon as={Instagram} w="40px" h="40px" /></Link>
                             <Link href="https://t.me/SPEBUOG"><Icon as={Telegram} w="40px" h="40px" fill="white" /></Link>
-                            <Link href="https://linkedin.com/basketful"><Icon as={Linkedin} w="40px" h="40px" fill="white" /></Link>
+                            <Link href="https://www.linkedin.com/company/buog-spe-student-chapter"><Icon as={Linkedin} w="40px" h="40px" fill="white" /></Link>
                         </Flex>
                     </Flex>
                     {/* Contact Info*/}
