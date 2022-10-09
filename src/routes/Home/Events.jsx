@@ -9,7 +9,7 @@ const Events = () => {
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan elementum sapien. Praesent sed varius purus. In hac habitasse platea dictumst.Vivamus vel sodales enim, a vehicula mi.Quisque odio ex, viverra eu metus quis, bibendum molestie risus.",
       tags: ['Completion'],
       speaker: {
-        avatar: 'http://spebuog-dev.vercel.app/images/sayed.png',
+        avatar: 'https://spebuog-dev.vercel.app/images/sayed.png',
         name: 'Eng Elsayed Amer',
         position: 'Senior Petrolem Engineer'
       }

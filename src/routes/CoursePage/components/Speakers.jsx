@@ -12,7 +12,7 @@ const Speakers = ({ speakers }) => {
                     speakers.map(speaker => (
                         <Flex align="center" gap="1em" maxW="450px">
                             <Image
-                                src={`http://spebuog-dev.vercel.app${speaker.image}`}
+                                src={`https://spebuog-dev.vercel.app${speaker.image}`}
                                 as={Avatar}
                                 w={{ base: "100px", lg: "130px" }}
                                 h={{ base: "100px", lg: "130px" }}

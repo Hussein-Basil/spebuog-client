@@ -10,7 +10,7 @@ const SpeakerProfile = () => {
     const [speaker, setSpeaker] = useState()
 
     useEffect(() => {
-        fetch(`http://spebuog-dev.vercel.app/api/speaker/${params.id}`)
+        fetch(`https://spebuog-dev.vercel.app/api/speaker/${params.id}`)
             .then(res => res.json())
             .then(data => setSpeaker({ ...data.speaker, events: data.events }))
 
@@ -42,7 +42,7 @@ const SpeakerProfile = () => {
                         textAlign={{ base: "center", lg: "unset" }}
                     >
                         <Image
-                            src={`http://spebuog-dev.vercel.app${speaker.image}`}
+                            src={`https://spebuog-dev.vercel.app${speaker.image}`}
                             w={{ base: "150px", lg: "200px" }}
                             h={{ base: "150px", lg: "200px" }}
                             mb="-45px"

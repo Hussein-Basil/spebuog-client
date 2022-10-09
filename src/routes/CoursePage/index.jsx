@@ -15,7 +15,7 @@ const Course = () => {
     const [event, setEvent] = useState({})
 
     useEffect(() => {
-        fetch(`http://spebuog-dev.vercel.app/api/event/${params.id}`)
+        fetch(`https://spebuog-dev.vercel.app/api/event/${params.id}`)
             .then(res => res.json())
             .then(data => setEvent(data))
         // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -36,7 +36,7 @@ const Speakers = () => {
                         >
                             {speaker.image !== '/images/speaker.png' ? (
                                 <Image
-                                    src={`http://spebuog-dev.vercel.app${speaker.image}`}
+                                    src={`https://spebuog-dev.vercel.app${speaker.image}`}
                                     alt="instructor"
                                     width="150px"
                                     height="150px"

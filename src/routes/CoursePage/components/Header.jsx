@@ -39,7 +39,7 @@ const Header = ({ event }) => {
                         <Flex align="center" gap="1em">
                             {event.speakers.at(0) && event.speakers.at(0)?.image !== '/images/speaker.png' ? (
                                 <Image
-                                    src={`http://spebuog-dev.vercel.app${event.speakers.at(0)?.image}`}
+                                    src={`https://spebuog-dev.vercel.app${event.speakers.at(0)?.image}`}
                                     w="50px"
                                     h="50px"
                                 />

@@ -38,7 +38,7 @@ const Courses = () => {
 
     useEffect(() => {
         setLoading(true)
-        let link = 'http://spebuog-dev.vercel.app/api/event'
+        let link = 'https://spebuog-dev.vercel.app/api/event'
 
         if (filterTag?.value && searchQuery) {
             link += `?tag=${filterTag.value}&q=${searchQuery}`

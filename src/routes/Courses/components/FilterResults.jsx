@@ -24,7 +24,7 @@ const FilterResults = ({
                                 if (speaker?.image && speaker.image === '/images/speaker.png') {
                                     return <Avatar key={idx} w="40px" h="40px" />
                                 } else return (
-                                    <Image key={idx} w="40px" h="40px" borderRadius="50%" src={`http://spebuog-dev.vercel.app${speaker.image}`} />
+                                    <Image key={idx} w="40px" h="40px" borderRadius="50%" src={`https://spebuog-dev.vercel.app${speaker.image}`} />
                                 )
                             })} */}
                             {/* <Text>
