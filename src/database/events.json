@@ -1,0 +1,58 @@
+{
+    "events": [
+        {
+            "id": "1",
+            "name": "Unconventional Reservoir",
+            "speaker": "1",
+            "startTime": "7:00 pm",
+            "endTime": "8:00 pm",
+            "platform": "Campus",
+            "description": "A BIG shout out to Dr.Yousif for joining us tomorrow ، He’s gonna give you a passive knowledge in geomechanics & its application in petroleum industry "
+        },
+        {
+            "id": "2",
+            "name": "Carbon Capture Utilization and Sequestration",
+            "speaker": "1",
+            "startTime": "7:00 pm",
+            "endTime": "8:00 pm",
+            "platform": "Campus",
+            "description": "A BIG shout out to Dr.Yousif for joining us tomorrow ، He’s gonna give you a passive knowledge in geomechanics & its application in petroleum industry "
+        },
+        {
+            "id": "3",
+            "name": "Underground Hydrocarbon Storage",
+            "speaker": "2",
+            "startTime": "7:00 pm",
+            "endTime": "8:00 pm",
+            "platform": "zoom",
+            "description": "A BIG shout out to Dr.Yousif for joining us tomorrow ، He’s gonna give you a passive knowledge in geomechanics & its application in petroleum industry "
+        },
+        {
+            "id": "4",
+            "name": "API Cement and Additives",
+            "speaker": "3",
+            "startTime": "7:00 pm",
+            "endTime": "8:00 pm",
+            "platform": "zoom",
+            "description": "A BIG shout out to Dr.Yousif for joining us tomorrow ، He’s gonna give you a passive knowledge in geomechanics & its application in petroleum industry "
+        },
+        {
+            "id": "5",
+            "name": "Primary Cementing",
+            "speaker": "1",
+            "startTime": "7:00 pm",
+            "endTime": "8:00 pm",
+            "platform": "zoom",
+            "description": "Agenda: Preparations for Primary Cementing and Pre-Job Checklist • Types of Casing Cementing Jobs • Preventing Cementing Failures and Causes of Primary Cementing Failures • Effects of Drilling Fluids and Contaminants on Cements • Flow properties • Conditioning the Drilling fluid • Pipe movement and Pipe Centralization • Eccentric Flow, Density Difference, and High Displacement Rates • Spacers and/or Flushes"
+        },
+        {
+            "id": "6",
+            "name": "Primary Cementing Calculations",
+            "speaker": "2",
+            "startTime": "7:00 pm",
+            "endTime": "8:00 pm",
+            "platform": "zoom",
+            "description": "Agenda: Single stage volumes calculations\n• Slurry Yield\n• Water requirement calculation\n• Additive requirement calculation\n• Equivalent sacks calculation\n• Estimated job time"
+        }
+    ]
+}

@@ -5,22 +5,18 @@ const AuthProvider = (props) => {
     const [status, setStatus] = useState('fetching')
     const [user, setUser] = useState({})
     const [notifications, setNotification] = useState([])
-    const [cartItems, setCartItems] = useState([])
+
+    const [speakers, setSpeakers] = useState([])
+    const [events, setEvents] = useState([])
 
     useEffect(() => {
-        if (status === "fetching") {
-            fetch("http://localhost:8000/api/auth/status", {
-                method: "GET",
-                credentials: "include"
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setStatus(data.isLoggedIn ? "loggedIn" : "loggedOut")
-                    setUser(data.user || {})
-                    setCartItems(data.cart || [])
-                })
-                .catch(err => setStatus("loggedOut"))
-        }
+        fetch('http://spebuog-dev.vercel.app/api/event')
+            .then(res => res.json())
+            .then(data => setEvents(data))
+
+        fetch('http://spebuog-dev.vercel.app/api/speaker')
+            .then(res => res.json())
+            .then(data => setSpeakers(data))
     }, [])
 
 
@@ -31,8 +27,8 @@ const AuthProvider = (props) => {
         setUser,
         notifications,
         setNotification,
-        cartItems,
-        setCartItems
+        speakers,
+        events,
     }
 
     return (

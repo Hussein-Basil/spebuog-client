@@ -10,6 +10,7 @@
 
 # production
 /build
+/spe-cms
 
 # misc
 .DS_Store

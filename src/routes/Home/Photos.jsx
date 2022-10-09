@@ -27,7 +27,7 @@ const Photos = () => {
     return (
         <Flex flexDir="column" align="center" gap="2em">
             <Heading>Photos</Heading>
-            <Grid gridTemplateColumns="1fr 1fr 1fr" gap="1em">
+            <Grid gridTemplateColumns={{ base: "1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr" }} gap="1em">
                 {photos.map(photo => (
                     <Image src={photo} w="300px" h="300px" objectFit="cover" />
                 ))}

@@ -5,12 +5,11 @@ import { Grid, Box } from '@chakra-ui/react'
 import { useUser } from '../auth/UserContext'
 import Notification from '../components/Notification'
 
-const Layout = ({ children }) => {
+const BasicLayout = ({ children }) => {
     const { notifications, setNotification } = useUser()
-    console.log(children.props)
 
     return (
-        <Grid minH="100vh" gridTemplateRows="auto 1fr auto" >
+        <Grid minH="100vh" maxW="100vw" style={{ overflowX: 'hidden', overflowX: 'clip' }} gridTemplateRows="auto 1fr auto" >
             <Navbar />
             <Box
             // w={{
@@ -38,4 +37,4 @@ const Layout = ({ children }) => {
     )
 }
 
-export default Layout
+export default BasicLayout

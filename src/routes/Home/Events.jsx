@@ -1,119 +1,123 @@
 import React from 'react'
-import { Flex, Heading, Text, Input, Button } from '@chakra-ui/react'
-
-const Event = ({ event }) => {
-  const months = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May',
-    'Jun', 'Jul', 'Aug', 'Sep', 'Oct',
-    'November', 'December'
-  ]
-  console.log(event.date.getDay())
-
-  return (
-    <Flex flexDir="row" gap="1em">
-      <Flex
-        flexDir="column"
-        bg="primary.500"
-        align="center"
-        px='1em'
-        color="white"
-        w="75px"
-        h="100px"
-      >
-        <Text fontSize="24px" textTransform="uppercase">{months[event.date?.getMonth()]}</Text>
-        <Text fontWeight="bold" fontSize="36px">{event.date?.getDate()}</Text>
-      </Flex>
-      <Flex flexDir="column" justify="space-between" fontSize="24px">
-        <Flex flexDir="row" gap="1em">
-          <Text textTransform="capitalize">{event.platform}</Text>
-          <Text>{`${event.startTime} - ${event.endTime}`}</Text>
-        </Flex>
-        <Flex flexDir="row">
-          <Heading fontSize="24px" fontWeight="semibold">{event.name}</Heading>
-        </Flex>
-      </Flex>
-    </Flex>
-  )
-}
+import { Flex, Heading, Text, Show, Hide, Image, Divider } from '@chakra-ui/react'
+import { ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons'
 
 const Events = () => {
-
-  const past = [
-    {
-      name: 'Unconventional Reservoir',
-      date: new Date(2022, 5, 5),
-      startTime: '7:00 pm',
-      endTime: '8:00 pm',
-      platform: 'Campus',
-    },
-    {
-      name: 'Carbon Capture Utilization and Sequestration',
-      date: new Date(2022, 5, 5),
-      startTime: '7:00 pm',
-      endTime: '8:00 pm',
-      platform: 'Campus',
-    },
-    {
-      name: 'Underground Hydrocarbon Storage',
-      date: new Date(2022, 5, 8),
-      startTime: '7:00 pm',
-      endTime: '8:00 pm',
-      platform: 'zoom',
-    },
-  ]
-
   const upcoming = [
     {
-      name: 'API Cement and Additives',
-      date: new Date(2022, 6, 9),
-      startTime: '7:00 pm',
-      endTime: '8:00 pm',
-      platform: 'zoom',
-    },
-    {
-      name: 'Primary Cementing',
-      date: new Date(2022, 6, 10),
-      startTime: '7:00 pm',
-      endTime: '8:00 pm',
-      platform: 'zoom',
-    },
-    {
-      name: 'Primary Cementing Calculations',
-      date: new Date(2022, 6, 11),
-      startTime: '7:00 pm',
-      endTime: '8:00 pm',
-      platform: 'zoom',
-    },
+      title: 'Well Completion Operation and Equipment',
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan elementum sapien. Praesent sed varius purus. In hac habitasse platea dictumst.Vivamus vel sodales enim, a vehicula mi.Quisque odio ex, viverra eu metus quis, bibendum molestie risus.",
+      tags: ['Completion'],
+      speaker: {
+        avatar: 'http://spebuog-dev.vercel.app/images/sayed.png',
+        name: 'Eng Elsayed Amer',
+        position: 'Senior Petrolem Engineer'
+      }
+    }
   ]
   return (
-    <Flex flexDir="column" align="center" gap="2em">
-      <Heading>Events</Heading>
-      <Flex flexDir="row" gap="5em" w="1200px" justify="space-between">
-        <Flex flexDir="column" gap="3em" w="600px">
-          <Flex fontWeight="semibold" fontSize="22px">Latest</Flex>
-          {past.map(event => (
-            <Event event={event} />
+    <Flex
+      flexDir="column"
+      align="center"
+      justify="center"
+      gap="2em"
+      my="3em"
+      w="100vw"
+      h="585px"
+      bg="#f1f1f1"
+    >
+      <Heading fontWeight="medium" fontSize="28px">Upcoming Events</Heading>
+      <Show above="lg">
+        <Flex flexDir="row" gap="2em" align="center">
+          {/* <ArrowBackIcon w="35px" h="35px" color="#F6BB43" /> */}
+          {upcoming.map((event, i) => (
+            <Flex key={i} minW="350px" maxW={{ base: "410px", lg: "950px" }} flexDir="row" border="1px solid #c8c8c8" borderRadius="10px" bg="white">
+              <Flex flexDir="column" px="2em" py="1.5em" gap="1em" borderRight="1px solid #c8c8c8" w="80%">
+                <Flex gap="1em" fontSize="18px">
+                  <Text>Aug <b>20</b>, 2022</Text>
+                  <Text>Zoom</Text>
+                </Flex>
+                <Heading fontWeight="semibold" fontSize="28px">{event.title}</Heading>
+                <Text fontSize="18px">
+                  {event.description}
+                </Text>
+                <Flex flexDir="row" gap="1em">
+                  {event.tags?.map((tag, idx) => (
+                    <Flex
+                      key={idx}
+                      bg="#F6BB43"
+                      color="black"
+                      borderRadius="10px"
+                      border="1px solid black"
+                      h="32px"
+                      fontSize="16px"
+                      px="18px"
+                      align="center"
+                    >
+                      {tag}
+                    </Flex>
+                  ))}
+                </Flex>
+              </Flex>
+              <Flex flexDir="column" p="2em" align="center" gap="1em" textAlign="center">
+                <Image src={event.speaker.avatar} w="162px" h="auto" />
+                <Text fontSize="18px" fontWeight="medium">{event.speaker.name}</Text>
+                <Text fontSize="16px" mt="-10px">{event.speaker.position}</Text>
+              </Flex>
+            </Flex>
+          ))}
+          {/* <ArrowForwardIcon w="35px" h="35px" color="#F6BB43" /> */}
+        </Flex>
+      </Show>
+      <Hide above="lg">
+        <Flex flexDir="row" gap="2em" align="center">
+          {upcoming.map((event, i) => (
+            <Flex flexDir="column" minW="350px" w="90%" mx="auto" gap="0.5em">
+              <Flex gap="1em" fontSize="16px" align="center">
+                <Text>Aug <b>20</b>, 2022</Text>
+                <Divider orientation="vertical" height="12px" borderColor="black" />
+                <Text>Zoom</Text>
+              </Flex>
+              <Flex flexDir="column" bg="white" p="1em" gap="1em" borderRadius="10px" border="1px solid #c8c8c8">
+                {/* Speaker */}
+                <Flex flexDir="row" align="center" gap="1em" textAlign="left">
+                  <Image src={event.speaker.avatar} w="62px" h="auto" />
+                  <Flex flexDir="column">
+                    <Text fontSize="18px" fontWeight="medium">{event.speaker.name}</Text>
+                    <Text fontSize="16px">{event.speaker.position}</Text>
+                  </Flex>
+                </Flex>
+                <Divider />
+                {/* Event */}
+                <Flex flexDir="column" gap="1em">
+                  <Heading fontWeight="semibold" fontSize="24px">{event.title}</Heading>
+                  <Text fontSize="16px">
+                    {event.description}
+                  </Text>
+                  <Flex flexDir="row" gap="1em">
+                    {event.tags?.map((tag, idx) => (
+                      <Flex
+                        key={idx}
+                        bg="#F6BB43"
+                        color="black"
+                        borderRadius="10px"
+                        border="1px solid black"
+                        h="32px"
+                        fontSize="16px"
+                        px="18px"
+                        align="center"
+                      >
+                        {tag}
+                      </Flex>
+                    ))}
+                  </Flex>
+                </Flex>
+              </Flex>
+            </Flex>
           ))}
         </Flex>
-        <Flex flexDir="column" gap="3em" w="600px">
-          <Flex fontWeight="semibold" fontSize="22px">Upcoming</Flex>
-          {upcoming.map(event => (
-            <Event event={event} />
-          ))}
-        </Flex>
-      </Flex>
-      <Flex flexDir="column" align="center" mx="auto" mt="2em" w="1200px">
-        <Flex flexDir="column" align="start" w="50%" gap="1em">
-          <Heading fontSize="24px" fontWeight="semibold">
-            To get notified about events:
-          </Heading>
-          <Flex w="100%" gap="0.5em">
-            <Input placeholder="Type your email here" />
-            <Button>Submit</Button>
-          </Flex>
-        </Flex>
-      </Flex>
-    </Flex>
+      </Hide >
+    </Flex >
   )
 }
 

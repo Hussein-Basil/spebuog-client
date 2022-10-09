@@ -116,7 +116,7 @@ const Theme = extendTheme({
         global: {
             body: {
                 bg: "white",
-                color: "dark.500",
+                color: "black",
             },
         },
     },
@@ -145,6 +145,10 @@ const Theme = extendTheme({
                 md: {
                     height: "42px",
                     fontSize: "16px",
+                },
+                huge: {
+                    height: '64px',
+                    fontSize: '24px'
                 }
             },
             variants: {
@@ -221,7 +225,7 @@ const Theme = extendTheme({
         },
         Heading: {
             baseStyle: {
-                fontFamily: "Poppins",
+                fontFamily: "Poppins, Arial",
             },
             sizes: {
                 h1: {
@@ -261,7 +265,7 @@ const Theme = extendTheme({
                     bg: "gray.100",
                     borderRadius: "5px",
                     borderWidth: "1px",
-                    borderColor: "gray.100",
+                    borderColor: "#C8C8C8",
                     color: "black",
                     _hover: {
                         bg: "white",

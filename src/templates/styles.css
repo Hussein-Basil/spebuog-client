@@ -1,0 +1,21 @@
+.is-pisnned {
+  box-shadow: 0 4px 2px -2px rgb(60 64 67 / 30%);
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  height: 60px !important;
+  padding: 30px 0;
+}
+
+/* .is-pisnned .logo-text {
+  display: none;
+} */
+.is-pisnned .logo-text-chapter,
+.is-pisnned .logo-text-spe {
+  font-size: 12px;
+}
+
+.is-pisnned .logo-image {
+  height: 28px;
+  width: auto;
+}

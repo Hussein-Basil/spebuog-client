@@ -4,13 +4,17 @@ import {
   Routes,
   Route,
 } from 'react-router-dom'
-import Layout from './templates/Layout'
+import BasicLayout from './templates/BasicLayout'
 
 import Home from './routes/Home'
-import Events from './routes/Events'
-import Officers from './routes/Officers'
+import Speakers from './routes/Speakers'
 import Contact from './routes/Contact'
 import NotFound from './routes/Errors/NotFound'
+import SpeakerProfile from './routes/SpeakerProfile'
+import About from './routes/About'
+
+import Course from './routes/CoursePage'
+import Courses from './routes/Courses'
 
 const ScrollToTop = ({ children }) => {
   useEffect(() => {
@@ -22,17 +26,20 @@ const ScrollToTop = ({ children }) => {
 const App = () => {
   return (
     <Router forceRefresh={true}>
-      <Layout>
+      <BasicLayout>
         <ScrollToTop>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/officers" element={<Officers />} />
+            <Route path="/courses" element={<Courses />} />
+            <Route path="/course/:id" element={<Course />} />
+            <Route path="/speakers" element={<Speakers />} />
+            <Route path="/speaker/:id" element={<SpeakerProfile />} />
+            <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
+            {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
         </ScrollToTop>
-      </Layout>
+      </BasicLayout>
     </Router>
   )
 }
