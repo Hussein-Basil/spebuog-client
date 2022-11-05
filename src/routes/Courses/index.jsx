@@ -42,7 +42,7 @@ const Courses = () => {
     useEffect(() => {
         setLoading(true)
         setFilteredResults([])
-        let link = 'https://spebuog-dev.vercel.app/api/event'
+        let link = 'https://spebuog-dev.netlify.app/.netlify/functions/api/event'
 
         if (query.tag?.value && query.search) {
             link += `?tag=${query.tag.value}&q=${query.search}`

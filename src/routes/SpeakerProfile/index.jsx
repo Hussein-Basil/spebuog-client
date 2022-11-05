@@ -17,7 +17,7 @@ const SpeakerProfile = () => {
     const responsiveSlides =  useBreakpointValue({ base: 1, md:2, lg: 3, xl: 4})
 
     useEffect(() => {
-        fetch(`https://spebuog-dev.vercel.app/api/speaker/${params.id}`)
+        fetch(`https://spebuog-dev.netlify.app/.netlify/functions/api/speaker/${params.id}`)
             .then(res => res.json())
             .then(data => setSpeaker({ ...data.speaker, events: data.events }))
 

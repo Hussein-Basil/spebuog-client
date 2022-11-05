@@ -10,11 +10,11 @@ const AuthProvider = (props) => {
     const [events, setEvents] = useState([])
 
     useEffect(() => {
-        fetch('https://spebuog-dev.vercel.app/api/event')
+        fetch('https://spebuog-dev.netlify.app/.netlify/functions/api/event')
             .then(res => res.json())
             .then(data => setEvents(data))
 
-        fetch('https://spebuog-dev.vercel.app/api/speaker')
+        fetch('https://spebuog-dev.netlify.app/.netlify/functions/api/speaker')
             .then(res => res.json())
             .then(data => setSpeakers(data))
     }, [])
