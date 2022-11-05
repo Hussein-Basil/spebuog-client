@@ -10,7 +10,7 @@ import Header from './components/Header'
 import About from './components/About'
 import FAQ from './components/FAQ'
 
-const Course = () => {
+const CoursePage = () => {
     const params = useParams()
     const [event, setEvent] = useState({})
 
@@ -21,9 +21,15 @@ const Course = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    if (!event || !event.title) {
-        return 'Loading'
-    }
+    useEffect(() => {
+        if (event.title) {
+            document.title = event.title
+        }
+    }, [event.title])
+
+    // if (!event || !event.title) {
+    //     return 'Loading'
+    // }
 
     return (
         <Flex
@@ -46,9 +52,7 @@ const Course = () => {
                 >
                     <About course={event} />
                     <Speakers speakers={event.speakers} />
-                    <Lectures speakers={event.speakers} lectures={event.timeline} />
-                    <Files />
-                    <SupportingLectures />
+                    <Lectures speakers={event.speakers} lectures={event.children} />
                     <FAQ />
                 </Flex>
             </Flex>
@@ -56,4 +60,4 @@ const Course = () => {
     )
 }
 
-export default Course
+export default CoursePage

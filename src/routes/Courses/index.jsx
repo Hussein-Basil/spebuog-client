@@ -9,62 +9,73 @@ import FilterResults from './components/FilterResults'
 
 import './styles.css'
 import ResponsiveWidth from '../../components/ResponsiveWidth'
+import { useUser } from '../../auth/UserContext'
 
 const Courses = () => {
-    const [searchQuery, setSearchQuery] = useState('')
-    const [filterTag, setFilterTag] = useState({})
-    const sensorRef = useRef(null)
+    const { events } = useUser()
     const stickyRef = useRef(null)
     const [filteredResults, setFilteredResults] = useState([])
     const [loading, setLoading] = useState(false)
 
+    const [query, setQuery] = useState({
+        search: '',
+        tag: {
+        }
+    })
+
     useEffect(() => {
+        document.title = 'Courses - SPE BUOG'
         let lastScrollY = window.scrollY
-
         const sticky = stickyRef.current.offsetTop
-
         const handleWindowScroll = () => {
             stickyRef.current.classList.toggle("is-pinned",
                 (window.pageYOffset >= sticky) && !(window.scrollY >= lastScrollY)
             )
             lastScrollY = window.scrollY
         }
-
         window.addEventListener("scroll", handleWindowScroll)
         return () => {
             window.removeEventListener('scroll', handleWindowScroll)
         }
-    })
+    }, [])
 
     useEffect(() => {
         setLoading(true)
+        setFilteredResults([])
         let link = 'https://spebuog-dev.vercel.app/api/event'
 
-        if (filterTag?.value && searchQuery) {
-            link += `?tag=${filterTag.value}&q=${searchQuery}`
+        if (query.tag?.value && query.search) {
+            link += `?tag=${query.tag.value}&q=${query.search}`
         }
-        else if (filterTag?.value) {
-            link += `?tag=${filterTag.value}`
-        } else if (searchQuery) {
-            link += `?q=${searchQuery}`
+        else if (query.tag?.value) {
+            link += `?tag=${query.tag.value}`
+        } else if (query.search) {
+            link += `?q=${query.search}`
+        } else {
+            setFilteredResults(events)
+            setLoading(false)
+            return 
         }
 
         fetch(link)
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok) return res.json()
+                else return []
+            })
             .then(data => {
                 setFilteredResults(data)
                 setLoading(false)
             })
-    }, [searchQuery, filterTag?.value])
+    }, [query])
 
     return (
-        <Layout pt={{ base: "1em", lg: "5em" }}>
-            < Flex flexDir="column" gap="0.5em" w="100vw" >
+        <Layout pt={{ base: "1em", lg: "3em" }}>
+            <Flex flexDir="column" gap="0.5em" w="100vw" >
                 <ResponsiveWidth>
-                    <Heading>Courses</Heading>
-                    <Text fontSize="18px" mt="0.75em">Grow your skills by studying from our exciting courses</Text>
+                    <Heading fontSize="28px" fontWeight="medium">Find Courses</Heading>
+                    <Text fontSize="16px" mt="0.25em">Grow your skills by studying from our exciting courses</Text>
                 </ResponsiveWidth>
-                <Flex h={{ base: "134px", lg: filterTag?.value ? "134px" : "224px" }} >
+                <Flex h={{ base: "134px", lg: query.tag?.value ? "134px" : "224px" }} >
                     <Flex
                         bg="white"
                         flexDir="column"
@@ -76,9 +87,8 @@ const Courses = () => {
                         w="99vw"
                     >
                         <ResponsiveWidth>
-                            <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-
-                            {filterTag?.value ? (
+                            <Search query={query} setQuery={setQuery} />
+                            {query.tag?.value ? (
                                 <Flex
                                     bg="#c8c8c8"
                                     borderRadius="20px"
@@ -86,18 +96,19 @@ const Courses = () => {
                                     align='center'
                                     py="3px"
                                     px="12px"
+                                    mt="0.5em"
                                 >
-                                    {filterTag.name}
-                                    <CloseButton onClick={() => setFilterTag({})} />
+                                    {query.tag.name}
+                                    <CloseButton onClick={() => setQuery({...query, tag: {}})} />
                                 </Flex>
                             ) : (
-                                <TagSelector setFilterTag={setFilterTag} setSearchQuery={setSearchQuery} />
+                                <TagSelector setQuery={setQuery} setFilteredResults={setFilteredResults} />
                             )}
                         </ResponsiveWidth>
                     </Flex>
                 </Flex>
                 <ResponsiveWidth>
-                    {(filterTag?.value || searchQuery) ? <FilterResults results={filteredResults} /> : <CoursesPreview />}
+                    {(query.tag?.value || query.search) ? <FilterResults results={filteredResults} loading={loading} /> : <CoursesPreview />}
                 </ResponsiveWidth>
             </Flex >
         </Layout >

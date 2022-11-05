@@ -4,7 +4,7 @@ import { MdList } from 'react-icons/md'
 import { BsDropletFill } from 'react-icons/bs'
 
 
-const TagSelector = ({ setFilterTag, setSearchQuery }) => {
+const TagSelector = ({ setQuery, setFilteredResults }) => {
 
     const tags = [
         {
@@ -56,8 +56,11 @@ const TagSelector = ({ setFilterTag, setSearchQuery }) => {
                     w="215px"
                     cursor="pointer"
                     onClick={() => {
-                        setFilterTag(tag)
-                        setSearchQuery('')
+                        setQuery({
+                            search: '',
+                            tag
+                        })
+                        setFilteredResults([])
                         window.scrollTo(0, 0)
                     }}
                     className="tag"

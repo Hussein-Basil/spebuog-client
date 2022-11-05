@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import React from "react";
 
 import Logo from '../assets/spe-logo-2020.png'
+import { motion } from 'framer-motion';
 
 const MobileDrawer = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -13,7 +14,14 @@ const MobileDrawer = (props) => {
     return (
         <Flex {...props}>
             <Icon as={IoMdMenu} w="36px" h="36px" ref={btnRef} onClick={onOpen} />
-
+            <motion.nav
+                animate={isOpen ? "open" : "closed"}
+                variants={{
+                    open: { opacity: 1, x: 0 },
+                    closed: { opacity: 0, x: "-100%" }
+                }}
+            >
+            
             <Drawer
                 isOpen={isOpen}
                 onClose={onClose}
@@ -37,6 +45,7 @@ const MobileDrawer = (props) => {
                     </VStack>
                 </Flex>
             </Drawer>
+            </motion.nav>
         </Flex>
     );
 };

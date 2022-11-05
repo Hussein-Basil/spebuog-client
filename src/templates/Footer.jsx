@@ -41,7 +41,7 @@ const Footer = () => {
                             </Text>
                             <Flex columnGap="20px">
                                 <Link href="https://fb.com/spebuog"><Icon as={Facebook} w="40px" h="40px" fill="white" /></Link>
-                                <Link href="https://www.instagram.com/spebuog"><Icon as={Instagram} w="40px" h="40px" /></Link>
+                                <Link href="https://www.instagram.com/spebuog"><Icon as={Instagram} w="40px" h="40px" fill="white" /></Link>
                                 <Link href="https://t.me/SPEBUOG"><Icon as={Telegram} w="40px" h="40px" fill="white" /></Link>
                                 <Link href="https://www.linkedin.com/company/buog-spe-student-chapter"><Icon as={Linkedin} w="40px" h="40px" fill="white" /></Link>
                             </Flex>
@@ -50,14 +50,13 @@ const Footer = () => {
                     {/* Contact Info*/}
                     <Flex flexDir="column" gap="0.5em" fontSize={{ base: "16px", lg: "18px" }}>
                         <Heading fontSize={{ base: "18px", lg: "20px" }} size="md" mb="10px" color="#F6BB43" fontWeight="medium">MENU</Heading>
-                        <Link href="#">About</Link>
-                        <Link href="#">Events</Link>
-                        <Link href="#">Courses</Link>
-                        <Link href="#">Contact</Link>
+                        <Link href="/about">About</Link>
+                        <Link href="/courses">Courses</Link>
+                        <Link href="/contact">Contact</Link>
                     </Flex>
                     <Flex flexDir="column" gap="0.5em" fontSize={{ base: "16px", lg: "18px" }}>
                         <Heading fontSize={{ base: "18px", lg: "20px" }} size="md" mb="10px" color="#F6BB43" fontWeight="medium">CONTACTS</Heading>
-                        <Link href="tel:009647811234567">+964 781 1234 567</Link>
+                        {/* <Link href="tel:009647811234567">+964 781 1234 567</Link> */}
                         <Link href="mailto:buog.spe.chapter@gmail.com">buog.spe.chapter@gmail.com</Link>
                         <Text><Icon as={MdLocationOn} /> Basrah, Iraq</Text>
                     </Flex>
@@ -79,7 +78,7 @@ const Footer = () => {
                 <Hide above="lg">
                     <Flex columnGap="20px" alignSelf="center">
                         <Link href="https://fb.com/spebuog"><Icon as={Facebook} w="40px" h="40px" fill="white" /></Link>
-                        <Link href="https://www.instagram.com/spebuog"><Icon as={Instagram} w="40px" h="40px" /></Link>
+                        <Link href="https://www.instagram.com/spebuog"><Icon as={Instagram} w="40px" h="40px" fill="white" /></Link>
                         <Link href="https://t.me/SPEBUOG"><Icon as={Telegram} w="40px" h="40px" fill="white" /></Link>
                         <Link href="https://www.linkedin.com/company/buog-spe-student-chapter"><Icon as={Linkedin} w="40px" h="40px" fill="white" /></Link>
                     </Flex>

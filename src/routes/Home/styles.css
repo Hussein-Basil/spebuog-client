@@ -1,0 +1,14 @@
+.swiper-button-prev,
+.swiper-button-next {
+  color: #000000a1!important;
+}
+
+.swiper-wrapper {
+  padding-right: 5em;
+}
+
+.swiper-pagination {
+  bottom: 0;
+  width: 50px;
+  height: 50px;
+}

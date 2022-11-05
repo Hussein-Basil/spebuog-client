@@ -132,7 +132,8 @@ const Theme = extendTheme({
             baseStyle: {
                 fontWeight: "semibold",
                 borderRadius: "5px",
-                textTransform: "uppercase",
+
+                // textTransform: "uppercase",
                 _focus: {
                     boxShadow: "none"
                 }
@@ -156,7 +157,7 @@ const Theme = extendTheme({
                     backgroundColor: "accent.500",
                     color: "white",
                     borderWidth: 0,
-                    textTransform: "uppercase",
+                    // textTransform: "uppercase",
                     _hover: {
                         backgroundColor: "accent.600",
                     },
@@ -169,7 +170,7 @@ const Theme = extendTheme({
                     backgroundColor: "accent.500",
                     color: "white",
                     borderWidth: 0,
-                    textTransform: "uppercase",
+                    // textTransform: "uppercase",
                     _hover: {
                         backgroundColor: "accent.600",
                     },
@@ -189,7 +190,7 @@ const Theme = extendTheme({
                 outline: {
                     bg: "transparent",
                     borderWidth: "1px",
-                    borderColor: "gray.500",
+                    borderColor: "#c8c8c8",
                     color: "accent.500",
                     svg: {
                         fill: "accent.500"
@@ -226,6 +227,7 @@ const Theme = extendTheme({
         Heading: {
             baseStyle: {
                 fontFamily: "Poppins, Arial",
+                fontWeight: "medium"
             },
             sizes: {
                 h1: {
@@ -263,7 +265,7 @@ const Theme = extendTheme({
                     },
                     height: "42px",
                     bg: "gray.100",
-                    borderRadius: "5px",
+                    borderRadius: "10px",
                     borderWidth: "1px",
                     borderColor: "#C8C8C8",
                     color: "black",

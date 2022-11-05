@@ -1,8 +1,26 @@
 import React from 'react'
-import { Flex, Heading, Text } from '@chakra-ui/react'
+import { Flex, Heading, SkeletonText, Text } from '@chakra-ui/react'
 
 const About = ({ course }) => {
-    return (
+
+    if (!course?.title) {
+        return (
+            <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "2em", lg: "0" }} id="about">
+            <Flex flexDir="column" gap="2em" w={{ base: "100%", lg: "500px", xl: "600px"}}>
+                <Heading fontSize="24px" fontWeight="medium">About this course</Heading>
+                <SkeletonText noOfLines={6} w="100%" />
+                <Heading fontSize="24px" fontWeight="medium">What you'll learn</Heading>
+                <SkeletonText noOfLines={6} w="100%"/>
+            </Flex>
+            <Flex flexDir="column" align="start" w="fit-content" ml={{ base: "0", lg: "200px" }} gap="2em">
+                <Heading fontSize="24px" fontWeight="medium">Who this course is for</Heading>
+                <SkeletonText noOfLines={6}  w={{ base: "100%", lg: "350px", xl: "600px"}}/>
+            </Flex>
+        </Flex>
+        )
+    }
+
+    else return (
         <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "2em", lg: "0" }} id="about">
             <Flex flexDir="column" gap="2em">
                 <Heading fontSize="24px" fontWeight="medium">About this course</Heading>

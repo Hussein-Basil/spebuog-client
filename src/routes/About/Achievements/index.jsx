@@ -29,20 +29,26 @@ const Photos = () => {
         }, {
             title: 'BUOG SPE Presentation Competition 2022',
             items: importAll(require.context('../../../assets/photos/competition')),
-            description: "تحت رعاية السيد رئيس جامعة البصرة للنفط و الغاز الدكتور محمد هليل الكعبي المحترم انطلقت يوم 24 من الشهر الحالي التصفية النهائية BUOG SPE Presentation Competition 2022 بحضور عدد من الشركات و السادة من جامعة البصرة للنفط و الغاز انطلقت المنافسة بين 6 فرق على المراكز الأربع الاولى و بتقييم من لجنة مختصة في جامعة البصرة للنفط و الغاز ، اللجنة : - د.ليال فاضل - أ.نجاح سعيد - أ.أسماعيل رعد عبد الباقي -أ.علي خضير الجوائز المقدمة : ▪️المركز الاول : 120 الف دينار عراقي مع دورة تدريبية مقدمة من AGRC ▪️المركز الثاني : 90 الف دينا عراقي ▪️المركز الثالث : 60 الف دينار عراقي ▪️المركز الرابع : 50 الف دينار عراقي حصلت الفرق من طلاب قسم هندسة النفط و الغاز و للمراحل الثالثة و الرابعة على المراكز الاربع الاولى بعناوين مختلفة بتقديم دام لمدة 20 دقيقة بعد ان تمت مناقشتها مع اللجنة المختصة من جامعة البصرة للنفط و الغاز"
+            description: "The presentation competition was held by the student chapter in March 20th, 2022. Group of 20 Oil and Gas Student Teams. The presentations marked the topic of natural gas and related inspection, extraction and processing. \
+            Objectives of the competition:\n \
+            1-Increase students' interaction in terms of developing their skills in public speaking and presentation.\n \
+            2-Enhance students' spirit of discussion with regard to the scientific subject.\n \
+            3-Students return to participate in various in-person events of what they lost during the COVID-19 period.\
+            "
         }, {
             title: 'BUOG SPE Presentation Competition 2022',
             description: 'انطلقت يوم 22 - 23 من الشهر الحالي مسابقة العروض التقديمة / الجولة الاولى بجامعة البصرة للنفط والغاز بمشاركة 20 فريق من الاقسام التالية: -قسم هندسة النفط والغاز -قسم الهندسة الكيميائية وتكرير النفط -قسم هندسة البوليمرات والبتروكيمياويات تحت عنوان natural gas وبتقييم لجنة  مختصة من كادر جامعة البصرة للنفط والغاز',
             items: importAll(require.context('../../../assets/photos/presentation')),
         }, {
             items: importAll(require.context('../../../assets/photos/spe_presentation')),
+            description: "The first-stage students of the Department of Chemical Engineering and Oil Refining are invited to familiarize them with the concepts of the specialization of chemical engineering, oil refining and engineer's workplaces as well as to explain a road map of how the student prepares himself during the university period and enhance it with the necessary skills as well as their introduction to the World Oil Engineers Association and its benefits for the purpose of joining the university's student chapter."
         }, {
             title: 'Cleaning the Sindbad Island',
             items: importAll(require.context('../../../assets/photos/volunteering')),
-            description: 'صور من الحملة التطوعية التي نظمت من قبل فريق ادم التطوعي بمشاركة الفرع الطلابي لجمعية المهندسيين العالمية في جامعة البصرة للنفط والغاز BUOG لتنظيف جزيرة السندباد',
+            description: "The voluntary campaign to clean the island of Sinbad and the banks of the Shatt Al-Arab was organized by the student chapter of SPE, which included a group of university youth. The site was cleaned and the waste was removed successfully."
         }, {
             items: importAll(require.context('../../../assets/photos/bazaar')),
-            description: <Lorem count={20} />
+            description: ''
         }
     ]
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -87,7 +93,7 @@ const Photos = () => {
                                 ))}
                             </Swiper>
                             <Flex>
-                                {modalData.description ? <Text alignSelf="start">{modalData.description}</Text> : <Lorem count={4} />}
+                                {modalData.description ? <Text alignSelf="start">{modalData.description.split('\n').map(_ => <>{_}<br /></>)}</Text> : <Lorem count={4} />}
                             </Flex>
                         </Flex>
                     </ModalBody>
