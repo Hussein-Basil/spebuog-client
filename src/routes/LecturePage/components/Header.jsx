@@ -112,6 +112,7 @@ const Header = ({ event }) => {
                                 w="50px"
                                 h="50px"
                                 as={Avatar}
+                                opacity={1}
                             />
                             <Text>{event.speakers?.at(0)?.name}</Text>
                         </Flex>
