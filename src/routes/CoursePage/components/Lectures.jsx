@@ -35,7 +35,7 @@ const Lectures = ({ lectures, speakers }) => {
                         <Flex flexDir="column" gap="1em">
                             <Heading fontSize="18px"><Link href={`/lecture/${lec?.uid}`}>{lec.title}</Link></Heading>
                             {/* <Text><Link href={`/speaker/${lec.speakers.at(0)?.uid}`}>{lec.speakers.at(0).name}</Link></Text>*/}
-                            <Text><Lorem count={3}/></Text>
+                            <Text>{lec.description || <Lorem count={3}/>}</Text>
                             
                         </Flex> 
                     </Flex>

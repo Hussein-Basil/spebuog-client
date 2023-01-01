@@ -1,7 +1,6 @@
 import React from 'react'
-import { Flex, Heading, Text, Box, Button, Show, Hide, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
+import { Flex, Heading,Icon, Grid, Text, Box, Button, Show, Hide, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import NumbersProof from './NumbersProof'
-import ResponsiveWidth from '../../components/ResponsiveWidth'
 
 const Hero = () => {
     return (
@@ -10,7 +9,7 @@ const Hero = () => {
                 w={{
                     base: '90%',
                     md: '768px',
-                    lg: '1024px',
+                    lg: '1114px',
                     xl: '1440px',
                     '2xl': '1500px',
                 }}
@@ -25,8 +24,8 @@ const Hero = () => {
             <Flex
                 flexDir="column"
                 rowGap="2em"
-                align="start"
-                textAlign="start"
+                align={{ base: "center", lg: "start"}}
+                textAlign={{ base: "center", lg: "start"}}
                 color="white"
                 position="relative"
                 maxW={{ base: "unset", lg: "580px", xl: "unset"}}
@@ -118,8 +117,8 @@ const Hero = () => {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 />
                 </Hide> */}
-            </Flex>
             <NumbersProof />
+            </Flex>
         </Box>
     )
 }

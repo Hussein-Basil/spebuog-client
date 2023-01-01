@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Heading, Text, Flex, Image, Grid, Show, Icon } from '@chakra-ui/react'
-import Logo from '../../assets/spe-logo-2020.png'
+import Logo from '../../assets/SPE-logo.png'
 import { GiOilPump } from 'react-icons/gi'
 import { BsPeopleFill } from 'react-icons/bs'
 import { FaHandsHelping } from 'react-icons/fa'
@@ -8,9 +8,14 @@ import { motion } from 'framer-motion'
 import Team from './Team'
 import Achievements from './Achievements'
 
+import vision from '../../assets/vision.svg'
+import { ReactComponent as mission } from '../../assets/biometrics.svg'
+
 import ResponsiveWidth from '../../components/ResponsiveWidth'
+import AboutBackground from '../../assets/about.png'
 
 // import '../Officers/overlay.css'
+import './styles.css'
 
 const About = () => {
     useEffect(() => {
@@ -18,113 +23,41 @@ const About = () => {
     }, [])
 
     return (
-        <ResponsiveWidth mx="auto" gap={{ base: "4em", lg: "8em" }} align="center" my="5em">
-            {/* Content Section */}
-            <Flex justify="end" gap="5em" flexDir={{ base: 'column', lg: 'row' }} px="2em">
-                <Flex flexDir="column" gap="2.5em">
-                    <Heading fontWeight="semibold" fontSize="28px">
-                        Who We are
-                    </Heading>
-                    <Text fontSize="18px" maxW="700px">
-                    Student Chapter with more than 1000 member, managed by Students from Basrah University of Oil and Gas passionate about the oil and gas engineering, we aspire with support from our university to provide help and benefit to our students as well as anyone interested in the oil and gas industry
-                    </Text>
-                </Flex>
-                <Show above="lg">
-                    <Image src={Logo} h={{ base: "100px", lg: "234px" }} objectFit="contain" />
-                </Show>
+        <Flex w="100%" flexDir="column">
+            <Flex bg="#0D4C94" justify="center" position="relative" userSelect="none">
+                {/* <Image src={"https://images.slideplayer.com/20/5970310/slides/slide_33.jpg"} minW="100%" maxH="300px" objectFit="contain" /> */}
+                <Image src={AboutBackground} minW="100%" objectFit="cover" maxH="420px"  />
+                <Heading position="absolute" color="white" top="calc(50%)" fontSize="56px" textAlign="center">We Are SPE</Heading>
             </Flex>
-            <Flex flexDir="column" gap="2.5em" alignSelf="center">
-                <Heading fontWeight="semibold" fontSize="28px">
-                    Our Mission
-                </Heading>
-                <Text fontSize="18px" maxW="700px">
-                    Presenting several seminars on our campus by experts in the oil and gas Industry , as well as Online workshops, training courses, software, webinars presented by specialists instructors in the oil and gas industry from over Iraq and the world.  Furthermore our goal is to improve the Technical and not technical skills of students. However, We believe that through helping them to enhance their personal skills (as leadership and communication and time management)  And their technical skills (as computer's programs and writing Emails ), We can help them for increasing their employment capabilities.We are also supportive the role of women in the oil industry By inviting professional and accomplished women in the industry presented seminars How they being to support and develop the role of women. Hold many competitions among our chapter's members (Or even by cooperate with other chapters in Iraq)، We didn't stop that far,  we also Making  field trips to the oil and gas international Companies as Schlumberger, Halliburton, weatherford and other companies that work in oil and gas industry
-                </Text>
-            </Flex>
-            {/* Features Section */}
-            <motion.div
-                
-                // whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                viewport={{ once: true }}
-            >
-                <Flex flexDir="column" align="center">
-                    <Heading fontWeight="medium" fontSize="28px">What We Offer</Heading>
-                    <Text>Because we are the best</Text>
-                    <Flex gap="1.5em" mt="2em" flexDir={{ base: 'column', lg: 'row' }}>
-                        <Flex 
-                            as={motion.div}
-                            whileHover={{scale: 1.1}}
-                            initial={{  x: -200 }}
-                            whileInView={{ x: 0}}
-                            transition={{ duration: 2, type: "tween" }}
-                            flexDir={{ base: "row", lg: "column"}}
-                            gap={{ base: "1em", lg: "0.5em"}}
-                            textAlign="center" 
-                            align="center" 
-                            maxW={{ base: "unset", lg: "250px"}}
-                            border="1px solid lightgray"
-                            borderRadius="10px"
-                            px="1em"
-                            py="1.5em"
-                        >
-                            <Icon as={BsPeopleFill} h="90px" w="90px" color="#0D4C94" />
-                            <Flex flexDir="column" textAlign={{ base: "left", lg: "center"}}>
-                                <Text fontSize="22px" fontWeight="medium">Leadership Environment</Text>
-                                <Text fontSize="16px">Volunteering for building experience and self development</Text>
-                            </Flex>
-                        </Flex>
-                        <Flex 
-                            as={motion.div}
-                            whileHover={{scale: 1.1}}
-                            initial={{  x: -200 }}
-                            whileInView={{ x: 0}}
-                            transition={{ duration: 2, type: "tween" }}
-                            flexDir={{ base: "row", lg: "column"}}
-                            gap={{ base: "1em", lg: "0.5em"}}
-                            textAlign="center" 
-                            align="center" 
-                            maxW={{ base: "unset", lg: "250px"}}
-                            border="1px solid lightgray"
-                            borderRadius="10px"
-                            px="1em"
-                            py="1.5em"
-                        >
-                            <Icon as={GiOilPump} h="90px" w="90px" color="#0D4C94" />
-                            <Flex flexDir="column" textAlign={{ base: "left", lg: "center"}}>
-                            <Text fontSize="22px" fontWeight="medium">Scientific Events</Text>
-                            <Text fontSize="16px">Organizing internships, courses and seminars on oil industry topics</Text>
-                            </Flex>
-                        </Flex>
-                        <Flex 
-                            as={motion.div}
-                            whileHover={{scale: 1.1}}
-                            initial={{  x: -200 }}
-                            whileInView={{ x: 0}}
-                            transition={{ duration: 2, type: "tween" }}
-                            flexDir={{ base: "row", lg: "column"}}
-                            gap={{ base: "1em", lg: "0.5em"}}
-                            textAlign="center" 
-                            align="center" 
-                            maxW={{ base: "unset", lg: "250px"}}
-                            border="1px solid lightgray"
-                            borderRadius="10px"
-                            px="1em"
-                            py="1.5em"
-                        >
-                            <Icon as={FaHandsHelping} h="90px" w="90px" color="#0D4C94" />
-                            <Flex flexDir="column" textAlign={{ base: "left", lg: "center"}}>
-                                <Text fontSize="22px" fontWeight="medium">Community Involvement</Text>
-                                <Text fontSize="16px">Helping community, organizaing annual charity bazaars</Text>
-                            </Flex>
-                        </Flex>
+            <ResponsiveWidth mx="auto" gap={{ base: "4em", lg: "8em" }} align="center" my="5em">
+                <Flex justify="space-between" gap="3em" w="fit-content" flexDir={{ base: 'column', lg: 'row'}}>
+                    <Flex flexDir="column" gap="2.5em" py="2em" w="fit-content" border="1px solid #c8c8c8" borderRadius="10px">
+                    <Icon as={mission} w="50px" h="50px" alignSelf="center" color="red" />
+                        <Heading fontWeight="semibold" fontSize="28px" textAlign="center">
+                            Who We Are
+                        </Heading>
+                        <Text fontSize="18px" maxW="80%" alignSelf="center">
+                        Student Chapter with more than 1000 member, managed by students from Basrah University of Oil and Gas passionate about the oil and gas engineering, we aspire with support from our university to provide help and benefit to our students as well as anyone interested in the oil and gas industry.
+                        </Text>
                     </Flex>
+                    <Flex flexDir="column" gap="2.5em" py="2em" w="fit-content" border="1px solid #c8c8c8" borderRadius="10px" >
+                    <Image src={vision} w="50px" h="50px" alignSelf="center"/>
+                        <Heading fontWeight="semibold" fontSize="28px" textAlign="center">
+                            Our Mission
+                        </Heading>
+                        <Text fontSize="18px" maxW="80%" alignSelf="center">
+                        To deliver numerous on-campus seminars as well as online workshops, training courses, software trainings, and webinars presented by instructors who are experts in the oil and gas industry from all over the world and Iraq. In addition, we hold student competitions and make field trips to international companies. We aim to help students enhance their personal and technical skills as well as increase their employment capabilities. We support the role of women in the oil industry by inviting professional and accomplished women in the industry to present relevant seminars.
+                        </Text>
+                    </Flex>
+
                 </Flex>
-            </motion.div>
+            {/* Features Section */}
+           
             {/* Team Section */}
             <Team />
             <Achievements />
         </ResponsiveWidth>
+        </Flex>
     )
 }
 

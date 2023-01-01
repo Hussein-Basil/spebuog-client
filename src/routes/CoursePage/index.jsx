@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Flex } from '@chakra-ui/react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Speakers from './components/Speakers'
 import Lectures from './components/Lectures'
@@ -13,11 +13,20 @@ import FAQ from './components/FAQ'
 const CoursePage = () => {
     const params = useParams()
     const [event, setEvent] = useState({})
+    const navigate = useNavigate()
+
+
 
     useEffect(() => {
         fetch(`https://spebuog-dev.netlify.app/.netlify/functions/api/event/${params.id}`)
             .then(res => res.json())
-            .then(data => setEvent(data))
+            .then(data => {
+                if (['webinar', 'course_lecture'].includes(data.event_type)) {
+                    navigate(`/lecture/${params.id}`)
+                } else {
+                    setEvent(data.error ? {} : data.event)
+                }
+            })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -50,10 +59,12 @@ const CoursePage = () => {
                     flexDir="column"
                     gap="3em"
                 >
-                    <About course={event} />
+                    {event?.title && (event.description || event.agenda?.length > 0 || event.target?.length > 0) &&
+                    <About course={event} />}
                     <Speakers speakers={event.speakers} />
                     <Lectures speakers={event.speakers} lectures={event.children} />
-                    <FAQ />
+                    
+                    {/* <FAQ /> */}
                 </Flex>
             </Flex>
         </Flex>

@@ -53,7 +53,9 @@ const Courses = () => {
             link += `?q=${query.search}`
         } else {
             setFilteredResults(events)
-            setLoading(false)
+            setTimeout(() => {
+                setLoading(false)
+            }, 1000)
             return 
         }
 
@@ -63,14 +65,15 @@ const Courses = () => {
                 else return []
             })
             .then(data => {
-                setFilteredResults(data)
-                setLoading(false)
+                setFilteredResults(data.error ? [] : data.events)
+                setTimeout(() => {
+                    setLoading(false)
+                }, 1000)
             })
     }, [query])
 
     return (
-        <Layout pt={{ base: "1em", lg: "3em" }}>
-            <Flex flexDir="column" gap="0.5em" w="100vw" >
+            <Flex py={{ base: "1em", lg: "3em" }} flexDir="column" gap="0.5em" w="100vw">
                 <ResponsiveWidth>
                     <Heading fontSize="28px" fontWeight="medium">Find Courses</Heading>
                     <Text fontSize="16px" mt="0.25em">Grow your skills by studying from our exciting courses</Text>
@@ -111,7 +114,6 @@ const Courses = () => {
                     {(query.tag?.value || query.search) ? <FilterResults results={filteredResults} loading={loading} /> : <CoursesPreview />}
                 </ResponsiveWidth>
             </Flex >
-        </Layout >
     )
 }
 

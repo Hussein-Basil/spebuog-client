@@ -116,7 +116,7 @@ const SpeakerProfile = () => {
                         >
                         {[...Array(4)].map((_, idx) => (
                             <SwiperSlide style={{ display: "flex", gap: "1em" }}>
-                                <Course key={idx} height="450px" />
+                                <Course key={idx} />
                             </SwiperSlide>
                         ))}
                         </Swiper>
@@ -131,7 +131,7 @@ const SpeakerProfile = () => {
         <Flex flexDir="column" align="center" gap="1em" mb="5em" w="100vw">
             <Flex bg="#0D4C94" pt={{ base: "3em", lg: "7em" }} pb={{ base: "3em", lg: 0 }} width="100%" justify="center" align="end" mb="60px">
                 <Flex w={{
-                    base: '100%',
+                    base: '90%',
                     md: '768px',
                     lg: '1024px',
                     xl: '1440px',
@@ -168,7 +168,7 @@ const SpeakerProfile = () => {
                         <Icon as={GiAchievement} w="56px" h="56px" color="#e0a800" />
                         <Flex gap="1em" align="center" color="white">
                             <Text fontSize="64px" fontWeight="semibold">{speaker.events.length}</Text>
-                            <Text>Completed<br />Courses</Text>
+                            <Text>Completed<br />Lectures</Text>
                         </Flex>
                     </Flex>
                 </Flex>
@@ -183,11 +183,11 @@ const SpeakerProfile = () => {
                 flexDir="column"
                 gap="3em"
             >
+                {speaker.description && 
                 <Flex flexDir="column" gap="1em" maxW="800px">
                     <Heading fontSize="24px" fontWeight="medium">Experience</Heading>
                     <Text >{speaker.description.split('\n').map(s => <>{s}<br /></>)}</Text>
-                </Flex>
-
+                </Flex>}
                 <Flex flexDir="column" gap="1em">
                     <Heading fontSize="24px" fontWeight="medium">
                         Courses
@@ -215,7 +215,7 @@ const SpeakerProfile = () => {
                         >
                         {speaker.events.map((group, idx) => (
                             <SwiperSlide style={{ display: "flex", gap: "1em" }}>
-                                <Course course={group} key={idx} height="450px" />
+                                <Course course={group} key={idx} />
                             </SwiperSlide>
                         ))}
                         </Swiper>

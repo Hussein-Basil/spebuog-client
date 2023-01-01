@@ -11,37 +11,31 @@ const TagSelector = ({ setQuery, setFilteredResults }) => {
             name: 'All Courses',
             value: 'all',
             icon: MdList,
-            description: 'Everything, past & upcoming courses'
-        },
-        {
-            name: 'Oil & Gas Starter',
-            value: 'og-starter',
-            icon: BsDropletFill,
-            description: 'For beginners, drilling and reservoir'
+            description: 'Everything, online webinars and courses'
         },
         {
             name: 'Completion',
             value: 'completion',
             icon: MdList,
-            description: 'Everything, past & upcoming courses'
+            description: 'Lectures about well completion operations'
         },
         {
             name: 'Drilling',
             value: 'drilling',
             icon: MdList,
-            description: 'Everything, past & upcoming courses'
+            description: 'Lectures on drilling and well control'
         },
         {
             name: 'Reservoir',
             value: 'reservoir',
             icon: MdList,
-            description: 'Everything, past & upcoming courses'
+            description: 'Lectures in reservoir engineering'
         },
         {
             name: 'Others',
             value: 'others',
             icon: MdList,
-            description: 'Everything, past & upcoming courses'
+            description: 'Other categories of lectures'
         },
     ]
 
@@ -69,6 +63,7 @@ const TagSelector = ({ setQuery, setFilteredResults }) => {
                     padding={{ base: "5px 12px", lg: "1em" }}
                     mt={{ base: "5px", lg: "unset" }}
                     whiteSpace={{ base: "nowrap", lg: "unset" }}
+                    userSelect="none"
                 >
                     <Flex justify="space-between" align="center">
                         <Text className="tag-text" fontWeight={{ base: "normal", lg: "medium" }} fontSize={{ base: "14pt", lg: "18px" }}>{tag.name}</Text>

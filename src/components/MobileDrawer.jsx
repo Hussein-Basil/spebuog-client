@@ -36,7 +36,7 @@ const MobileDrawer = (props) => {
                         <Link to="/courses">
                             <Button variant="text" onClick={onClose}>Courses</Button>
                         </Link>
-                        <Link to="/speakers">
+                        <Link to="/instructors">
                             <Button variant="text" onClick={onClose}>Instructors</Button>
                         </Link>
                         <Link to="/about">

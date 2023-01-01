@@ -1,7 +1,7 @@
 import { BsDropletFill } from 'react-icons/bs'
 import { IoIosFlask } from 'react-icons/io'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Flex, Icon, Divider, Text, useBreakpointValue, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import Course from '../../../components/Course'
 import { useUser } from '../../../auth/UserContext'
@@ -18,13 +18,25 @@ const CoursesPreview = () => {
     const [swipe, setSwipe] = useState()
     const [swipe2, setSwipe2] = useState()
     const responsiveSlides = useBreakpointValue({ base: 1, md:2, lg: 3, xl: 4})
+    const [drillingCourses, setDrillingCourses] = useState([])
+    const [reserviorCourses, setReserviorCourses] = useState([])
+
+    useEffect(() => {
+        fetch('https://spebuog-dev.netlify.app/.netlify/functions/api/event?q=drilling')
+        .then(res => res.json())
+        .then(data => setDrillingCourses(data.error ? [] : data.events))
+
+        fetch('https://spebuog-dev.netlify.app/.netlify/functions/api/event?q=reservoir')
+        .then(res => res.json())
+        .then(data => setReserviorCourses(data.error ? [] : data.events))
+    }, [])
 
     return (
         <LinkBox>
         <Flex flexDir="column" gap="1.5em" mt="1.5em">
             <Flex align="center" gap="1em">
-                <Icon as={BsDropletFill} w="28px" h="28px" />
-                <Text fontSize="28px" fontWeight="medium">Oil & Gas Engineering</Text>
+                {/* <Icon as={BsDropletFill} w="28px" h="28px" /> */}
+                <Text fontSize="28px" fontWeight="medium">Drilling Engineering</Text>
             </Flex>
             <Flex flexDir="row" gap="3em" overflow="auto">
             <Flex w="100%" align="center" >
@@ -51,10 +63,10 @@ const CoursesPreview = () => {
                         }}
                         
                     >
-                    {events?.length ? events.slice(0, 5).map((event, idx) => (
+                    {drillingCourses?.length ? drillingCourses.slice(0, 5).map((event, idx) => (
                         <SwiperSlide style={{ display: "flex", justifyContent: responsiveSlides == 1 ? "center": "space-between" }}>
                             <LinkOverlay href={`/${["course_lecture", "webinar"].includes(event.evnet_type) ? "lecture" : "course"}/${event.uid}`}>
-                                <Course minHeight="450px" course={event} key={idx} />
+                                <Course course={event} key={idx} />
                             </LinkOverlay>
                         </SwiperSlide>
                     )) : (
@@ -81,8 +93,8 @@ const CoursesPreview = () => {
         <Divider my="2em" />
         <Flex flexDir="column" gap="1.5em">
             <Flex align="center" gap="1em">
-                <Icon as={IoIosFlask} w="28px" h="28px" />
-                <Text fontSize="28px" fontWeight="medium">Chemical & Oil Refining</Text>
+                {/* <Icon as={IoIosFlask} w="28px" h="28px" /> */}
+                <Text fontSize="28px" fontWeight="medium">Reservoir Engineering</Text>
             </Flex>
             <Flex flexDir="row" gap="3em" overflow="auto">
                 <Flex w="100%" align="center">
@@ -109,10 +121,10 @@ const CoursesPreview = () => {
                         }}
                         
                     >
-                    {events?.length ? events.slice(10, 15).map((event, idx) => (
+                    {reserviorCourses?.length ? reserviorCourses.slice(0, 5).map((event, idx) => (
                         <SwiperSlide style={{ display: "flex", justifyContent: responsiveSlides == 1 ? "center": "space-between" }}>
                             <LinkOverlay href={`/${["course_lecture", "webinar"].includes(event.evnet_type) ? "lecture" : "course"}/${event.uid}`}>
-                                <Course minHeight="450px" course={event} key={idx} />
+                                <Course course={event} key={idx} />
                             </LinkOverlay>
                         </SwiperSlide>
                     )) : (

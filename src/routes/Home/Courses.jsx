@@ -14,21 +14,11 @@ import './styles.css'
 const Courses = () => {
     const { events } = useUser()
     const [swipe, setSwipe] = useState()
-    let newCourses = []
-    
-    let itemsPerPage = 3
-    let pages = events.length / itemsPerPage
-    let index = 0
-    let count = 0
-    while (count < pages) {
-    newCourses.push(events.slice(index, index+=3))
-    count++
-    }
 
 
     return (
-        <LinkBox>
-        <Flex flexDir="column" align="center" mb="3em" w={{
+        
+        <Flex flexDir="column" align="center" my="3em" w={{
             base: '90vw',
             lg: '1114px',
             xl: '1440px',
@@ -36,9 +26,11 @@ const Courses = () => {
         }}>
             <Heading fontSize="28px" fontWeight="medium" mb="0.5">Browse Our Courses</Heading>
             <Text mb="1em" textAlign="center">Grow your skills by studying from our exciting courses</Text>
-                <LinkOverlay  href="/courses">
+            <LinkBox>
+                <LinkOverlay  href="/courses" w="fit-content">
                     <Button mb="2em">View All Courses</Button>
                 </LinkOverlay>
+            </LinkBox>
             <Flex w="100%" align="center">
             {/* <BsChevronLeft cursor="pointer" onClick={() => swipe?.slidePrev()} /> */}
             <Swiper
@@ -49,7 +41,7 @@ const Courses = () => {
                 style={{
                     width: '100%',
                     paddingBottom: "5em",
-                    minHeight: "480px"
+                    // minHeight: "480px",
                 }}
                 slidesPerView={useBreakpointValue({ base: 1, md:2, lg: 3, xl: 4})}
                 slidesPerGroup={useBreakpointValue({ base: 1, md: 2, lg: 3, xl: 4})}
@@ -60,9 +52,11 @@ const Courses = () => {
             >
             {events?.length ? events.slice(0, 10).map((event, idx) => (
                 <SwiperSlide style={{ display: "flex", justifyContent: "center" }}>
+                    <LinkBox>
                     <LinkOverlay href={`/${["course_lecture", "webinar"].includes(event.event_type) ? 'lecture' : 'course'}/${event.uid}`}>
-                        <Course height="480px" course={event} key={idx} />
+                        <Course course={event} key={idx} />
                     </LinkOverlay>
+                    </LinkBox>
                 </SwiperSlide>
             )) : [...Array(4)].map((_, idx) => (
                 <SwiperSlide key={idx} style={{ display: "flex", justifyContent: "center" }}>
@@ -74,7 +68,6 @@ const Courses = () => {
             </Flex>
             
         </Flex>
-        </LinkBox>
     )
 }
 

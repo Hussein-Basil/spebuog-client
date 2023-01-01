@@ -4,13 +4,15 @@ import { useUser } from '../../auth/UserContext'
 import { SearchIcon } from '@chakra-ui/icons'
 import { MdFilterList, MdHouse, MdGridView, MdList, MdWork, MdCancel, MdTimeline } from 'react-icons/md'
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, useDisclosure } from '@chakra-ui/react'
+import moment from 'moment'
 
 const Speakers = () => {
-    const { speakers } = useUser()
+    const { speakers, loading } = useUser()
     const [searchQuery, setSearchQuery] = useState("")
     const [gridView, setGridView] = useState(true)
     const [filterPosition, setFilterPosition] = useState("")
     const [filterCompany, setFilterCompany] = useState('')
+    const [sortOrder, setSortOrder] = useState(-1)
     const responsiveGridView = useBreakpointValue({ base: false, lg: true })
 
     const [filteredSpeakers, setFilteredSpeakers] = useState([])
@@ -23,7 +25,14 @@ const Speakers = () => {
         document.title = 'Instructors - SPE BUOG'
     }, [])
 
-    useEffect(() => { setFilteredSpeakers(speakers) }, [speakers])
+    useEffect(() => { setFilteredSpeakers(speakers.sort((a, b) => {
+        var dateA = new Date(a.latestEvent).getTime()
+        var dateB = new Date(b.latestEvent).getTime()
+        if (dateA < dateB) return 1;
+        if (dateA > dateB) return -1;
+        return 0;
+
+    })) }, [speakers])
 
     useEffect(() => {
         let newSpeakers = speakers
@@ -105,8 +114,8 @@ const Speakers = () => {
                             ))} */}
                             <option>Schlumberger</option>
                             <option>Haliburton</option>
-                            <option>Weatherford</option> 
-                            <option>Baker Hughes</option> 
+                            <option>Basra University of Oil and Gas</option> 
+                            <option>National Companies</option> 
                         </SelectField>
                         <InputLeftElement h="65px" my="auto" ml="0.75em"><Icon as={MdHouse} w="24px" h="24px" color="gray" /></InputLeftElement>
                     </InputGroup>
@@ -117,6 +126,7 @@ const Speakers = () => {
                             placeholder="Sort"
                             // onChange={e => setFilterCompany(e.target.value)}
                             // value={filterCompany}
+                            // value={sortOrder}
                             h="65px"
                             borderRadius="10px"
                             border="1px solid #C8C8C8"
@@ -192,8 +202,8 @@ const Speakers = () => {
                     lg: "repeat(3, 1fr)",
                     xl: "repeat(4, 1fr)"
                 }} gap="1.5em" >
-                    {filteredSpeakers?.length ? filteredSpeakers.slice(0, sliceIndex).map((speaker, i) => (
-                        <LinkBox><LinkOverlay href={`/speaker/${speaker.uid}`}>
+                    {!loading ? filteredSpeakers?.slice(0, sliceIndex).map((speaker, i) => (
+                        <LinkBox><LinkOverlay href={`/instructor/${speaker.uid}`}>
                             <Flex
                                 key={i}
                                 flexDir="column"
@@ -246,7 +256,7 @@ const Speakers = () => {
                                                 </Flex>
                                             ))}
                                         </Flex>
-                                            <Link href={`/speaker/${speaker.uid}`} variant="textButton" _hover={{textDecor: "none"}}>
+                                            <Link href={`/instructor/${speaker.uid}`} variant="textButton" _hover={{textDecor: "none"}}>
                                                 View Profile
                                             </Link>
                                     </Flex>
@@ -292,7 +302,7 @@ const Speakers = () => {
                 <Flex flexDir="column" gap="1em" maxW={{ base: "90vw", md: "100%"}}>
                     {filteredSpeakers?.length ? filteredSpeakers.slice(0, sliceIndex).map((speaker, idx) => {
                         return (
-                            <LinkBox><LinkOverlay href={`/speaker/${speaker.uid}`}>
+                            <LinkBox><LinkOverlay href={`/instructor/${speaker.uid}`}>
                                 <Flex
                                     key={idx}
                                     align="center"
@@ -343,7 +353,7 @@ const Speakers = () => {
                                     </Flex>
                                     ))}
                                     <Show above="lg">
-                                        <Link ml="auto" href={`/speaker/${speaker.uid}`} _hover={{textDecor: "none"}}>
+                                        <Link ml="auto" href={`/instructor/${speaker.uid}`} _hover={{textDecor: "none"}}>
                                             <Button>View Profile</Button>
                                         </Link>
                                     </Show>

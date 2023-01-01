@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex,  Text, Image, Avatar, Heading, Link,   SkeletonCircle, SkeletonText, useBreakpointValue } from '@chakra-ui/react'
+import { Flex,  Text, Image, Avatar, Heading, Link, SkeletonCircle, SkeletonText, useBreakpointValue } from '@chakra-ui/react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, EffectFade, Pagination, Autoplay } from 'swiper'
@@ -32,7 +32,7 @@ const Speakers = ({ speakers }) => {
                     slidesPerGroup={responsiveSlides}
                     style={{
                         width: '110%',
-                        paddingBottom: "5em"
+                        paddingBottom: !speakers?.length || speakers.length > responsiveSlides ? "5em" : 0
                     }}
                 >
 
@@ -47,7 +47,7 @@ const Speakers = ({ speakers }) => {
                                 borderRadius="50%"
                                 objectFit="cover" />
                             <Flex flexDir="column">
-                                <Link href={`/speaker/${speaker.uid}`} fontSize="18px" fontWeight="medium">{speaker.name}</Link>
+                                <Link href={`/instructor/${speaker.uid}`} fontSize="18px" fontWeight="medium">{speaker.name}</Link>
                                 <Text fontSize="16px">{speaker.position}</Text>
                                 <Text fontSize="16px">{speaker.organization}</Text>
                             </Flex>
@@ -78,21 +78,3 @@ const Speakers = ({ speakers }) => {
 }
 
 export default Speakers
-
-// children={
-//         {speakers.slice(sliceIndex, sliceIndex + 3).map(speaker => (
-//             <Flex align="center" gap="1em" maxW="450px">
-//                 <Image
-//                     src={`https://spebuog-dev.vercel.app${speaker.image}`}
-//                     as={Avatar}
-//                     w={{ base: "100px", lg: "130px" }}
-//                     h={{ base: "100px", lg: "130px" }}
-//                     borderRadius="50%"
-//                     objectFit="cover" />
-//                 <Flex flexDir="column">
-//                     <Link href={`/speaker/${speaker.uid}`} fontSize="18px" fontWeight="medium">{speaker.name}</Link>
-//                     <Text fontSize="16px">{speaker.position}</Text>
-//                     <Text fontSize="16px">{speaker.organization}</Text>
-//                 </Flex>
-//             </Flex>
-//         }

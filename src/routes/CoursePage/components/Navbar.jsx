@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Flex, Link } from '@chakra-ui/react'
 import '../styles.css'
 
-const Navbar = () => {
+const Navbar = ({ event }) => {
     const navbarRef = useRef(null)
 
     useEffect(() => {
@@ -52,12 +52,13 @@ const Navbar = () => {
                     gap={{ base: "3em", lg: "5em" }}
                     px="1.5em"
                 >
-                    <Link href="#about" fontWeight="semibold" color="#0D4C94">About</Link>
+                    {event?.title && (event.description || event.agenda?.length > 0 || event.target?.length > 0) && (
+                    <Link href="#about" fontWeight="semibold" color="#0D4C94">About</Link>)}
                     <Link href="#instructors">Instructors</Link>
                     <Link href="#lectures">Lectures</Link>
-                    <Link href="#files">Files</Link>
-                    <Link href="#supporting-lectures" whiteSpace="nowrap">Supporting Lectures</Link>
-                    <Link href="#faq">FAQ</Link>
+                    {/* <Link href="#files">Files</Link> */}
+                    {/* <Link href="#supporting-lectures" whiteSpace="nowrap">Related Lectures</Link> */}
+                    {/* <Link href="#faq">FAQ</Link> */}
                 </Flex>
             </Flex>
         </Flex>

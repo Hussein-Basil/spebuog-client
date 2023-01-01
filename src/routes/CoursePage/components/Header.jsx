@@ -120,7 +120,7 @@ const Header = ({ event }) => {
                         <Link href="#instructors" textDecor="underline">{event.speakers.length > 1 && `+${event.speakers.length - 1} more instructors`}</Link>
                     </Flex>
                 </Flex>
-                <Show above="lg">
+                {/* <Show above="lg">
                     <Flex
                         flexDir="column"
                         color="white"
@@ -179,7 +179,7 @@ const Header = ({ event }) => {
                             <Text fontSize="16px">{event.language} Language</Text>
                         </Flex>
                     </Flex>
-                </Hide>
+                </Hide> */}
             </Flex>
         </Flex>
     )

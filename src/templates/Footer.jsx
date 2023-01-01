@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Text, Flex, Heading, Link, Icon, Image, Input, Button, InputGroup, InputRightElement, Show, Hide } from '@chakra-ui/react'
 import { ReactComponent as Facebook } from '../assets/facebook.svg'
 import { ReactComponent as Telegram } from '../assets/telegram-1.svg'
@@ -10,6 +10,8 @@ import Logo from '../assets/spe-logo-2020.png'
 import { MdLocationOn } from 'react-icons/md'
 
 const Footer = () => {
+    const [buttonText, setButtonText] = useState('Subscribe')
+    const [subscriber, setSubscriber] = useState('')
     return (
         <Flex
             flexDir="column"
@@ -37,7 +39,7 @@ const Footer = () => {
                                     fontWeight="medium"
                                 >
                                     SPE BUOG
-                                </Text> - amazing place for petroleum industry students to get information
+                                </Text> - We aim to give our members the most enriching lectures with Oil & Gas top experts
                             </Text>
                             <Flex columnGap="20px">
                                 <Link href="https://fb.com/spebuog"><Icon as={Facebook} w="40px" h="40px" fill="white" /></Link>
@@ -54,22 +56,44 @@ const Footer = () => {
                         <Link href="/courses">Courses</Link>
                         <Link href="/contact">Contact</Link>
                     </Flex>
-                    <Flex flexDir="column" gap="0.5em" fontSize={{ base: "16px", lg: "18px" }}>
+                    {/* <Flex flexDir="column" gap="0.5em" fontSize={{ base: "16px", lg: "18px" }}>
                         <Heading fontSize={{ base: "18px", lg: "20px" }} size="md" mb="10px" color="#F6BB43" fontWeight="medium">CONTACTS</Heading>
-                        {/* <Link href="tel:009647811234567">+964 781 1234 567</Link> */}
                         <Link href="mailto:buog.spe.chapter@gmail.com">buog.spe.chapter@gmail.com</Link>
                         <Text><Icon as={MdLocationOn} /> Basrah, Iraq</Text>
-                    </Flex>
+                    </Flex> */}
                     <Show above="lg">
                         <Flex flexDir="column" gap="1em" fontSize="18px">
                             <Heading fontSize="20px" size="md" mb="10px" color="#F6BB43" fontWeight="medium">SUBSCRIBE TO NEWS</Heading>
                             <Text maxW="350px">
                                 Subscribe to our newsletter and be the first to know about new courses and events.
                             </Text>
-                            <InputGroup mt="1em" p="0">
-                                <Input placeholder="email" border="1px solid white" />
-                                <InputRightElement w="100px" mr="-5px" h="40px">
-                                    <Button color="black" borderLeftRadius="0">Subscribe</Button>
+                            <InputGroup mt="1em" p="0" display="flex" justify="space-between" position="relative">
+                                <Input placeholder="Enter your email" bg="white" border="1px solid white" value={subscriber} onChange={e => setSubscriber(e.target.value)} />
+                                <InputRightElement   >
+                                    <Button minW="100px" h="40px" position="absolute" right="0" px="1em" color="black" borderLeftRadius="0" onClick={() => {
+                                        if (subscriber && buttonText === 'Subscribe') {
+                                            setButtonText('Wait..')
+                                            fetch('https://spebuog-dev.netlify.app/.netlify/functions/api/event/newsletter', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify({
+                                                    subscriber
+                                                })
+                                            })
+                                            .then(res => {
+                                                if (res.ok) {
+                                                    setButtonText('Sent!')
+                                                    setTimeout(() => setButtonText('Subscribe'), 3000)
+                                                }
+                                            })
+                                            .catch(() => {
+                                                setButtonText('Error!')
+                                                setTimeout(() => setButtonText('Subscribe'), 3000)
+                                            })
+                                        }
+                                    }}>{buttonText}</Button>
                                 </InputRightElement>
                             </InputGroup>
                         </Flex>

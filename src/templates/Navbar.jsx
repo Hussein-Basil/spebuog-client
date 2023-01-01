@@ -61,7 +61,7 @@ const Navbar = () => {
                         >
                             <Link href="/">Home</Link>
                             <Link href="/courses">Courses</Link>
-                            <Link href="/speakers" >Instructors</Link>
+                            <Link href="/instructors" >Instructors</Link>
                             <Link href="/about" >About</Link>
                         </Flex>
                         {/* For Mobiles */}

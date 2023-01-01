@@ -1,6 +1,6 @@
 import React from 'react'
-import { Flex, Text, Link, Skeleton, SkeletonText, LinkBox, LinkOverlay } from '@chakra-ui/react'
-
+import { Flex, Text, Link, Button, Skeleton, SkeletonText, LinkBox, LinkOverlay } from '@chakra-ui/react'
+import moment from 'moment'
 const Course = ({
     course,
     ...props
@@ -19,6 +19,8 @@ const Course = ({
             cursor="pointer"
             alignSelf="center"
             justifySelf="center"
+            p="0"
+            
             {...props}
             // onClick={() => navigate(`/course/${course.uid}`)}
         >
@@ -45,14 +47,17 @@ const Course = ({
         <LinkBox><LinkOverlay href={['course_lecture', 'webinar'].includes(course.event_type) ? `/lecture/${course.uid}` : `/course/${course.uid}`}>
         <Flex
             flexDir="column"
-            border="1px solid #c8c8c8"
-            // minW="350px"
+            m="1px"
+            boxShadow="0 0 0 1px #e1e1e1"
+            minH="400px"
+            minW="320px"
             maxW="410px"
             borderRadius="10px"
             overflow="hidden"
             cursor="pointer"
             alignSelf="center"
             justifySelf="center"
+            userSelect="none"
             {...props}
             // onClick={() => navigate(`/course/${course.uid}`)}
         >
@@ -64,13 +69,18 @@ const Course = ({
                 minHeight: "160px",
             }}>
             </Flex>
-            <Flex px="28px" py="1em" flexDir="column" gap="1em">
-                <Text textTransform="uppercase" fontSize="16px">{course.event_type === "course_lecture" ? "lecture" : course.event_type}</Text>
-                <Text fontWeight="medium" fontSize="18px">{course.title}</Text>
-                <Text fontSize="16px">{course.description || (
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan elementum sapien. Praesent sed varius purus. In hac habitasse platea dictumst. Vivamus vel sodales enim, a vehicula mi. Quisque odio ex, viverra eu metus quis, bibendum molestie risus. Curabitur et pulvinar quam. Donec a purus tortor. In volutpat vehicula quam id rutrum.".slice(0, 216))}
-                </Text>
-            </Flex>
+                <Flex px="28px" py="1em" flexDir="column" gap="0.5em">
+                    <Text textTransform="uppercase" fontSize="16px">{course.event_type === "course_lecture" ? "lecture" : course.event_type}</Text>
+                    <Text fontWeight="medium" fontSize="18px">{course.title}</Text>
+                    <Text fontSize="16px">{course.description?.slice(0, 160) || (
+                            ['course', 'internship'].includes(course.event_type) ? 
+                                `Join this ${course.event_type} to learn about ${course.title.toLowerCase()}`
+                            : 
+                            `On ${moment(course.date).format('MMMM DD, YYYY')} ${course.speakers.at(0)?.name} 
+                            ${course.speakers.at(0) ? `who is ${course.speakers.at(0).position} at ${course.speakers.at(0).organization}` : ''} presented lecture about ${course.title.toLowerCase()} ${course.parent ? `as a part of the course ${course.parent.title}` : ''}`
+                    ) }</Text>
+                   
+                </Flex>
         </Flex>
         </LinkOverlay></LinkBox>
     )

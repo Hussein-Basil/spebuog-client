@@ -53,20 +53,20 @@ const UpcomingEvent = ({ event, size, ...props }) => {
           </Flex>
         </Flex>
       )}
-      {["large"].includes(size) && (
+      {/* {["large"].includes(size) && (
         <Text fontSize="16px">
           {event.description}
         </Text>
-      )}
+      )} */}
       {size === "large" && (
-        <Flex flexDir="row" gap="1em">
+        <Flex flexDir="row" gap="0.5em">
           {event.tags?.map((tag, idx) => (
             <Flex
               key={idx}
-              bg="#F6BB43"
-              color="black"
+              bg="#0D4C94c9"
+              color="white"
               borderRadius="10px"
-              border="1px solid black"
+              // border="1px solid black"
               h="32px"
               fontSize="16px"
               px="18px"
@@ -85,7 +85,18 @@ const Upcoming = () => {
   const upcoming = [
     {
       title: 'Well Completion Operation and Equipment',
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan elementum sapien. Praesent sed varius purus. In hac habitasse platea dictumst.Vivamus vel sodales enim, a vehicula mi.Quisque odio ex, viverra eu metus quis, bibendum molestie risus.",
+      // description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan elementum sapien. Praesent sed varius purus. In hac habitasse platea dictumst.Vivamus vel sodales enim, a vehicula mi.Quisque odio ex, viverra eu metus quis, bibendum molestie risus.",
+      tags: ['Completion', 'Well Intervention'],
+      speaker: {
+        image: 'https://spebuog-dev.vercel.app/images/sayed.png',
+        name: 'Eng Elsayed Amer',
+        position: 'Senior Petrolem Engineer'
+      },
+      date: 'Aug 8th, 2022'
+    },
+    {
+      title: 'Well Completion Operation and Equipment',
+      // description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan elementum sapien. Praesent sed varius purus. In hac habitasse platea dictumst.Vivamus vel sodales enim, a vehicula mi.Quisque odio ex, viverra eu metus quis, bibendum molestie risus.",
       tags: ['Completion'],
       speaker: {
         image: 'https://spebuog-dev.vercel.app/images/sayed.png',
@@ -96,7 +107,7 @@ const Upcoming = () => {
     },
     {
       title: 'Well Completion Operation and Equipment',
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan elementum sapien. Praesent sed varius purus. In hac habitasse platea dictumst.Vivamus vel sodales enim, a vehicula mi.Quisque odio ex, viverra eu metus quis, bibendum molestie risus.",
+      // description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan elementum sapien. Praesent sed varius purus. In hac habitasse platea dictumst.Vivamus vel sodales enim, a vehicula mi.Quisque odio ex, viverra eu metus quis, bibendum molestie risus.",
       tags: ['Completion'],
       speaker: {
         image: 'https://spebuog-dev.vercel.app/images/sayed.png',
@@ -107,18 +118,7 @@ const Upcoming = () => {
     },
     {
       title: 'Well Completion Operation and Equipment',
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan elementum sapien. Praesent sed varius purus. In hac habitasse platea dictumst.Vivamus vel sodales enim, a vehicula mi.Quisque odio ex, viverra eu metus quis, bibendum molestie risus.",
-      tags: ['Completion'],
-      speaker: {
-        image: 'https://spebuog-dev.vercel.app/images/sayed.png',
-        name: 'Eng Elsayed Amer',
-        position: 'Senior Petrolem Engineer'
-      },
-      date: 'Aug 8th, 2022'
-    },
-    {
-      title: 'Well Completion Operation and Equipment',
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan elementum sapien. Praesent sed varius purus. In hac habitasse platea dictumst.Vivamus vel sodales enim, a vehicula mi.Quisque odio ex, viverra eu metus quis, bibendum molestie risus.",
+      // description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan elementum sapien. Praesent sed varius purus. In hac habitasse platea dictumst.Vivamus vel sodales enim, a vehicula mi.Quisque odio ex, viverra eu metus quis, bibendum molestie risus.",
       tags: ['Completion'],
       speaker: {
         image: 'https://spebuog-dev.vercel.app/images/sayed.png',
@@ -129,42 +129,65 @@ const Upcoming = () => {
     },
   ]
   const responsiveSlides = useBreakpointValue({ base: 1, md: 2, lg: 3 })
-  return (
-    <Flex
-      flexDir="column"
-      align="center"
-      justify="center"
-      gap="2em"
-      mb="5em"
-      w="100vw"
-      bg="#f1f1f1"
-      pb="5em"
-      pt="5em"
-    >
-      <Heading fontWeight="medium" fontSize="28px">Upcoming Events</Heading>
-      <LinkBox><LinkOverlay href="/upcoming"><Button>View Calendar</Button></LinkOverlay></LinkBox>
-      <ResponsiveWidth>
-        <Swiper
-          modules={[Pagination]}
-          pagination={{
-            clickable: true
-          }}
-          style={{ width: "100%", paddingBottom: "5em"}}
-          loop={true}
-          speed={800}
-          slidesPerView={responsiveSlides}
-          slidesPerGroup={responsiveSlides}
-          spaceBetween={20}
-        >
-          {upcoming.map((item, idx) => (
-            <SwiperSlide style={{ width: "fit-content"}}>
-              <UpcomingEvent event={item} key={idx} size="large" />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </ResponsiveWidth>
+  // return (
+  //   <Flex
+  //     flexDir="column"
+  //     align="center"
+  //     justify="center"
+  //     gap="2em"
+  //     mb="5em"
+  //     w="100vw"
+  //     bg="#f1f1f1"
+  //     pb="1em"
+  //     pt="3em"
+  //   >
+  //     <Heading fontWeight="medium" fontSize="28px">Upcoming Events</Heading>
+  //     <LinkBox><LinkOverlay href="/upcoming"><Button>View Calendar</Button></LinkOverlay></LinkBox>
+  //     <ResponsiveWidth>
+  //       <Swiper
+  //         modules={[Pagination]}
+  //         pagination={{
+  //           clickable: true
+  //         }}
+  //         style={{ width: "100%", paddingBottom: "5em"}}
+  //         loop={true}
+  //         speed={800}
+  //         slidesPerView={responsiveSlides}
+  //         slidesPerGroup={responsiveSlides}
+  //         spaceBetween={20}
+  //       >
+  //         {upcoming.map((item, idx) => (
+  //           <SwiperSlide style={{ width: "fit-content"}}>
+  //             <UpcomingEvent event={item} key={idx} size="large" />
+  //           </SwiperSlide>
+  //         ))}
+  //       </Swiper>
+  //     </ResponsiveWidth>
       
-    </Flex >
+  //   </Flex >
+  // )
+  return (
+    <ResponsiveWidth mb="3em" align="center" textAlign="center" >
+      <Heading fontSize="28px" fontWeight="medium" mb="0.5">Upcoming Events</Heading>
+      <Text mb="1em" textAlign="center">Check out our future lectures and activites!</Text>
+      {/* <Flex 
+        w="100%" 
+        bg="#0D4C94" 
+        p="2em" 
+        color="white" 
+        borderRadius="5px"
+        gap="5em"
+        align="center"
+        justify="space-between"
+      >
+        <Flex flexDir="column">
+          <Text fontWeight="semibold" fontSize="28px">Check our upcoming events</Text>
+          <Text>Something interesting</Text>
+        </Flex>
+        <Button>See Calendar</Button>
+      </Flex> */}
+      <LinkBox><LinkOverlay href="/upcoming"><Button>View Calendar</Button></LinkOverlay></LinkBox>
+    </ResponsiveWidth>
   )
 }
 

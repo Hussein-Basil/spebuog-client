@@ -139,14 +139,16 @@ const Header = ({ event }) => {
                                     </Flex>
                                 </Flex>)
                         }
+                        {event.video_length && 
                         <Flex align="center" gap="1em">
                             <Icon w="52px" h="52px" as={IoIosTimer} />
-                            <Text fontSize="18px">9 hours video</Text>
-                        </Flex>
+                            <Text fontSize="18px">{event.video_length} hours video</Text>
+                        </Flex>}
+                        {event.language && 
                         <Flex align="center" gap="1em">
                             <Icon w="52px" h="52px" as={MdLanguage} />
                             <Text fontSize="18px">{event.language} Language</Text>
-                        </Flex>
+                        </Flex>}
                     </Flex>
                 </Show>
                 <Hide above="lg">
