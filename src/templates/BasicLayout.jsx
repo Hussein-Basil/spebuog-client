@@ -9,17 +9,9 @@ const BasicLayout = ({ children }) => {
     const { notifications, setNotification } = useUser()
 
     return (
-        <Grid minH="100vh" maxW="100vw" style={{ overflowX: 'hidden', overflowX: 'clip' }} gridTemplateRows="auto 1fr auto" >
+        <Grid minH="100vh" maxW="100vw" style={{ overflowX: 'clip' }} gridTemplateRows="auto 1fr auto" >
             <Navbar />
             <Box
-            // w={{
-            //     sm: "320px",
-            //     md: "768px",
-            //     lg: "1024px",
-            //     xl: "1440px",
-            //     '2xl': "1500px"
-            // }}
-            // mx="auto"
             >
                 {notifications &&
                     notifications.map((text, index) => (

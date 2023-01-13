@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Text, Flex, Grid, Link, Icon, Image, LinkBox } from '@chakra-ui/react'
+import { Heading, Text, Flex, Grid, Link, Image } from '@chakra-ui/react'
 
 import yousif from '../../../assets/officers/yousif.png'
 import yaman from '../../../assets/officers/yaman.png'
@@ -12,7 +12,6 @@ import ali from '../../../assets/officers/ali.png'
 import nooraldeen from '../../../assets/officers/nooraldeen.png'
 import fatima from '../../../assets/officers/fatima.png'
 
-import { ReactComponent as Linkedin } from '../../../assets/linkedin.svg'
 import ResponsiveWidth from '../../../components/ResponsiveWidth'
 
 import { motion } from 'framer-motion'

@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Flex, Heading, Grid, Image, Text } from '@chakra-ui/react'
 
-import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure } from '@chakra-ui/react'
-import Lorem from '../../../components/Lorem'
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, useDisclosure } from '@chakra-ui/react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, EffectFade } from 'swiper'
@@ -14,13 +13,11 @@ import './styles.css'
 
 function importAll(r) {
     let images = []
-    r.keys().map((item) => { images.push(r(item)) });
+    r.keys().forEach((item) => { images.push(r(item)) });
     return images
 }
 
 const Photos = () => {
-
-
     const photos = [
         {
             title: 'Sustainability practice in oil and gas',
@@ -37,7 +34,6 @@ const Photos = () => {
             "
         }, {
             title: 'BUOG SPE Presentation Competition 2022',
-            description: 'انطلقت يوم 22 - 23 من الشهر الحالي مسابقة العروض التقديمة / الجولة الاولى بجامعة البصرة للنفط والغاز بمشاركة 20 فريق من الاقسام التالية: -قسم هندسة النفط والغاز -قسم الهندسة الكيميائية وتكرير النفط -قسم هندسة البوليمرات والبتروكيمياويات تحت عنوان natural gas وبتقييم لجنة  مختصة من كادر جامعة البصرة للنفط والغاز',
             items: importAll(require.context('../../../assets/photos/presentation')),
         }, {
             items: importAll(require.context('../../../assets/photos/spe_presentation')),
@@ -52,7 +48,6 @@ const Photos = () => {
         }
     ]
     const { isOpen, onOpen, onClose } = useDisclosure()
-
     const [modalData, setModalData] = useState({})
 
     return (
@@ -66,14 +61,12 @@ const Photos = () => {
                     }} />
                 ))}
             </Grid>
-
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent position="absolute" top="20px" my="0" maxW={{ base: "95%", lg: "428px" }}>
                     <ModalHeader >{modalData.title}</ModalHeader>
                     <ModalCloseButton ml="1em" />
                     <ModalBody >
-                        {/* <Lorem count={1} /> */}
                         <Flex flexDir="column" gap="2em" mb="1em" >
                             <Swiper
                                 modules={[Navigation, EffectFade]}
@@ -93,17 +86,10 @@ const Photos = () => {
                                 ))}
                             </Swiper>
                             <Flex>
-                                {modalData.description ? <Text alignSelf="start">{modalData.description.split('\n').map(_ => <>{_}<br /></>)}</Text> : <Lorem count={4} />}
+                                {modalData.description && <Text alignSelf="start">{modalData.description.split('\n').map(_ => <>{_}<br /></>)}</Text>}
                             </Flex>
                         </Flex>
                     </ModalBody>
-
-                    {/* <ModalFooter>
-                        <Button colorScheme='blue' mr={3} onClick={onClose}>
-                            Close
-                        </Button>
-                        <Button variant='ghost'>Secondary Action</Button>
-                    </ModalFooter> */}
                 </ModalContent >
             </Modal >
         </Flex >

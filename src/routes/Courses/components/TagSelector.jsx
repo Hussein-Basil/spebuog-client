@@ -1,11 +1,8 @@
 import React from 'react'
 import { Flex, Icon, Text } from '@chakra-ui/react'
 import { MdList } from 'react-icons/md'
-import { BsDropletFill } from 'react-icons/bs'
-
 
 const TagSelector = ({ setQuery, setFilteredResults }) => {
-
     const tags = [
         {
             name: 'All Courses',

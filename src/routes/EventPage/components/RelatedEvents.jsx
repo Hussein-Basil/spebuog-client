@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Flex, Heading, useBreakpointValue } from '@chakra-ui/react'
+import { Heading, useBreakpointValue } from '@chakra-ui/react'
 import Course from '../../../components/Course'
 import ResponsiveWidth from '../../../components/ResponsiveWidth'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -8,19 +8,52 @@ import 'swiper/css/navigation'
 import 'swiper/css/effect-fade'
 import 'swiper/css/pagination'
 import 'swiper/css'
+import { useUser } from '../../../auth/UserContext'
 
-
-const RelatedLectures = ({ event }) => {
+const RelatedEvents = ({
+    type, 
+    tags, 
+    categoryID,
+    eventID
+}) => {
     const [related, setRelated] = useState([])
     const responsiveSlides = useBreakpointValue({ base: 1, md: 2, lg: 3, xl: 4})
+    const { client } = useUser()
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        if (event?.tags?.length > 0) {
-            fetch(`https://spebuog-dev.netlify.app/.netlify/functions/api/event?tag=${event.tags.at(0)}`)
-            .then(res => res.json())
-            .then(data => setRelated(data.error ? [] : data.events))
+        const isLecture = ['course_lecture', 'webinar'].includes(type)
+        const query =  isLecture ? (
+            `*[_type == 'event' && event_type in ['course_lecture', 'webinar'] && count(tags) > 0] &&
+            _id != '${eventID}'
+            `
+        ) : (
+            `*[_type == 'event' && references('${categoryID}') && _id != '${eventID}']`
+        )
+
+        if (isLecture && tags?.length === 0) {
+            return setLoading(false)
         }
-    })
+
+        client.fetch(query).then(result => {
+            if (isLecture) {
+                setRelated(result.filter(ev => ev.tags.filter(value => tags.includes(value)).length))
+            } else {
+                setRelated(result)
+            }
+            setLoading(false)
+        })
+    }, [])
+
+    const nullSlides = Array(3).fill(
+        <SwiperSlide>
+            <Course />
+        </SwiperSlide>
+    )
+
+    if (!loading && !related.length) {
+        return ''
+    }
     
     return (
         <ResponsiveWidth gap="2em" id="supporting-lectures">
@@ -44,13 +77,9 @@ const RelatedLectures = ({ event }) => {
                 }}
                 spaceBetween={16}
             >
-                {related?.length ? related.filter(item => item.uid !== event.uid).slice(0, 4).map((item, idx) => (
+                {loading ? nullSlides : related.slice(0, 4).map((item, idx) => (
                     <SwiperSlide key={idx}>
                         <Course course={item} />
-                    </SwiperSlide>
-                )) : [...Array(3)].map((_, idx) => (
-                    <SwiperSlide key={idx}>
-                        <Course />
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -58,4 +87,4 @@ const RelatedLectures = ({ event }) => {
     )
 }
 
-export default RelatedLectures
+export default RelatedEvents

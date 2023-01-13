@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Box, Grid, Text, Heading, Image } from '@chakra-ui/react'
+import { Flex, Box, Grid, Text, Heading, Image, Link } from '@chakra-ui/react'
 
 import Schlumberger from '../../assets/slb.png'
 import Haliburton from '../../assets/haliburton.png'
@@ -10,13 +10,31 @@ import METC from '../../assets/metc.png'
 import ResponsiveWidth from '../../components/ResponsiveWidth'
 
 const CompaniesProof = () => {
-    const logos = [
-        Schlumberger,
-        Haliburton,
-        Weatherford,
-        Aramco,
-        BOC,
-        METC
+    const companies = [
+        {
+            logo: Schlumberger,
+            website: 'https://www.slb.com/'
+        },
+        {
+            logo: Haliburton,
+            website: 'https://www.halliburton.com/'
+        },
+        {
+            logo: Weatherford,
+            website: 'https://www.weatherford.com/'
+        },
+        {
+            logo: Aramco,
+            website: 'https://www.aramco.com/'
+        },
+        {
+            logo: BOC,
+            website: 'https://boc.oil.gov.iq/'
+        },
+        {
+            logo: METC,
+            website: 'http://www.metcegypt.com/'
+        },
     ]
     return (
         <Flex w="100vw">
@@ -33,9 +51,11 @@ const CompaniesProof = () => {
                     gap="1em"
                     w="100%"
                 >
-                    {logos.map((logo, idx) => (
-                        <Box p="1em" >
-                            <Image key={idx} src={logo} h="81px" maxW="150px"  objectFit="contain" filter="grayscale(1)" opacity="0.65" />
+                    {companies.map((company, idx) => (
+                        <Box p="1em">
+                            <Link href={company.website} target="_blank">
+                                <Image key={idx} src={company.logo} h="81px" maxW="150px"  objectFit="contain" filter="grayscale(1)" opacity="0.65" />
+                            </Link>
                         </Box>
                     ))}
                 </Grid>

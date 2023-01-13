@@ -4,16 +4,15 @@ import { useUser } from '../../auth/UserContext'
 import { SearchIcon } from '@chakra-ui/icons'
 import { MdFilterList, MdHouse, MdGridView, MdList, MdWork, MdCancel, MdTimeline } from 'react-icons/md'
 import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, useDisclosure } from '@chakra-ui/react'
-import moment from 'moment'
 
 const Speakers = () => {
-    const { speakers, loading } = useUser()
+    const { client, urlFor } = useUser()
     const [searchQuery, setSearchQuery] = useState("")
     const [gridView, setGridView] = useState(true)
     const [filterPosition, setFilterPosition] = useState("")
     const [filterCompany, setFilterCompany] = useState('')
-    const [sortOrder, setSortOrder] = useState(-1)
     const responsiveGridView = useBreakpointValue({ base: false, lg: true })
+    const [speakers, setSpeakers] = useState([])
 
     const [filteredSpeakers, setFilteredSpeakers] = useState([])
 
@@ -23,16 +22,13 @@ const Speakers = () => {
 
     useEffect(() => {
         document.title = 'Instructors - SPE BUOG'
+
+        client.fetch(`
+            (*[_type == 'instructor'] | order(latestEvent desc))
+        `)
+        .then(result => setSpeakers(result))
+        
     }, [])
-
-    useEffect(() => { setFilteredSpeakers(speakers.sort((a, b) => {
-        var dateA = new Date(a.latestEvent).getTime()
-        var dateB = new Date(b.latestEvent).getTime()
-        if (dateA < dateB) return 1;
-        if (dateA > dateB) return -1;
-        return 0;
-
-    })) }, [speakers])
 
     useEffect(() => {
         let newSpeakers = speakers
@@ -40,23 +36,24 @@ const Speakers = () => {
             newSpeakers = speakers.filter(s => {
                 return (
                     s.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    s.position.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    s.position?.toLowerCase().includes(searchQuery.toLowerCase()) ||
                     s.organization?.toLowerCase().includes(searchQuery.toLowerCase())
                 )
             })
         }
+        
 
         if (filterPosition) {
-            newSpeakers = newSpeakers.filter(s => s.position.toLowerCase().includes(filterPosition.toLowerCase()))
+            newSpeakers = newSpeakers.filter(s => s.position?.toLowerCase().includes(filterPosition.toLowerCase()))
         }
         
         if (filterCompany) {
-            newSpeakers = newSpeakers.filter(s => s.organization.toLowerCase().includes(filterCompany.toLowerCase()))
+            newSpeakers = newSpeakers.filter(s => s.organization?.toLowerCase().includes(filterCompany.toLowerCase()))
         }
 
         setFilteredSpeakers(newSpeakers)
 
-    }, [searchQuery, filterPosition, filterCompany])
+    }, [speakers, searchQuery, filterPosition, filterCompany])
 
     return (
         <Flex 
@@ -202,8 +199,8 @@ const Speakers = () => {
                     lg: "repeat(3, 1fr)",
                     xl: "repeat(4, 1fr)"
                 }} gap="1.5em" >
-                    {!loading ? filteredSpeakers?.slice(0, sliceIndex).map((speaker, i) => (
-                        <LinkBox><LinkOverlay href={`/instructor/${speaker.uid}`}>
+                    {filteredSpeakers?.slice(0, sliceIndex).map((speaker, i) => (
+                        <LinkBox><LinkOverlay href={`/instructor/${speaker.slug?.current}`}>
                             <Flex
                                 key={i}
                                 flexDir="column"
@@ -218,7 +215,7 @@ const Speakers = () => {
                             >
                                 <Flex alignSelf="start">
                                     <Image
-                                        src={`https://spebuog-dev.vercel.app/images/${speaker.image}`}
+                                        src={speaker.image ? urlFor(speaker.image).toString() : ""}
                                         alt="instructor"
                                         width="100px"
                                         height="100px"
@@ -256,14 +253,14 @@ const Speakers = () => {
                                                 </Flex>
                                             ))}
                                         </Flex>
-                                            <Link href={`/instructor/${speaker.uid}`} variant="textButton" _hover={{textDecor: "none"}}>
+                                            <Link href={`/instructor/${speaker.slug?.current}`} variant="textButton" _hover={{textDecor: "none"}}>
                                                 View Profile
                                             </Link>
                                     </Flex>
                                 </Flex>
                             </Flex>
                         </LinkOverlay></LinkBox>
-                    )) : [...Array(12)].map((_, idx) => (
+                    )) || [...Array(12)].map((_, idx) => (
                         <Flex
                             key={idx}
                             flexDir="column"
@@ -302,7 +299,7 @@ const Speakers = () => {
                 <Flex flexDir="column" gap="1em" maxW={{ base: "90vw", md: "100%"}}>
                     {filteredSpeakers?.length ? filteredSpeakers.slice(0, sliceIndex).map((speaker, idx) => {
                         return (
-                            <LinkBox><LinkOverlay href={`/instructor/${speaker.uid}`}>
+                            <LinkBox><LinkOverlay href={`/instructor/${speaker.slug?.current}`}>
                                 <Flex
                                     key={idx}
                                     align="center"
@@ -312,7 +309,7 @@ const Speakers = () => {
                                     borderRadius="15px"
                                 >
                                     <Image
-                                        src={`https://spebuog-dev.vercel.app/images/${speaker.image}`}
+                                        src={speaker.image ? urlFor(speaker.image).toString() : ""}
                                         alt="instructor"
                                         width="100px"
                                         height="100px"
@@ -353,7 +350,7 @@ const Speakers = () => {
                                     </Flex>
                                     ))}
                                     <Show above="lg">
-                                        <Link ml="auto" href={`/instructor/${speaker.uid}`} _hover={{textDecor: "none"}}>
+                                        <Link ml="auto" href={`/instructor/${speaker.slug?.current}`} _hover={{textDecor: "none"}}>
                                             <Button>View Profile</Button>
                                         </Link>
                                     </Show>

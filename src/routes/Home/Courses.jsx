@@ -10,11 +10,42 @@ import 'swiper/css/effect-fade'
 import 'swiper/css'
 
 import './styles.css'
+import { useEffect } from 'react'
 
 const Courses = () => {
-    const { events } = useUser()
-    const [swipe, setSwipe] = useState()
+    const { client } = useUser()
+    const [events, setEvents] = useState([])
+    const [loading, setLoading] = useState(true)
 
+    useEffect(() => {
+        client.fetch(`
+            *[_type == 'event' && event_type in ['course', 'internship']][0..3] 
+            { 
+                event_type, 
+                title, 
+                description, 
+                slug,
+                event_type == 'course' => {
+                    'instructors': array::unique(*[_type == 'event' && references(^._id)]{instructors[]->{name}}.instructors[].name)
+                },
+                event_type == 'internship' => {
+                    'instructors': array::unique(*[_type == 'event' && references(^._id)] {
+                        'children': *[_type == 'event' && references(^._id)]
+                    }.children[].instructors[]._ref)
+                }
+            }
+        `)
+        .then(result => {
+            setEvents(result)
+            setLoading(false)
+        })
+    }, [])
+
+    const nullSlides = Array(4).fill(
+        <SwiperSlide style={{ display: "flex", justifyContent: "center" }}>
+            <Course loading={true} />
+        </SwiperSlide>
+    )
 
     return (
         
@@ -34,7 +65,6 @@ const Courses = () => {
             <Flex w="100%" align="center">
             {/* <BsChevronLeft cursor="pointer" onClick={() => swipe?.slidePrev()} /> */}
             <Swiper
-                onBeforeInit={(swipper) => setSwipe(swipper)}
                 modules={[Pagination, EffectFade]}
                 effect
                 speed={800}
@@ -50,17 +80,13 @@ const Courses = () => {
                     clickable: true,
                 }}
             >
-            {events?.length ? events.slice(0, 10).map((event, idx) => (
+            {loading ? nullSlides : events?.slice(0, 10).map((event, idx) => (
                 <SwiperSlide style={{ display: "flex", justifyContent: "center" }}>
                     <LinkBox>
-                    <LinkOverlay href={`/${["course_lecture", "webinar"].includes(event.event_type) ? 'lecture' : 'course'}/${event.uid}`}>
+                    <LinkOverlay href={`/${["course_lecture", "webinar"].includes(event.event_type) ? 'lecture' : 'course'}/${event.id}`}>
                         <Course course={event} key={idx} />
                     </LinkOverlay>
                     </LinkBox>
-                </SwiperSlide>
-            )) : [...Array(4)].map((_, idx) => (
-                <SwiperSlide key={idx} style={{ display: "flex", justifyContent: "center" }}>
-                    <Course />
                 </SwiperSlide>
             ))}
             </Swiper>

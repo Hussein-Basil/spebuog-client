@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Flex, Heading, Text, CloseButton } from '@chakra-ui/react'
-import Layout from '../../components/Layout'
 
 import TagSelector from './components/TagSelector'
 import Search from './components/Search'
@@ -12,15 +11,15 @@ import ResponsiveWidth from '../../components/ResponsiveWidth'
 import { useUser } from '../../auth/UserContext'
 
 const Courses = () => {
-    const { events } = useUser()
+    const { client, filterEventsByQuery, filterEventsByTag } = useUser()
     const stickyRef = useRef(null)
     const [filteredResults, setFilteredResults] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
+    const [events, setEvents] = useState([])
 
     const [query, setQuery] = useState({
         search: '',
-        tag: {
-        }
+        tag: {}
     })
 
     useEffect(() => {
@@ -39,38 +38,53 @@ const Courses = () => {
         }
     }, [])
 
-    useEffect(() => {
-        setLoading(true)
-        setFilteredResults([])
-        let link = 'https://spebuog-dev.netlify.app/.netlify/functions/api/event'
+    function intersect(a, b) {
+        var setB = new Set(b);
+        return [...new Set(a)].filter(x => setB.has(x));
+    }
 
+    useEffect(() => {
+        client.fetch(`
+            *[_type == 'event']{
+                ...,
+                instructors[]->,
+                parent->,
+                event_type == 'course' => {
+                    'children': *[_type =='event' && references(^._id)],
+                    'instructors': array::unique(*[_type == 'event' && references(^._id)]{instructors[]->{name}}.instructors[].name)
+                },
+                event_type == 'internship' => {
+                    'children': *[_type =='event' && references(^._id)],
+                    'instructors': array::unique(*[_type == 'event' && references(^._id)] {
+                        'children': *[_type == 'event' && references(^._id)]
+                    }.children[].instructors[]._ref)
+                }
+            }
+        `)
+        .then(result => {
+            setEvents(result)
+            setLoading(false)
+        })
+    }, [])
+
+    useEffect(() => {
+        let result
+        
         if (query.tag?.value && query.search) {
-            link += `?tag=${query.tag.value}&q=${query.search}`
+            let a = filterEventsByTag(events, query.tag.value)
+            let b = filterEventsByQuery(events, query.search)
+            result  = intersect(a, b)
         }
         else if (query.tag?.value) {
-            link += `?tag=${query.tag.value}`
+            result = filterEventsByTag(events, query.tag.value)
         } else if (query.search) {
-            link += `?q=${query.search}`
+            result = filterEventsByQuery(events, query.search)
         } else {
-            setFilteredResults(events)
-            setTimeout(() => {
-                setLoading(false)
-            }, 1000)
-            return 
+            result = events
         }
 
-        fetch(link)
-            .then(res => {
-                if (res.ok) return res.json()
-                else return []
-            })
-            .then(data => {
-                setFilteredResults(data.error ? [] : data.events)
-                setTimeout(() => {
-                    setLoading(false)
-                }, 1000)
-            })
-    }, [query])
+        setFilteredResults(result)
+    }, [query, events])
 
     return (
             <Flex py={{ base: "1em", lg: "3em" }} flexDir="column" gap="0.5em" w="100vw">

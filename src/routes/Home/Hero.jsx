@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Heading,Icon, Grid, Text, Box, Button, Show, Hide, Link, LinkBox, LinkOverlay } from '@chakra-ui/react'
+import { Flex, Heading, Text, Box, Button, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import NumbersProof from './NumbersProof'
 
 const Hero = () => {

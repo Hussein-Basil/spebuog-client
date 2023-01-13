@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Box, Flex, Heading, Image, Link, Text } from '@chakra-ui/react'
+import {  Flex, Heading, Image, Link, Text } from '@chakra-ui/react'
 import ResponsiveWidth from '../../components/ResponsiveWidth'
 
 const Membership = () => {

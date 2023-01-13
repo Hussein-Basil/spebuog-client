@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import {
-    Flex, Text, Heading, Image, Input,
-    FormLabel, Button, Link, Icon,
-    InputGroup, Textarea, InputRightElement
+    Flex, Text, Heading, Input,
+    Button, Link, Icon,
+    InputGroup, InputRightElement
 } from '@chakra-ui/react'
 
 import { ReactComponent as Facebook } from '../../assets/facebook.svg'

@@ -4,8 +4,6 @@ import { FaChalkboardTeacher } from 'react-icons/fa'
 import { BsPeopleFill } from 'react-icons/bs'
 import { AiOutlineFieldTime } from 'react-icons/ai'
 import { MdEmojiPeople } from 'react-icons/md'
-import ResponsiveWidth from '../../components/ResponsiveWidth'
-import { motion } from 'framer-motion'
 
 const NumbersProof = () => {
     const numbers = [

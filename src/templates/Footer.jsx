@@ -7,8 +7,6 @@ import { ReactComponent as Linkedin } from '../assets/linkedin.svg'
 
 import Logo from '../assets/spe-logo-2020.png'
 
-import { MdLocationOn } from 'react-icons/md'
-
 const Footer = () => {
     const [buttonText, setButtonText] = useState('Subscribe')
     const [subscriber, setSubscriber] = useState('')
@@ -39,7 +37,7 @@ const Footer = () => {
                                     fontWeight="medium"
                                 >
                                     SPE BUOG
-                                </Text> - We aim to give our members the most enriching lectures with Oil & Gas top experts
+                                </Text> - We strive to make our members the most distinguished in oil and gas worldwide.
                             </Text>
                             <Flex columnGap="20px">
                                 <Link href="https://fb.com/spebuog"><Icon as={Facebook} w="40px" h="40px" fill="white" /></Link>

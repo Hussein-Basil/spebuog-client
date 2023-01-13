@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Flex, Link } from '@chakra-ui/react'
 import '../styles.css'
 
-const Navbar = ({ event }) => {
+const Navbar = ({ event, loading }) => {
     const navbarRef = useRef(null)
 
     useEffect(() => {
@@ -22,7 +22,6 @@ const Navbar = ({ event }) => {
             window.removeEventListener('scroll', handleWindowScroll)
         }
     })
-
 
     return (
         <Flex h="60px" mb="3em">
@@ -52,13 +51,17 @@ const Navbar = ({ event }) => {
                     gap={{ base: "3em", lg: "5em" }}
                     px="1.5em"
                 >
-                    {event?.title && (event.description || event.agenda?.length > 0 || event.target?.length > 0) && (
-                    <Link href="#about" fontWeight="semibold" color="#0D4C94">About</Link>)}
-                    <Link href="#instructors">Instructors</Link>
-                    <Link href="#lectures">Lectures</Link>
-                    {/* <Link href="#files">Files</Link> */}
-                    <Link href="#supporting-lectures" whiteSpace="nowrap">Related Lectures</Link>
-                    {/* <Link href="#faq">FAQ</Link> */}
+                    {!loading && (
+                        <>
+                            {event?.title && (event.description || event.agenda || event.target) && (
+                            <Link href="#about" fontWeight="semibold" color="#0D4C94">About</Link>)}
+                            <Link href="#instructors">Instructors</Link>
+                            <Link href="#lectures">Video</Link>
+                            {/* <Link href="#files">Files</Link> */}
+                            <Link href="#supporting-lectures" whiteSpace="nowrap">Related Lectures</Link>
+                            {/* <Link href="#faq">FAQ</Link> */}
+                        </>
+                    )}
                 </Flex>
             </Flex>
         </Flex>

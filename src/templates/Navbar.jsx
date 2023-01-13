@@ -1,18 +1,15 @@
 import React, { useEffect, useRef } from 'react'
-import { Image, Icon, Flex, HStack, Box, Heading, Link } from '@chakra-ui/react'
+import { Image, Flex, HStack, Box, Heading, Link } from '@chakra-ui/react'
 import MobileDrawer from '../components/MobileDrawer'
 import Logo from '../assets/spe-logo-2020.png'
 import './styles.css'
 import ResponsiveWidth from '../components/ResponsiveWidth'
-import { motion } from 'framer-motion'
 
 const Navbar = () => {
-    // const Logo = 'https://www.spe.org/binaries/content/gallery/specms/speevents/organization-logos/spe-logo-2020.png'
     const navRef = useRef(null)
 
     useEffect(() => {
         let lastScrollY = window.scrollY
-        const sticky = navRef.current.offsetTop
 
         const handleWindowScroll = () => {
             navRef.current.classList.toggle("is-pisnned",

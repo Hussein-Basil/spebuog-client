@@ -2,12 +2,10 @@ import React from 'react'
 import { Flex, Heading, Text, Button, Link } from '@chakra-ui/react'
 import About from './About'
 import Features from './Features'
-import Upcoming from './Upcoming'
 import Courses from './Courses'
 import Layout from '../../components/Layout'
 import Hero from './Hero'
 import CompaniesProof from './CompaniesProof'
-import NumbersProof from './NumbersProof'
 
 
 const Home = () => {
@@ -22,10 +20,8 @@ const Home = () => {
                 <Features />
                 <CompaniesProof />
                 <Courses />
-                <Upcoming />
                 <Flex w="100vw" bg="#F6BB43" py="4em" align="center" justify="center"  flexDir="column">
                     <Heading 
-                        // fontSize={{ base: "1.75rem", lg: "2.25rem" }} 
                         fontSize={{ base: "32px", lg: "42px" }} 
                         fontWeight="medium"
                         textAlign="center"

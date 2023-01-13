@@ -13,11 +13,10 @@ import NotFound from './routes/Errors/NotFound'
 import SpeakerProfile from './routes/SpeakerProfile'
 import About from './routes/About'
 
-import CoursePage from './routes/CoursePage'
-import LecturePage from './routes/LecturePage'
+import EventPage from './routes/EventPage'
 import Courses from './routes/Courses'
 import Membership from './routes/Membership'
-import Upcoming from './routes/Upcoming'
+import Certificate from './routes/Certificate'
 
 const ScrollToTop = ({ children }) => {
   useEffect(() => {
@@ -34,14 +33,14 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/courses" element={<Courses />} />
-            <Route path="/upcoming" element={<Upcoming />} />
-            <Route path="/course/:id" element={<CoursePage />} />
-            <Route path="/lecture/:id" element={<LecturePage />}/>
+            <Route path="/course/:slug" element={<EventPage />} />
+            <Route path="/lecture/:slug" element={<EventPage />}/>
             <Route path="/instructors" element={<Speakers />} />
             <Route path="/instructor/:id" element={<SpeakerProfile />} />
             <Route path="/about" element={<About />} />
             <Route path="/membership" element={<Membership />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/certificate" element={<Certificate />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ScrollToTop>

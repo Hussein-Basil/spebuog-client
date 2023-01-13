@@ -1,40 +1,59 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import UserContext from './UserContext'
+import sanityClient from '@sanity/client'
+import imageUrlBuilder from '@sanity/image-url'
 
 const AuthProvider = (props) => {
     const [status, setStatus] = useState('fetching')
     const [user, setUser] = useState({})
     const [notifications, setNotification] = useState([])
 
-    const [speakers, setSpeakers] = useState([])
-    const [events, setEvents] = useState([])
-    const [loading, setLoading] = useState(true)
+    const client = sanityClient({
+        projectId: 'q6fpo8mv',
+        dataset: 'production',
+        apiVersion: '2021-10-21',
+    })
 
-    useEffect(() => {
-        fetch('https://spebuog-dev.netlify.app/.netlify/functions/api/event')
-        .then(res => res.json())
-        .then(data => setEvents(data.error ? [] : data.events))
-        
-        setLoading(true)
-        fetch('https://spebuog-dev.netlify.app/.netlify/functions/api/speaker')
-            .then(res => res.json())
-            .then(data => {
-                setSpeakers(data.error ? {} : data.speakers)
-                setLoading(false)
-        })
-    }, [])
+    const builder = imageUrlBuilder({
+        baseUrl: 'https://q6fpo8mv.api.sanity.io',
+        projectId: 'q6fpo8mv',
+        dataset: 'production',
+        useCdn: true,
+    })
 
+    const urlFor = (source) => builder.image(source)
+
+    const filterEventsByQuery = (events, q) => {
+        let query = q.toLowerCase()
+        return events.filter(event => (
+            event.title.toLowerCase().includes(query) ||
+            event.description?.toLowerCase().includes(query)
+        ))
+    }
+
+    const filterEventsByTag = (events, tag) => {
+        if (tag === 'all') return events
+        return events.filter(event => (
+            event.tags.includes(tag)
+        ))
+    }
+
+    const filterById = (group, id) => {
+        return group.find(item => item.id === id)
+    }
 
     const value = {
+        client,
+        filterEventsByQuery,
+        filterEventsByTag,
+        filterById,
         status,
         setStatus,
         user,
         setUser,
         notifications,
         setNotification,
-        speakers,
-        events,
-        loading
+        urlFor
     }
 
     return (

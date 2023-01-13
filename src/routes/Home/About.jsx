@@ -1,7 +1,6 @@
 import React from 'react'
-import { Flex, Heading, Box, Icon, Image, Text, Show, Link, Button, LinkOverlay, LinkBox } from '@chakra-ui/react'
+import { Flex, Heading, Box, Image, Text, Show, Button, LinkOverlay, LinkBox } from '@chakra-ui/react'
 import Logo from '../../assets/SPE-logo.png'
-import { motion } from 'framer-motion'
 import ResponsiveWidth from '../../components/ResponsiveWidth'
 
 const About = () => {

@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Flex, Heading, Text, Icon, Image, useBreakpointValue, Show, Hide } from '@chakra-ui/react'
-import { MdOutlineArrowForwardIos } from 'react-icons/md'
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
+import { Flex, Heading, Show, Hide } from '@chakra-ui/react'
 
-const Lectures = ({ event }) => {
-    const [currentLecture, setCurrentLecture] = useState(0)
+const LectureVideo = ({ video, loading }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
     useEffect(() => {
-
         const handleWindowResize = () => {
             setWindowWidth(window.innerWidth)
         }
@@ -19,10 +15,11 @@ const Lectures = ({ event }) => {
         }
     }, [])
 
-    if (!event?.video) {
+    const youtube_regex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube(-nocookie)?\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/
+
+    if (loading || !video || !youtube_regex.test(video)) {
         return ''
     }
-
 
     return (
         <Flex flexDir="column" gap="2em" mt="2em" id="lectures">
@@ -36,7 +33,7 @@ const Lectures = ({ event }) => {
                             width="960"
                             height="539"
                             style={{ background: '#c8c8c8' }}
-                            src={`https://www.youtube.com/embed/${event.video.split("https://youtu.be/").pop()}`}
+                            src={`https://www.youtube.com/embed/${video.split("https://youtu.be/").pop()}`}
                             title="YouTube video player"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
@@ -47,7 +44,7 @@ const Lectures = ({ event }) => {
                             width={windowWidth}
                             height={Math.round(windowWidth * 9 / 16)}
                             style={{ background: '#c8c8c8', marginRight: 'auto', marginLeft: -0.05 * windowWidth }}
-                            src={`https://www.youtube.com/embed/${event.video.split("https://youtu.be/").pop()}`}
+                            src={`https://www.youtube.com/embed/${video.split("https://youtu.be/").pop()}`}
                             title="YouTube video player"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
@@ -60,4 +57,4 @@ const Lectures = ({ event }) => {
     )
 }
 
-export default Lectures
+export default LectureVideo
