@@ -1,7 +1,30 @@
 import React from 'react'
 import { Flex, Heading, Text, Link } from '@chakra-ui/react'
 
-const Lectures = ({ lectures }) => {
+const CourseLectures = ({ lectures }) => {
+
+    const handleDescription = (lecture) => {
+        let instructors = [...new Map(lecture.instructors.map(item => 
+            [item['_id'], item])).values()]
+        
+        if (!instructors.length) {
+            return ''
+        }
+
+        if (instructors.length === 1) {
+            if (instructors.at(0).position && instructors.at(0).organization) {
+                return `
+                    Instructor: ${instructors.at(0).name} 
+                    who is ${instructors.at(0).position} at ${instructors.at(0).organization}
+                `
+            }
+        } else {
+            return `
+                ${instructors.at(0).name} and ${instructors.at(1).name}
+            `
+        }
+    }
+
     return (
         <Flex flexDir="column" gap="2em" mt="2em" id="lectures" maxW={{ base: "100%", lg: "1000px"}}>
             <Heading fontSize="24px" fontWeight="medium" >
@@ -14,7 +37,7 @@ const Lectures = ({ lectures }) => {
                         <Text fontSize="24px" alignSelf="center">{index + 1}</Text>
                         <Flex flexDir="column" gap="1em">
                             <Heading fontSize="18px"><Link href={`/lecture/${lec?.slug?.current}`}>{lec.title}</Link></Heading>
-                            <Text>{lec.description || lec.instructors.at(0)?.name}</Text>
+                            <Text>{lec.description || handleDescription(lec)}</Text>
                         </Flex> 
                     </Flex>
                 )
@@ -24,4 +47,4 @@ const Lectures = ({ lectures }) => {
     )
 }
 
-export default Lectures
+export default CourseLectures

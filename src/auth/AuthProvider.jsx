@@ -12,6 +12,7 @@ const AuthProvider = (props) => {
         projectId: 'q6fpo8mv',
         dataset: 'production',
         apiVersion: '2021-10-21',
+        useCdn: true,
     })
 
     const builder = imageUrlBuilder({

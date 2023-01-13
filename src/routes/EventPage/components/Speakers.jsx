@@ -17,8 +17,8 @@ const Speakers = ({ instructors, loading }) => {
     const { urlFor } = useUser()
     const responsiveSlides = useBreakpointValue({ base: 1, md: 2, lg: 3, xl: 4})
 
-    const nullSlides = Array(4).fill(
-        <SwiperSlide>
+    const nullSlides = [...Array(4)].map((_, key) => (
+        <SwiperSlide key={key}>
             <Flex align="center" gap="1em" maxW="450px">
                 <Image
                     as={Avatar}
@@ -34,7 +34,7 @@ const Speakers = ({ instructors, loading }) => {
                 </Flex>
             </Flex>
         </SwiperSlide>
-    )
+    ))
 
     return (
         <Flex flexDir="column" gap="2em" mt="2em" id="instructors" >
@@ -46,7 +46,7 @@ const Speakers = ({ instructors, loading }) => {
                     pagination={{
                         clickable: true
                     }}
-                    speed={800}
+                    speed={3500}
                     autoplay={{
                         delay: 3500,
                         disableOnInteraction: true,
@@ -62,21 +62,14 @@ const Speakers = ({ instructors, loading }) => {
                 {loading ? nullSlides : instructors?.length ? instructors.map(speaker => (
                     <SwiperSlide key={speaker.id}>
                         <Flex align="center" gap="1em" maxW="450px">
-                            <ProgressiveImage 
-                                src={speaker.image ? urlFor(speaker.image) : ""} 
-                                placeholder={speaker.image ? urlFor(speaker.image).width(50).blur() : ""}
-                            >
-                                {(src) => (
-                                    <Image
-                                        src={src}
-                                        as={Avatar}
-                                        w="100px"
-                                        h="100px"
-                                        borderRadius="50%"
-                                        objectFit="cover" 
-                                    />
-                                )}
-                            </ProgressiveImage>
+                            <Image
+                                src={speaker.image ? urlFor(speaker.image) : ""}
+                                as={Avatar}
+                                w="100px"
+                                h="100px"
+                                borderRadius="50%"
+                                objectFit="cover" 
+                            />
                             <Flex flexDir="column">
                                 <Link href={`/instructor/${speaker.slug?.current}`} fontSize="18px" fontWeight="medium">{speaker.name}</Link>
                                 <Text fontSize="16px">{speaker.position}</Text>

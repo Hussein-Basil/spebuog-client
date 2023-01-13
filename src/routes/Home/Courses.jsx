@@ -41,11 +41,11 @@ const Courses = () => {
         })
     }, [])
 
-    const nullSlides = Array(4).fill(
-        <SwiperSlide style={{ display: "flex", justifyContent: "center" }}>
+    const nullSlides = [...Array(4)].map((_, key) => (
+        <SwiperSlide style={{ display: "flex", justifyContent: "center" }} key={key}>
             <Course loading={true} />
         </SwiperSlide>
-    )
+    ))
 
     return (
         

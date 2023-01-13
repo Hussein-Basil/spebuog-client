@@ -37,19 +37,18 @@ const CoursesPreview = () => {
         })
     }, [])
 
-    const nullSlides = Array(4).fill(
-        <SwiperSlide style={{ display: "flex", justifyContent: "center" }}>
+    const nullSlides = [...Array(4)].map((_, key) => (
+        <SwiperSlide style={{ display: "flex", justifyContent: "center" }} key={key}>
             <Course loading={true} />
         </SwiperSlide>
-    )
+    ))
 
     return (
-        categories.map(category => (
-            !category.children?.length ? '' : 
+        (loading ? [...Array(3)] : categories).map(category => (
             <Flex flexDir="column" gap="1.5em" mt="1.5em">
-                <Text fontSize="28px" fontWeight="medium">{category.title}</Text>
+                <Text fontSize="28px" fontWeight="medium">{category?.title}</Text>
                 <Flex flexDir="row" gap="3em" overflow="auto">
-                <Flex w="100%" align="center" >
+                    <Flex w="100%" align="center" >
                         <Swiper
                             modules={[Autoplay, Pagination, EffectFade]}
                             effect

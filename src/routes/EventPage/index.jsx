@@ -2,7 +2,8 @@ import { Flex } from '@chakra-ui/react'
 import Navbar from './components/Navbar'
 import Speakers from './components/Speakers'
 import LectureVideo from './components/LectureVideo'
-import Lectures from './components/Lectures'
+import CourseLectures from './components/CourseLectures'
+import InternshipCourses from './components/InternshipCourses'
 import Header from './components/Header'
 import About from './components/About'
 import RelatedEvents from './components/RelatedEvents'
@@ -18,19 +19,28 @@ const EventPage = () => {
     const { client } = useUser()
     const [loading, setLoading] = useState(true)
 
+
     useEffect(() => {
         client.fetch(`
             *[_type == 'event' && slug.current == '${params.slug}'][0]
             {
                 ...,
+                parent->,
                 event_type in ['course_lecture', 'webinar'] => {
                     instructors[]->,
-                    parent->
                 },
-                event_type in ['course', 'internship'] => {
-                    'instructors': *[_type == 'event' && references(^._id)].instructors[]->,
-                    parent->,
-                    'children': *[_type == 'event' && references(^._id)]{..., instructors[]-> }
+                event_type == 'course' => {
+                    'children': *[_type == 'event' && references(^._id)]{..., instructors[]-> },
+                    'instructors': *[_type == 'event' && references(^._id)].instructors[]->
+                },
+                event_type == 'internship' => {
+                    'children': *[_type == 'event' && references(^._id)]{
+                        ..., 
+                        'instructors': *[_type == 'event' && references(^._id)].instructors[]-> 
+                    },
+                    'instructors': *[_type == 'event' && references(^._id)] {
+                        'children': *[_type == 'event' && references(^._id)]{ instructors[]-> }
+                    }.children[].instructors[]
                 }
             }
         `)
@@ -59,7 +69,7 @@ const EventPage = () => {
                 setLoading(false)
             }
         })
-    }, [])
+    }, [location.pathname])
 
     useEffect(() => {
         if (event?.title) {
@@ -99,8 +109,10 @@ const EventPage = () => {
                     />
                     {['course_lecture', 'webinar'].includes(event?.event_type) ? (
                         <LectureVideo video={event?.video} image={event?.image} loading={loading} />
+                    ) : event.event_type === 'course' ? (
+                        <CourseLectures lectures={event?.children} loading={loading} />
                     ) : (
-                        <Lectures lectures={event?.children} loading={loading} />
+                        <InternshipCourses courses={event?.children} loading={loading} />
                     )}
                     <RelatedEvents
                         type={event?.event_type}

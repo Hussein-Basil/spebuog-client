@@ -36,11 +36,11 @@ const SpeakerProfile = () => {
         }
     }, [speaker?.name])
 
-    const nullSlides = Array(4).fill(
+    const nullSlides = [...Array(4)].map((_, key) => (
         <SwiperSlide style={{ display: "flex", gap: "1em" }}>
             <Course loading={true} />
         </SwiperSlide>
-    )
+    ))
 
     return (
         <Flex flexDir="column" align="center" gap="1em" mb="5em" w="100vw">

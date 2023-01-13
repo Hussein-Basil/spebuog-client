@@ -10,8 +10,42 @@ const Course = ({
     ...props
 }) => {
     const { urlFor } = useUser()
+    const handleDescription = (course) => {
+        let result = ''
+
+        if (course.description) {
+            result = course.description
+        }
+        else if (['course', 'internship'].includes(course.event_type)) {
+            let count = course.children?.length ? `in ${course.children.length} ${course.event_type === 'internship' ? 'courses' : 'lectures'}` : ''
+            let instructors = course.instructors.length
+            instructors = instructors ? instructors === 1 ? ` with ${course.instructors.at(0)}` : ` ${course.instructors.length} instructors` : ''
+            result = `Join this ${course.event_type} to learn about ${course.title} ${count}${instructors}`
+        }
+
+        else if (!course.instructors?.length) {
+            result = `Join this ${course.event_type} to learn about ${course.title}`
+        }
+
+        else if (course.instructors?.length) {
+            let date = course.date ? `On ${moment(course.date).format('MMMM DD, YYYY')}, ` : ''
+            let position = course.instructors.at(0).position
+            let organization = course.instructors?.at(0).organization 
+            
+            let name = course.instructors.at(0).name
+            let work = position && organization ? ` who is ${position} at ${organization}` : ''
+            let others = course.instructors.length > 1 ? ' and others' : ''
+            let parent = course.parent ? ` as a part of the ${course.parent.event_type} ${course.parent.title}` : ''
+    
+            result = `${date + name + work + others} presented a lecture about ${course.title + parent}.`
+        }
+
+        let maxLen = result.indexOf(' ', 160)
+        return result.slice(0,  maxLen > 0 ? maxLen : undefined) + (maxLen > 0 ? '...' : '')
+    }
 
     if (loading) {
+        console.log('h2')
         return (
             <Flex
             flexDir="column"
@@ -46,45 +80,11 @@ const Course = ({
         )
     }
 
-    const handleDescription = (course) => {
-        let result = ''
-
-        if (course.description) {
-            result = course.description
-        }
-        else if (['course', 'internship'].includes(course.event_type)) {
-            let count = course.children?.length ? `in ${course.children.length} ${course.event_type === 'internship' ? 'courses' : 'lectures'}` : ''
-            let instructors = course.instructors.length
-            instructors = instructors ? instructors === 1 ? course.instructors.at(0) : `${course.instructors.length} instructors` : ''
-            result = `Join this ${course.event_type} to learn about ${course.title} ${count} with ${instructors}`
-        }
-
-        else if (!course.instructors?.length) {
-            result = `Join this ${course.event_type} to learn about ${course.title}`
-        }
-
-        else if (course.instructors?.length) {
-            let date = course.date ? `On ${moment(course.date).format('MMMM DD, YYYY')}, ` : ''
-            let position = course.instructors.at(0).position
-            let organization = course.instructors?.at(0).organization 
-            
-            let name = course.instructors.at(0).name
-            let work = position && organization ? ` who is ${position} at ${organization}` : ''
-            let others = course.instructors.length > 1 ? ' and others' : ''
-            let parent = course.parent ? ` as a part of the ${course.parent.event_type} ${course.parent.title}` : ''
-    
-            result = `${date + name + work + others} presented a lecture about ${course.title + parent}.`
-        }
-
-        let maxLen = result.indexOf(' ', 160)
-        return result.slice(0,  maxLen > 0 ? maxLen : undefined) + (maxLen > 0 ? '...' : '')
-    }
-
-    if (!course) {
+    else if (!course) {
         return ''
     }
 
-    return (
+    else return (
         <LinkBox><LinkOverlay href={['course_lecture', 'webinar'].includes(course?.event_type) ? `/lecture/${course.slug?.current}` : `/course/${course.slug?.current}`}>
         <Flex
             flexDir="column"

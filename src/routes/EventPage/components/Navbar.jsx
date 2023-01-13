@@ -56,9 +56,10 @@ const Navbar = ({ event, loading }) => {
                             {event?.title && (event.description || event.agenda || event.target) && (
                             <Link href="#about" fontWeight="semibold" color="#0D4C94">About</Link>)}
                             <Link href="#instructors">Instructors</Link>
-                            <Link href="#lectures">Video</Link>
+                            {event?.video && <Link href="#lectures">Video</Link>}
+                            {event?.children && <Link href='#lectures'>{event.event_type === 'course' ? 'Lectures' : 'Courses'}</Link>}
                             {/* <Link href="#files">Files</Link> */}
-                            <Link href="#supporting-lectures" whiteSpace="nowrap">Related Lectures</Link>
+                            <Link href="#supporting-lectures" whiteSpace="nowrap">Related</Link>
                             {/* <Link href="#faq">FAQ</Link> */}
                         </>
                     )}

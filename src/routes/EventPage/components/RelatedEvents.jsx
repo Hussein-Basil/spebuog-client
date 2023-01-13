@@ -45,11 +45,11 @@ const RelatedEvents = ({
         })
     }, [])
 
-    const nullSlides = Array(3).fill(
-        <SwiperSlide>
-            <Course />
+    const nullSlides = [...Array(3)].map((_, key) => (
+        <SwiperSlide style={{ display: "flex", justifyContent: "center" }} key={key}>
+            <Course loading={true} />
         </SwiperSlide>
-    )
+    ))
 
     if (!loading && !related.length) {
         return ''
