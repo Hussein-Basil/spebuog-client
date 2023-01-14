@@ -9,10 +9,10 @@ const FilterResults = ({
 }) => {
     const [sliceIndex, setSliceIndex] = useState(12)
 
-    const nullItems = Array(12).fill(<Course loading={true} />)
+    const nullItems = Array(12).fill(<Course loading={true}/>)
 
     return (
-        <Flex flexDir="column" gap="1em" mt="0.5em" w="100%" as={motion.div} initial={{ opacity: 0}} whileInView={{opacity: 1}}>
+        <Flex flexDir="column" gap="1em" mt="0.5em" w="100%" as={motion.div} initial={{ opacity: 0}} whileInView={{opacity: 1}} transition={{ delay: 1 }} >
             <Grid gridTemplateColumns={{
                 base: "repeat(1, 1fr)",
                 md: "repeat(2, 1fr)",
@@ -21,7 +21,7 @@ const FilterResults = ({
             }} gap="1.5em" alignItems="stretch">
                 {loading ? nullItems :
                     results?.length ? results.slice(0, sliceIndex).map((course, idx) => (
-                        <Course course={course} key={idx} />
+                        <Course course={course} key={idx}  />
                     ))
                 : (
                     <Text as={motion.div} initial={{opacity: 0}} whileInView={{opacity: 1}}>

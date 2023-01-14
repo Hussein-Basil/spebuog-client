@@ -1,6 +1,7 @@
 import React from 'react'
 import { Flex, Icon, Text } from '@chakra-ui/react'
 import { MdList } from 'react-icons/md'
+import {motion} from 'framer-motion'
 
 const TagSelector = ({ setQuery, setFilteredResults }) => {
     const tags = [
@@ -37,7 +38,7 @@ const TagSelector = ({ setQuery, setFilteredResults }) => {
     ]
 
     return (
-        <Flex flexDir="row" gap="1em" mt="10px" overflow="auto" >
+        <Flex flexDir="row" gap="1em" mt="10px" overflow="auto" as={motion.div} initial={{ opacity: 0}} whileInView={{opacity: 1}} transition={{ delay: 1 }}>
             {tags.map((tag, idx) => (
                 <Flex
                     key={idx}

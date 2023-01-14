@@ -9,6 +9,7 @@ import 'swiper/css/effect-fade'
 import 'swiper/css/pagination'
 import 'swiper/css'
 import { useUser } from '../../../auth/UserContext'
+import useSWR from 'swr'
 
 const RelatedEvents = ({
     type, 
@@ -16,34 +17,34 @@ const RelatedEvents = ({
     categoryID,
     eventID
 }) => {
-    const [related, setRelated] = useState([])
+    const [related, setRelated] = useState(null)
     const responsiveSlides = useBreakpointValue({ base: 1, md: 2, lg: 3, xl: 4})
     const { client } = useUser()
-    const [loading, setLoading] = useState(true)
+    
+    const isLecture = ['course_lecture', 'webinar'].includes(type)
+    const query =  isLecture ? (
+        `*[_type == 'event' && event_type in ['course_lecture', 'webinar'] && count(tags) > 0] &&
+        _id != '${eventID}'
+        `
+    ) : (
+        `*[_type == 'event' && references('${categoryID}') && _id != '${eventID}']`
+    )
+    const [loading, setLoading] = useState(isLecture && !tags?.length ? false : true)
+    const { data } = useSWR(query)
 
     useEffect(() => {
-        const isLecture = ['course_lecture', 'webinar'].includes(type)
-        const query =  isLecture ? (
-            `*[_type == 'event' && event_type in ['course_lecture', 'webinar'] && count(tags) > 0] &&
-            _id != '${eventID}'
-            `
-        ) : (
-            `*[_type == 'event' && references('${categoryID}') && _id != '${eventID}']`
-        )
-
-        if (isLecture && tags?.length === 0) {
-            return setLoading(false)
+        if (isLecture) {
+            setRelated(data?.length ? data.filter(ev => ev.tags.filter(value => tags.includes(value)).length) : [])
+        } else {
+            setRelated(data?.length ? data : [])
         }
+    }, [data])
 
-        client.fetch(query).then(result => {
-            if (isLecture) {
-                setRelated(result.filter(ev => ev.tags.filter(value => tags.includes(value)).length))
-            } else {
-                setRelated(result)
-            }
+    useEffect(() => {
+        if (related?.length !== undefined) {
             setLoading(false)
-        })
-    }, [])
+        }
+    }, [related])
 
     const nullSlides = [...Array(3)].map((_, key) => (
         <SwiperSlide style={{ display: "flex", justifyContent: "center" }} key={key}>

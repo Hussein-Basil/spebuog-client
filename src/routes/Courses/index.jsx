@@ -9,12 +9,12 @@ import FilterResults from './components/FilterResults'
 import './styles.css'
 import ResponsiveWidth from '../../components/ResponsiveWidth'
 import { useUser } from '../../auth/UserContext'
+import useSWR from 'swr'
 
 const Courses = () => {
-    const { client, filterEventsByQuery, filterEventsByTag } = useUser()
+    const { filterEventsByQuery, filterEventsByTag } = useUser()
     const stickyRef = useRef(null)
     const [filteredResults, setFilteredResults] = useState([])
-    const [loading, setLoading] = useState(true)
     const [events, setEvents] = useState([])
 
     const [query, setQuery] = useState({
@@ -43,29 +43,27 @@ const Courses = () => {
         return [...new Set(a)].filter(x => setB.has(x));
     }
 
-    useEffect(() => {
-        client.fetch(`
-            *[_type == 'event']{
-                ...,
-                instructors[]->,
-                parent->,
-                event_type == 'course' => {
-                    'children': *[_type =='event' && references(^._id)],
-                    'instructors': array::unique(*[_type == 'event' && references(^._id)]{instructors[]->{name}}.instructors[].name)
-                },
-                event_type == 'internship' => {
-                    'children': *[_type =='event' && references(^._id)],
-                    'instructors': array::unique(*[_type == 'event' && references(^._id)] {
-                        'children': *[_type == 'event' && references(^._id)]
-                    }.children[].instructors[]._ref)
-                }
+    const { data, isLoading } = useSWR(`
+        *[_type == 'event']{
+            ...,
+            instructors[]->,
+            parent->,
+            event_type == 'course' => {
+                'children': *[_type =='event' && references(^._id)],
+                'instructors': array::unique(*[_type == 'event' && references(^._id)]{instructors[]->{name}}.instructors[].name)
+            },
+            event_type == 'internship' => {
+                'children': *[_type =='event' && references(^._id)],
+                'instructors': array::unique(*[_type == 'event' && references(^._id)] {
+                    'children': *[_type == 'event' && references(^._id)]
+                }.children[].instructors[]._ref)
             }
-        `)
-        .then(result => {
-            setEvents(result)
-            setLoading(false)
-        })
-    }, [])
+        }
+    `)
+
+    useEffect(() => {
+        setEvents(data?.length ? data : [])
+    }, [data])
 
     useEffect(() => {
         let result
@@ -125,7 +123,11 @@ const Courses = () => {
                     </Flex>
                 </Flex>
                 <ResponsiveWidth>
-                    {(query.tag?.value || query.search) ? <FilterResults results={filteredResults} loading={loading} /> : <CoursesPreview />}
+                    {(query.tag?.value || query.search) ? (
+                        <FilterResults results={filteredResults} loading={isLoading} /> 
+                    ) : (
+                        <CoursesPreview />
+                    )}
                 </ResponsiveWidth>
             </Flex >
     )

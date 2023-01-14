@@ -4,7 +4,6 @@ import sanityClient from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
 
 const AuthProvider = (props) => {
-    const [status, setStatus] = useState('fetching')
     const [user, setUser] = useState({})
     const [notifications, setNotification] = useState([])
 
@@ -48,8 +47,6 @@ const AuthProvider = (props) => {
         filterEventsByQuery,
         filterEventsByTag,
         filterById,
-        status,
-        setStatus,
         user,
         setUser,
         notifications,

@@ -10,72 +10,77 @@ import RelatedEvents from './components/RelatedEvents'
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useUser } from '../../auth/UserContext'
+import useSWR from 'swr'
+import NotFound from '../Errors/NotFound'
 
 const EventPage = () => {
     const params = useParams()
     const location = useLocation()
-    const [event, setEvent] = useState({})
+    const [event, setEvent] = useState(null)
     const navigate = useNavigate()
-    const { client } = useUser()
     const [loading, setLoading] = useState(true)
+    const { data } = useSWR(`
+        *[_type == 'event' && slug.current == '${params.slug}'][0]
+        {
+            ...,
+            parent->,
+            event_type in ['course_lecture', 'webinar'] => {
+                instructors[]->,
+            },
+            event_type == 'course' => {
+                'children': *[_type == 'event' && references(^._id)]{..., instructors[]-> },
+                'instructors': *[_type == 'event' && references(^._id)].instructors[]->
+            },
+            event_type == 'internship' => {
+                'children': *[_type == 'event' && references(^._id)]{
+                    ..., 
+                    'instructors': *[_type == 'event' && references(^._id)].instructors[]-> 
+                },
+                'instructors': *[_type == 'event' && references(^._id)] {
+                    'children': *[_type == 'event' && references(^._id)]{ instructors[]-> }
+                }.children[].instructors[]
+            }
+        }
+    `)
 
 
     useEffect(() => {
-        client.fetch(`
-            *[_type == 'event' && slug.current == '${params.slug}'][0]
-            {
-                ...,
-                parent->,
-                event_type in ['course_lecture', 'webinar'] => {
-                    instructors[]->,
-                },
-                event_type == 'course' => {
-                    'children': *[_type == 'event' && references(^._id)]{..., instructors[]-> },
-                    'instructors': *[_type == 'event' && references(^._id)].instructors[]->
-                },
-                event_type == 'internship' => {
-                    'children': *[_type == 'event' && references(^._id)]{
-                        ..., 
-                        'instructors': *[_type == 'event' && references(^._id)].instructors[]-> 
-                    },
-                    'instructors': *[_type == 'event' && references(^._id)] {
-                        'children': *[_type == 'event' && references(^._id)]{ instructors[]-> }
-                    }.children[].instructors[]
-                }
-            }
-        `)
-        .then(result => {
-            if (['course', 'internship'].includes(result.event_type)) {
-                return {
-                    ...result,
-                    instructors: [...new Map(result.instructors.map(item => 
-                            [item['_id'], item])).values()]
-                }
-            } else return result
-        })
-        .then(result => {
+        if (data) {
             if (
                 location.pathname.startsWith('/course') && 
-                ['course_lecture', 'webinar'].includes(result.event_type)
+                ['course_lecture', 'webinar'].includes(data.event_type)
             ) {
-                navigate(`/lecture/${result.slug?.current}`)
+                navigate(`/lecture/${data.slug?.current}`)
             } else if (
                 location.pathname.startsWith('/lecture') && 
-                ['course', 'internship'].includes(result.event_type)
+                ['course', 'internship'].includes(data.event_type)
             ) {
-                navigate(`/course/${result.slug?.current}`)
-            } else {
-                setEvent(result)
-                setLoading(false)
-            }
-        })
-    }, [location.pathname])
+                navigate(`/course/${data.slug?.current}`)
+            } else if (['course', 'internship'].includes(data.event_type)) {
+                setEvent({
+                    ...data,
+                    instructors: [...new Map(data.instructors.map(item => 
+                            [item['_id'], item])).values()]
+                })
+            } else setEvent(data)
+        }
+    }, [data])
+
+    useEffect(() => {
+        if (event) {
+            setLoading(false)
+        }
+    }, [event])
 
     useEffect(() => {
         if (event?.title) {
             document.title = `${event.title} - SPE BUOG`
         }
     }, [event?.title])
+
+    if (!loading && !event?.title) {
+        return <NotFound />
+    }
 
     return (
         <Flex
@@ -109,7 +114,7 @@ const EventPage = () => {
                     />
                     {['course_lecture', 'webinar'].includes(event?.event_type) ? (
                         <LectureVideo video={event?.video} image={event?.image} loading={loading} />
-                    ) : event.event_type === 'course' ? (
+                    ) : event?.event_type === 'course' ? (
                         <CourseLectures lectures={event?.children} loading={loading} />
                     ) : (
                         <InternshipCourses courses={event?.children} loading={loading} />

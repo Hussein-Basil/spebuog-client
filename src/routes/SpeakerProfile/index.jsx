@@ -12,23 +12,31 @@ import 'swiper/css/navigation'
 import 'swiper/css/effect-fade'
 import 'swiper/css'
 import { useUser } from '../../auth/UserContext'
+import useSWR from 'swr'
+import NotFound from '../Errors/NotFound'
 
 const SpeakerProfile = () => {
     const params = useParams()
-    const { urlFor, client } = useUser()
-    const [speaker, setSpeaker] = useState()
+    const { urlFor } = useUser()
+    const [speaker, setSpeaker] = useState(null)
     const responsiveSlides =  useBreakpointValue({ base: 1, md:2, lg: 3, xl: 4})
     const [loading, setLoading] = useState(true)
 
+    const { data } = useSWR(`
+        *[_type == 'instructor' && slug.current == '${params.id}'][0]
+        {..., 'events': *[ _type == 'event' && references(^._id)]{..., 'speakers': instructors[]->} }
+    `)
+
     useEffect(() => {
-        client.fetch(`
-            *[_type == 'instructor' && slug.current == '${params.id}'][0]
-            {..., 'events': *[ _type == 'event' && references(^._id)]{..., 'speakers': instructors[]->} }`
-        ).then(data => {
-            setSpeaker(data)
+        setSpeaker(data || {})
+    }, [data])
+
+    useEffect(() => {
+        if (speaker) {
             setLoading(false)
-        })
-    }, [params.id])
+        }
+    }, [speaker])
+
 
     useEffect(() => {
         if (speaker?.name) {
@@ -41,6 +49,10 @@ const SpeakerProfile = () => {
             <Course loading={true} />
         </SwiperSlide>
     ))
+
+    if (!loading && !speaker?.name) {
+        return <NotFound />
+    }
 
     return (
         <Flex flexDir="column" align="center" gap="1em" mb="5em" w="100vw">

@@ -11,35 +11,36 @@ import 'swiper/css'
 
 import './styles.css'
 import { useEffect } from 'react'
+import useSWR from 'swr'
 
 const Courses = () => {
-    const { client } = useUser()
     const [events, setEvents] = useState([])
     const [loading, setLoading] = useState(true)
+    const { data } = useSWR(`
+        *[_type == 'event' && event_type in ['course', 'internship']][0..3] 
+        { 
+            event_type, 
+            title, 
+            description, 
+            slug,
+            event_type == 'course' => {
+                'instructors': array::unique(*[_type == 'event' && references(^._id)]{instructors[]->{name}}.instructors[].name)
+            },
+            event_type == 'internship' => {
+                'instructors': array::unique(*[_type == 'event' && references(^._id)] {
+                    'children': *[_type == 'event' && references(^._id)]
+                }.children[].instructors[]._ref)
+            }
+        }
+    `) 
+
+    useEffect(() => setEvents(data), [data])
 
     useEffect(() => {
-        client.fetch(`
-            *[_type == 'event' && event_type in ['course', 'internship']][0..3] 
-            { 
-                event_type, 
-                title, 
-                description, 
-                slug,
-                event_type == 'course' => {
-                    'instructors': array::unique(*[_type == 'event' && references(^._id)]{instructors[]->{name}}.instructors[].name)
-                },
-                event_type == 'internship' => {
-                    'instructors': array::unique(*[_type == 'event' && references(^._id)] {
-                        'children': *[_type == 'event' && references(^._id)]
-                    }.children[].instructors[]._ref)
-                }
-            }
-        `)
-        .then(result => {
-            setEvents(result)
+        if (events?.length !== undefined) {
             setLoading(false)
-        })
-    }, [])
+        }
+    }, [events])
 
     const nullSlides = [...Array(4)].map((_, key) => (
         <SwiperSlide style={{ display: "flex", justifyContent: "center" }} key={key}>

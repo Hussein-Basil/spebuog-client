@@ -4,9 +4,10 @@ import Footer from './Footer'
 import { Grid, Box } from '@chakra-ui/react'
 import { useUser } from '../auth/UserContext'
 import Notification from '../components/Notification'
+import { SWRConfig } from 'swr'
 
 const BasicLayout = ({ children }) => {
-    const { notifications, setNotification } = useUser()
+    const { notifications, setNotification, client } = useUser()
 
     return (
         <Grid minH="100vh" maxW="100vw" style={{ overflowX: 'clip' }} gridTemplateRows="auto 1fr auto" >
@@ -22,7 +23,9 @@ const BasicLayout = ({ children }) => {
                         />
                     ))
                 }
-                {children}
+                <SWRConfig value={{ fetcher: query => client.fetch(query)}}>
+                    {children}
+                </SWRConfig>
             </Box>
             <Footer />
         </Grid>

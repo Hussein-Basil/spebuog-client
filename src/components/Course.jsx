@@ -45,7 +45,6 @@ const Course = ({
     }
 
     if (loading) {
-        console.log('h2')
         return (
             <Flex
             flexDir="column"

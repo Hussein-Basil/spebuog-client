@@ -19,6 +19,7 @@ const Certificate = () => {
     const [displayMessage, setDisplayMessage] = useState(null)
     const { client } = useUser()
 
+
     return (
         <ResponsiveWidth gap="1em" my="3em">
             <Flex flexDir="column" gap="1em" maxW={{ base: "90vw", lg: "770px"}}>
