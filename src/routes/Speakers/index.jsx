@@ -13,12 +13,49 @@ const Speakers = () => {
     const [filterCompany, setFilterCompany] = useState('')
     const responsiveGridView = useBreakpointValue({ base: false, lg: true })
     const [speakers, setSpeakers] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const [filteredSpeakers, setFilteredSpeakers] = useState([])
 
     const [sliceIndex, setSliceIndex] = useState(12)
 
     const { isOpen, onOpen, onClose } = useDisclosure()
+    
+    const nullSpeakers = [...Array(12)].map((_, idx) => (
+        <Flex
+            key={idx}
+            flexDir="column"
+            boxShadow="0 0 0 1px #e8e8e8"
+            p="1em"
+            borderRadius="15px"
+            {...(gridView ? { 
+                align: "center",
+                justify: "space-between",
+                w: "354px",
+                h: "100%"
+            } : {})}
+        >
+            <Flex alignSelf="start">
+                <SkeletonCircle 
+                    width="100px"
+                    height="100px"
+                    borderRadius="50%"
+                    objectFit="cover"
+                    mb="10px"
+                    as={Avatar}
+                />
+                <Flex
+                    flexDir="column"
+                    align="start"
+                    pl="1em"
+                >
+                    <SkeletonText w="200px" mt="4" noOfLines={1} />
+                    <SkeletonText w="150px" mt="4" noOfLines={1}/>
+                    <SkeletonText  w="75px" mt="8"noOfLines={1}/>
+                </Flex>
+            </Flex>
+        </Flex>
+     ))   
 
     useEffect(() => {
         document.title = 'Instructors - SPE BUOG'
@@ -26,7 +63,10 @@ const Speakers = () => {
         client.fetch(`
             (*[_type == 'instructor'] | order(latestEvent desc))
         `)
-        .then(result => setSpeakers(result))
+        .then(result => {
+            setSpeakers(result)
+            setLoading(false)
+        })
         
     }, [])
 
@@ -42,7 +82,6 @@ const Speakers = () => {
             })
         }
         
-
         if (filterPosition) {
             newSpeakers = newSpeakers.filter(s => s.position?.toLowerCase().includes(filterPosition.toLowerCase()))
         }
@@ -199,7 +238,7 @@ const Speakers = () => {
                     lg: "repeat(3, 1fr)",
                     xl: "repeat(4, 1fr)"
                 }} gap="1.5em" >
-                    {filteredSpeakers?.slice(0, sliceIndex).map((speaker, i) => (
+                    {loading ? nullSpeakers : filteredSpeakers?.length ? filteredSpeakers?.slice(0, sliceIndex).map((speaker, i) => (
                         <LinkBox><LinkOverlay href={`/instructor/${speaker.slug?.current}`}>
                             <Flex
                                 key={i}
@@ -260,44 +299,11 @@ const Speakers = () => {
                                 </Flex>
                             </Flex>
                         </LinkOverlay></LinkBox>
-                    )) || [...Array(12)].map((_, idx) => (
-                        <Flex
-                            key={idx}
-                            flexDir="column"
-                            align="center"
-                            boxShadow="0 0 0 1px #e8e8e8"
-                            p="1em"
-                            // width="280px"
-                            borderRadius="15px"
-                            justify="space-between"
-                            w="354px"
-                            h="100%"
-                        >
-                            <Flex alignSelf="start">
-                                <SkeletonCircle 
-                                    width="100px"
-                                    height="100px"
-                                    borderRadius="50%"
-                                    objectFit="cover"
-                                    mb="10px"
-                                    as={Avatar}
-                                />
-                                <Flex
-                                    flexDir="column"
-                                    align="start"
-                                    pl="1em"
-                                >
-                                    <SkeletonText w="200px" mt="4" noOfLines={1} />
-                                    <SkeletonText w="150px" mt="4" noOfLines={1}/>
-                                    <SkeletonText  w="75px" mt="8"noOfLines={1}/>
-                                </Flex>
-                            </Flex>
-                        </Flex>
-                    ))}
+                    )) : 'No Results Found'}
                 </Grid>
             ) : (
                 <Flex flexDir="column" gap="1em" maxW={{ base: "90vw", md: "100%"}}>
-                    {filteredSpeakers?.length ? filteredSpeakers.slice(0, sliceIndex).map((speaker, idx) => {
+                    {loading ? nullSpeakers : filteredSpeakers?.length && filteredSpeakers.slice(0, sliceIndex).map((speaker, idx) => {
                         return (
                             <LinkBox><LinkOverlay href={`/instructor/${speaker.slug?.current}`}>
                                 <Flex
@@ -357,42 +363,11 @@ const Speakers = () => {
                                 </Flex>
                             </LinkOverlay></LinkBox>
                         )
-                    }) : [...Array(12)].map((_, idx) => (
-                        <Flex
-                            key={idx}
-                            align="center"
-                            boxShadow="0 0 0 1px #e1e1e1"
-                            px="1em"
-                            py="1em"
-                            borderRadius="15px"
-                        >
-                            <SkeletonCircle
-                                alt="instructor"
-                                width="100px"
-                                height="100px"
-                                maxWidth="200px"
-                                maxHeight="200px"
-                                borderRadius="50%"
-                                mb="10px"
-                                mr="1em"
-                            />
-                            <Flex flexDir="column" gap="1em" alignSelf="start" mt="0.5em">
-                                <SkeletonText w="200px" mt="4" noOfLines={1} />
-                                <SkeletonText w="150px" mt="4" noOfLines={1}/>
-                            </Flex>
-                        </Flex>
-                    ))}
+                    })}
                 </Flex>
             )}
-            {/* <Flex alignSelf="center" align="center" gap="1em" mt="2em">
-                <IconButton as={MdArrowBack} />
-                <Link href="?page=1">1</Link>
-                <Link href="?page=2">2</Link>
-                <Link href="?page=3">3</Link>
-                <IconButton as={MdArrowForward} />
-            </Flex> */}
             {sliceIndex < filteredSpeakers.length && (
-                <Button mt="2em" variant="outline" onClick={() => setSliceIndex(sliceIndex + 12)}>Load More</Button>
+                <Button mt="2em" variant="outline" onClick={() => setSliceIndex(undefined)}>Load More</Button>
             )}
         </Flex>
     )
