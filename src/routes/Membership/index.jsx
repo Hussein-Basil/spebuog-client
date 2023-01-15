@@ -3,9 +3,7 @@ import {  Flex, Heading, Image, Link, Text } from '@chakra-ui/react'
 import ResponsiveWidth from '../../components/ResponsiveWidth'
 
 const Membership = () => {
-    useEffect(() => {
-        document.title = 'Membership - SPE BUOG'
-    }, [])
+    document.title = 'Membership - SPE BUOG'
     return (
         <ResponsiveWidth gap="1em" my="3em">
             <Flex flexDir="column" gap="1em" maxW={{ base: "90vw", lg: "850px"}}>

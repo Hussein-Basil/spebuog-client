@@ -50,6 +50,7 @@ const CompaniesProof = () => {
                     gridTemplateColumns="repeat(auto-fit, minmax(150px, 1fr))"
                     gap="1em"
                     w="100%"
+                    ml="-1em"
                 >
                     {companies.map((company, idx) => (
                         <Box p="1em">

@@ -15,32 +15,38 @@ import useSWR from 'swr'
 
 const Courses = () => {
     const [events, setEvents] = useState([])
-    const [loading, setLoading] = useState(true)
-    const { data } = useSWR(`
+    const { data, isLoading } = useSWR(`
         *[_type == 'event' && event_type in ['course', 'internship']][0..3] 
         { 
             event_type, 
             title, 
             description, 
             slug,
+            date,
             event_type == 'course' => {
-                'instructors': array::unique(*[_type == 'event' && references(^._id)]{instructors[]->{name}}.instructors[].name)
+                'children': *[_type =='event' && references(^._id)],
+                'instructors': *[_type == 'event' && references(^._id)]{instructors[]->{name, image, _id}}.instructors[]
             },
             event_type == 'internship' => {
-                'instructors': array::unique(*[_type == 'event' && references(^._id)] {
-                    'children': *[_type == 'event' && references(^._id)]
-                }.children[].instructors[]._ref)
+                'children': *[_type =='event' && references(^._id)],
+                'instructors': *[_type == 'event' && references(^._id)] {
+                    'children': *[_type == 'event' && references(^._id)]{ instructors[]->{name, image, _id}}
+                }.children[].instructors[]
             }
         }
     `) 
 
-    useEffect(() => setEvents(data), [data])
-
     useEffect(() => {
-        if (events?.length !== undefined) {
-            setLoading(false)
-        }
-    }, [events])
+        setEvents(data?.map(event => {
+            if (['course', 'internship'].includes(event?.event_type)) {
+                return {
+                    ...event,
+                    instructors: [...new Map(event.instructors.map(item => 
+                        [item['_id'], item])).values()]
+                }
+            } else return event
+        }))
+    }, [data])
 
     const nullSlides = [...Array(4)].map((_, key) => (
         <SwiperSlide style={{ display: "flex", justifyContent: "center" }} key={key}>
@@ -53,8 +59,8 @@ const Courses = () => {
         <Flex flexDir="column" align="center" my="3em" w={{
             base: '90vw',
             lg: '1114px',
-            xl: '1440px',
-            '2xl': '1500px',
+            xl: '1400px',
+            '2xl': '1400px',
         }}>
             <Heading fontSize="28px" fontWeight="medium" mb="0.5">Browse Our Courses</Heading>
             <Text mb="1em" textAlign="center">Grow your skills by studying from our exciting courses</Text>
@@ -68,7 +74,7 @@ const Courses = () => {
             <Swiper
                 modules={[Pagination, EffectFade]}
                 effect
-                speed={800}
+                speed={300}
                 style={{
                     width: '100%',
                     paddingBottom: "5em",
@@ -81,7 +87,7 @@ const Courses = () => {
                     clickable: true,
                 }}
             >
-            {loading ? nullSlides : events?.slice(0, 10).map((event, idx) => (
+            {isLoading ? nullSlides : events?.slice(0, 10).map((event, idx) => (
                 <SwiperSlide style={{ display: "flex", justifyContent: "center" }}>
                     <LinkBox>
                     <LinkOverlay href={`/${["course_lecture", "webinar"].includes(event.event_type) ? 'lecture' : 'course'}/${event.id}`}>

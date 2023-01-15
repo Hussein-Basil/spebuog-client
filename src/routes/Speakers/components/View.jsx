@@ -60,7 +60,7 @@ const View = ({
                 {loading ? nullSpeakers : filteredSpeakers?.length ? filteredSpeakers?.slice(0, sliceIndex).map((speaker, i) => (
                     <LinkBox><LinkOverlay href={`/instructor/${speaker.slug?.current}`}>
                         <Flex
-                            key={i}
+                            key={speaker?._id || i}
                             flexDir="column"
                             align="center"
                             boxShadow="0 0 0 1px #e8e8e8"
@@ -74,16 +74,16 @@ const View = ({
                         >
                             <Flex alignSelf="start">
                                 <Image
-                                    src={speaker.image ? urlFor(speaker.image).toString() : ""}
+                                    as={Avatar}
+                                    bg="gray#ff"
+                                    src={speaker.image?.asset ? urlFor(speaker.image).width(100) : 'unset'}
                                     alt="instructor"
                                     width="100px"
                                     height="100px"
                                     borderRadius="50%"
                                     objectFit="cover"
                                     mb="10px"
-                                    as={Avatar}
                                 />
-
                                 <Flex
                                     flexDir="column"
                                     align="start"
@@ -127,7 +127,7 @@ const View = ({
                     return (
                         <LinkBox><LinkOverlay href={`/instructor/${speaker.slug?.current}`}>
                             <Flex
-                                key={idx}
+                                key={speaker?._id || idx}
                                 align="center"
                                 boxShadow="0 0 0 1px #e1e1e1"
                                 px="1em"

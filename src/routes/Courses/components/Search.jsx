@@ -9,12 +9,12 @@ const Search = ({ query, setQuery }) => {
                 placeholder="Search courses"
                 onChange={e => setQuery({...query, search: e.target.value})}
                 value={query.search}
-                h="65px"
+                h="48px"
                 borderRadius="10px"
-                border="1px solid #C8C8C8"
+                border="1px solid #dadce0"
                 pl="3.5em"
             />
-            <InputLeftElement h="65px" my="auto" ml="0.75em"><SearchIcon w="24px" h="24px" color="gray" /></InputLeftElement>
+            <InputLeftElement h="65px" mt="-7.5px" ml="0.75em"><SearchIcon w="24px" h="20px" color="gray" /></InputLeftElement>
             {/* <InputRightElement h="65px" mr={{ base: 0, lg: "2em" }} fontWeight="medium" fontSize="20px">
                 <Icon as={MdFilterList} w="24px" h="24px" mr="0.5em" /> <Show above="lg">Filters</Show>
             </InputRightElement> */}

@@ -24,7 +24,7 @@ const Navbar = ({ event, loading }) => {
     })
 
     return (
-        <Flex h="60px" mb="3em">
+        <Flex h="60px" mb={{base: "0", lg: "3em"}}>
             <Flex
                 flexDir="column"
                 align="center"

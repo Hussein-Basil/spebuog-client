@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useBreakpointValue, Flex, Avatar, Button, Divider, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
+import { useBreakpointValue, Flex, Divider } from '@chakra-ui/react'
 import useSWR from 'swr'
 import SearchBar from './components/SearchBar'
 import ViewControl from './components/ViewControl'
@@ -9,20 +9,28 @@ const Speakers = () => {
     const [searchQuery, setSearchQuery] = useState("")
     const [gridView, setGridView] = useState(true)
     const [filterPosition, setFilterPosition] = useState("")
-    const [filterCompany, setFilterCompany] = useState('')
+    const [filterCompany, setFilterCompany] = useState("")
     const responsiveGridView = useBreakpointValue({ base: false, lg: true })
     const [speakers, setSpeakers] = useState(null)
     const [filteredSpeakers, setFilteredSpeakers] = useState([])
+    const [sortOrder, setSortOrder] = useState('desc')
     
-    const { data, isLoading } = useSWR(`(*[_type == 'instructor'] | order(latestEvent desc))`)
+    const { data, isLoading } = useSWR(`
+        *[_type == 'instructor'] | score(
+            name match '*${searchQuery}*' ||
+            position match '*${filterPosition}*' ||
+            position match '*${searchQuery}*' ||
+            organization match '*${filterPosition}*' ||
+            organization match '*${searchQuery}*'
+        )[_score > 0] | order(latestEvent ${sortOrder || 'desc'})
+    `)
 
+    document.title = 'Instructors - SPE BUOG'
+    
     useEffect(() => {
         setSpeakers(data?.length ? data : [])
     }, [data])
 
-    useEffect(() => {
-        document.title = 'Instructors - SPE BUOG'
-    }, [])
 
     return (
         <Flex 
@@ -48,6 +56,8 @@ const Speakers = () => {
                 setFilteredSpeakers={setFilteredSpeakers}
                 setFilterPosition={setFilterPosition}
                 setFilterCompany={setFilterCompany}
+                sortOrder={sortOrder}
+                setSortOrder={setSortOrder}
             />
             <ViewControl 
                 setSearchQuery={setSearchQuery}

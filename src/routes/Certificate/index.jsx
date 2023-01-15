@@ -19,6 +19,29 @@ const Certificate = () => {
     const [displayMessage, setDisplayMessage] = useState(null)
     const { client } = useUser()
 
+    const handleClick = (certificateID) => {
+        if (certificateID && buttonText === 'Verify') {
+            setButtonText('Wait..')
+            client.fetch(`
+                *[_type == 'certificate' && lower(certificate_id) == lower('${certificateID}')][0]
+            `)
+            .then(result => {
+                if (result) {
+                    setDisplayMessage({
+                        message: 'This certificate is issued by Basra University for Oil & Gas SPE Student Chapter.',
+                        valid: true
+                    })
+                } else {
+                    setDisplayMessage({
+                        message: 'This certificate is not issued by our Student Chapter.',
+                        valid: false
+                    })
+                }
+                setCertificate(result)
+                setButtonText('Verify')
+            })
+        }
+    }
 
     return (
         <ResponsiveWidth gap="1em" my="3em">
@@ -26,31 +49,25 @@ const Certificate = () => {
                 <Heading>Verify Certificate</Heading>
                 <Text mt="-0.5em">Entering the ID printed on the certificate will allow you to verify its validity if it was issued by our student chapter.</Text>
                 <InputGroup mt="1em" p="0" display="flex" justify="space-between" position="relative">
-                    <Input placeholder="Enter your certificate ID" bg="#f1f1f1" border="1px solid white" value={certificateID} onChange={e => setCertificateID(e.target.value)} />
+                    <Input  
+                        placeholder="Enter your certificate ID" 
+                        bg="#f1f1f1" 
+                        border="1px solid white" value={certificateID} 
+                        onChange={e => setCertificateID(e.target.value)} 
+                    />
                     <InputRightElement   >
-                        <Button minW="100px" style={{ height: '38.5px', marginTop: '-2px'}} position="absolute" right="0" px="1em" color="black" borderLeftRadius="0" onClick={() => {
-                            if (certificateID && buttonText === 'Verify') {
-                                setButtonText('Wait..')
-                                client.fetch(`
-                                    *[_type == 'certificate' && certificate_id match '${certificateID}'][0]
-                                `)
-                                .then(result => {
-                                    if (result) {
-                                        setDisplayMessage({
-                                            message: 'This certificate is issued by Basra University for Oil & Gas SPE Student Chapter.',
-                                            valid: true
-                                        })
-                                    } else {
-                                        setDisplayMessage({
-                                            message: 'This certificate is not issued by our Student Chapter.',
-                                            valid: false
-                                        })
-                                    }
-                                    setCertificate(result)
-                                    setButtonText('Verify')
-                                })
-                            }
-                        }}>{buttonText}</Button>
+                        <Button 
+                            minW="100px" 
+                            style={{ height: '38.5px', marginTop: '-2px'}} 
+                            position="absolute" 
+                            right="0" 
+                            px="1em" 
+                            color="black" 
+                            borderLeftRadius="0" 
+                            type="submit"
+                            onClick={() => handleClick(certificateID)}
+                            onKey={() => handleClick(certificateID)}
+                        >{buttonText}</Button>
                     </InputRightElement>
                 </InputGroup>
                 {displayMessage && (
@@ -66,14 +83,14 @@ const Certificate = () => {
                         align="center"
                     >
                         {displayMessage.valid ? <CheckIcon color="#0f5132" /> : <CloseIcon />}
-                        <Flex gap="0.25em">
-                            <Text fontWeight="bold" color={displayMessage.valid ? "#0f5132" : "#A63232"}>
-                                {displayMessage.valid ? 'Valid.' : 'Invalid.'}
+                        <Text>
+                            <Text as="span" fontWeight="bold" color={displayMessage.valid ? "#0f5132" : "#A63232"}>
+                                {displayMessage.valid ? 'Valid. ' : 'Invalid. '}
                             </Text>
-                            <Text>
+                            <Text as="span">
                                 {displayMessage.message}
                             </Text>
-                        </Flex>
+                        </Text>
                     </Flex>
                 )}
                 {certificate &&

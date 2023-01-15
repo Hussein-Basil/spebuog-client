@@ -8,96 +8,37 @@ import FilterResults from './components/FilterResults'
 
 import './styles.css'
 import ResponsiveWidth from '../../components/ResponsiveWidth'
-import { useUser } from '../../auth/UserContext'
-import useSWR from 'swr'
 
 const Courses = () => {
-    const { filterEventsByQuery, filterEventsByTag } = useUser()
     const stickyRef = useRef(null)
-    const [filteredResults, setFilteredResults] = useState([])
-    const [events, setEvents] = useState([])
-
     const [query, setQuery] = useState({
         search: '',
         tag: {}
     })
-
-    useEffect(() => {
-        document.title = 'Courses - SPE BUOG'
-        let lastScrollY = window.scrollY
-        const sticky = stickyRef.current.offsetTop
-        const handleWindowScroll = () => {
-            stickyRef.current.classList.toggle("is-pinned",
-                (window.pageYOffset >= sticky) && !(window.scrollY >= lastScrollY)
-            )
-            lastScrollY = window.scrollY
-        }
-        window.addEventListener("scroll", handleWindowScroll)
-        return () => {
-            window.removeEventListener('scroll', handleWindowScroll)
-        }
-    }, [])
-
-    function intersect(a, b) {
-        var setB = new Set(b);
-        return [...new Set(a)].filter(x => setB.has(x));
-    }
-
-    const { data, isLoading } = useSWR(`
-        *[_type == 'event']{
-            ...,
-            instructors[]->,
-            parent->,
-            event_type == 'course' => {
-                'children': *[_type =='event' && references(^._id)],
-                'instructors': array::unique(*[_type == 'event' && references(^._id)]{instructors[]->{name}}.instructors[].name)
-            },
-            event_type == 'internship' => {
-                'children': *[_type =='event' && references(^._id)],
-                'instructors': array::unique(*[_type == 'event' && references(^._id)] {
-                    'children': *[_type == 'event' && references(^._id)]
-                }.children[].instructors[]._ref)
-            }
-        }
-    `)
-
-    useEffect(() => {
-        setEvents(data?.length ? data : [])
-    }, [data])
-
-    useEffect(() => {
-        let result
-        
-        if (query.tag?.value && query.search) {
-            let a = filterEventsByTag(events, query.tag.value)
-            let b = filterEventsByQuery(events, query.search)
-            result  = intersect(a, b)
-        }
-        else if (query.tag?.value) {
-            result = filterEventsByTag(events, query.tag.value)
-        } else if (query.search) {
-            result = filterEventsByQuery(events, query.search)
-        } else {
-            result = events
-        }
-
-        setFilteredResults(result)
-    }, [query, events])
+    document.title = 'Courses - SPE BUOG'
 
     return (
             <Flex py={{ base: "1em", lg: "3em" }} flexDir="column" gap="0.5em" w="100vw">
                 <ResponsiveWidth>
-                    <Heading fontSize="28px" fontWeight="medium">Find Courses</Heading>
-                    <Text fontSize="16px" mt="0.25em">Grow your skills by studying from our exciting courses</Text>
+                    <Heading fontSize="42px" letterSpacing={-1} fontWeight="semibold">Courses</Heading>
+                    <Text 
+                        fontSize="16px"
+                        mt="0.25em" 
+                        color="#5f6368"
+                        maxW="600px"
+                        minW="50%"
+                    >
+                        Grow your skills by studying from our exciting courses. We aim to give our members the most enriching lectures with Oil & Gas top experts.
+                    </Text>
                 </ResponsiveWidth>
-                <Flex h={{ base: "134px", lg: query.tag?.value ? "134px" : "224px" }} >
+                <Flex h={{ base: "134px", lg: query.tag?.value ? "134px" : "200px" }} >
                     <Flex
                         bg="white"
                         flexDir="column"
                         ref={stickyRef}
                         // stickyRef
                         top="-1px"
-                        zIndex={10}
+                        zIndex={1}
                         pb="1em"
                         w="99vw"
                     >
@@ -105,31 +46,28 @@ const Courses = () => {
                             <Search query={query} setQuery={setQuery} />
                             {query.tag?.value ? (
                                 <Flex
-                                    bg="#c8c8c8"
+                                    bg="#dadce0"
                                     borderRadius="20px"
                                     width="fit-content"
                                     align='center'
-                                    py="3px"
+                                    py="0px"
                                     px="12px"
                                     mt="0.5em"
+                                    zIndex={10}
                                 >
-                                    {query.tag.name}
+                                    <Text lineHeight='20px' fontSize="14px">{query.tag.name}</Text>
                                     <CloseButton onClick={() => setQuery({...query, tag: {}})} />
                                 </Flex>
                             ) : (
-                                <TagSelector setQuery={setQuery} setFilteredResults={setFilteredResults} />
+                                <TagSelector setQuery={setQuery} />
                             )}
                         </ResponsiveWidth>
                     </Flex>
                 </Flex>
                 <ResponsiveWidth>
-                    {(query.tag?.value || query.search) ? (
-                        <FilterResults results={filteredResults} loading={isLoading} /> 
-                    ) : (
-                        <CoursesPreview />
-                    )}
+                    {(query.tag?.value || query.search) ? <FilterResults query={query} /> : <CoursesPreview />}
                 </ResponsiveWidth>
-            </Flex >
+            </Flex>
     )
 }
 

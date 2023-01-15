@@ -18,8 +18,7 @@ const EventPage = () => {
     const location = useLocation()
     const [event, setEvent] = useState(null)
     const navigate = useNavigate()
-    const [loading, setLoading] = useState(true)
-    const { data } = useSWR(`
+    const { data, isLoading } = useSWR(`
         *[_type == 'event' && slug.current == '${params.slug}'][0]
         {
             ...,
@@ -46,6 +45,17 @@ const EventPage = () => {
 
     useEffect(() => {
         if (data) {
+
+            if (['course', 'internship'].includes(data.event_type)) {
+                setEvent({
+                    ...data,
+                    instructors: [...new Map(data.instructors.map(item => 
+                            [item['_id'], item])).values()]
+                })
+            } else {
+                setEvent(data)
+            }
+
             if (
                 location.pathname.startsWith('/course') && 
                 ['course_lecture', 'webinar'].includes(data.event_type)
@@ -56,21 +66,9 @@ const EventPage = () => {
                 ['course', 'internship'].includes(data.event_type)
             ) {
                 navigate(`/course/${data.slug?.current}`)
-            } else if (['course', 'internship'].includes(data.event_type)) {
-                setEvent({
-                    ...data,
-                    instructors: [...new Map(data.instructors.map(item => 
-                            [item['_id'], item])).values()]
-                })
-            } else setEvent(data)
+            }
         }
     }, [data])
-
-    useEffect(() => {
-        if (event) {
-            setLoading(false)
-        }
-    }, [event])
 
     useEffect(() => {
         if (event?.title) {
@@ -78,18 +76,18 @@ const EventPage = () => {
         }
     }, [event?.title])
 
-    if (!loading && !event?.title) {
+    if (!isLoading && !event?.title) {
         return <NotFound />
     }
 
     return (
         <Flex
             flexDir="column"
-            mb="5em"
             w="100vw"
+            mb={{ base: '0', xl: '3em'}}
         >
-            <Header event={event} loading={loading} />
-            <Navbar event={event} loading={loading} />
+            <Header event={event} loading={isLoading} />
+            <Navbar event={event} loading={isLoading} />
             <Flex flexDir="column" align="center">
                 <Flex
                     w={{
@@ -99,25 +97,25 @@ const EventPage = () => {
                         '2xl': '1500px',
                     }}
                     flexDir="column"
-                    gap="3em"
+                    gap="1em"
                 >
                     
                     <About 
                         description={event?.description}
                         target={event?.target}
                         agenda={event?.agenda}
-                        loading={loading} 
+                        loading={isLoading} 
                     />
                     <Speakers 
                         instructors={event?.instructors} 
-                        loading={loading} 
+                        loading={isLoading} 
                     />
                     {['course_lecture', 'webinar'].includes(event?.event_type) ? (
-                        <LectureVideo video={event?.video} image={event?.image} loading={loading} />
+                        <LectureVideo video={event?.video} image={event?.image} loading={isLoading} />
                     ) : event?.event_type === 'course' ? (
-                        <CourseLectures lectures={event?.children} loading={loading} />
+                        <CourseLectures lectures={event?.children} loading={isLoading} />
                     ) : (
-                        <InternshipCourses courses={event?.children} loading={loading} />
+                        <InternshipCourses courses={event?.children} loading={isLoading} />
                     )}
                     <RelatedEvents
                         type={event?.event_type}

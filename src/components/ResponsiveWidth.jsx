@@ -8,7 +8,7 @@ const ResponsiveWidth = ({ children, ...props }) => {
             md: "768px",
             lg: "1114px",
             xl: "1440px",
-            '2xl': "1500px"
+            '2xl': "1400px"
         }}
         mx="auto"
         flexDir="column"

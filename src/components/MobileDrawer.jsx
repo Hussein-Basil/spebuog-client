@@ -42,6 +42,9 @@ const MobileDrawer = (props) => {
                         <Link to="/about">
                             <Button variant="text" onClick={onClose}>About</Button>
                         </Link>
+                        <Link to="/certificate">
+                            <Button variant="text" onClick={onClose}>Verify Certificate</Button>
+                        </Link>
                     </VStack>
                 </Flex>
             </Drawer>

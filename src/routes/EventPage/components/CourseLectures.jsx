@@ -14,13 +14,17 @@ const CourseLectures = ({ lectures }) => {
         if (instructors.length === 1) {
             if (instructors.at(0).position && instructors.at(0).organization) {
                 return `
-                    Instructor: ${instructors.at(0).name} 
-                    who is ${instructors.at(0).position} at ${instructors.at(0).organization}
+                    ${instructors.at(0).name},
+                     ${instructors.at(0).position} at ${instructors.at(0).organization}
                 `
             }
-        } else {
+        } else if (instructors.length === 2) {
             return `
                 ${instructors.at(0).name} and ${instructors.at(1).name}
+            `
+        } else {
+            return `
+                ${instructors.at(0).name} and ${instructors.length} others
             `
         }
     }

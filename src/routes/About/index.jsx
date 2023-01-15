@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Heading, Text, Flex, Image, Icon } from '@chakra-ui/react'
 import Team from './Team'
 import Achievements from './Achievements'
@@ -12,10 +12,7 @@ import AboutBackground from '../../assets/about.png'
 import './styles.css'
 
 const About = () => {
-    useEffect(() => {
-        document.title = 'About Us - SPE BUOG'
-    }, [])
-
+    document.title = 'About Us - SPE BUOG'
     return (
         <Flex w="100%" flexDir="column">
             <Flex bg="#0D4C94" justify="center" position="relative" userSelect="none">

@@ -15,7 +15,9 @@ const SearchBar = ({
     filterCompany,
     setFilteredSpeakers,
     setFilterPosition,
-    setFilterCompany
+    setFilterCompany,
+    sortOrder,
+    setSortOrder
 }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -51,6 +53,8 @@ const SearchBar = ({
             setFilterCompany={setFilterCompany}
             filterPosition={filterPosition}
             filterCompany={filterCompany}
+            sortOrder={sortOrder}
+            setSortOrder={setSortOrder}
         />
         <Heading fontSize="28px" fontWeight="medium">Find Instructors</Heading>
         <Text fontSize="16px">Explore instructors who presented lectures at our chapter</Text>

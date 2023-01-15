@@ -18,7 +18,7 @@ const InternshipCourses = ({ courses, loading }) => {
                     xl: "repeat(4, 1fr)"
                 }} gap="1.5em" alignItems="stretch">
                     {loading ? nullItems :
-                        courses.map((course, idx) => (
+                        courses?.map((course, idx) => (
                             <Course course={course} key={idx} />
                         ))
                     }

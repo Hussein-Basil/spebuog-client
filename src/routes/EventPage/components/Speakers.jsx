@@ -11,8 +11,6 @@ import 'swiper/css'
 import '../styles.css'
 import { useUser } from '../../../auth/UserContext'
 
-import ProgressiveImage from 'react-progressive-graceful-image'
-
 const Speakers = ({ instructors, loading }) => {
     const { urlFor } = useUser()
     const responsiveSlides = useBreakpointValue({ base: 1, md: 2, lg: 3, xl: 4})
@@ -46,11 +44,7 @@ const Speakers = ({ instructors, loading }) => {
                     pagination={{
                         clickable: true
                     }}
-                    speed={3500}
-                    autoplay={{
-                        delay: 3500,
-                        disableOnInteraction: true,
-                      }}
+                    speed={800}
                     slidesPerView={responsiveSlides}
                     slidesPerGroup={responsiveSlides}
                     style={{

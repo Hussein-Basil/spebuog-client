@@ -24,7 +24,7 @@ const LectureVideo = ({ video, loading }) => {
     return (
         <Flex flexDir="column" gap="2em" mt="2em" id="lectures">
             <Heading fontSize="24px" fontWeight="medium">
-                Lecture
+                Lecture Video
             </Heading>
             <Flex flexDir={{ base: "column", xl: "row" }} gap="2em" >
                 <Flex flexDir="column" gap="1em">

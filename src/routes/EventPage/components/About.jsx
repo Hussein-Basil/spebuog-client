@@ -27,7 +27,7 @@ const About = ({
 
     else if (description || agenda || target) {
         return (
-            <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "2em", lg: "0" }} id="about">
+            <Flex flexDir={{ base: "column", lg: "row" }} gap={{ base: "2em", lg: "0" }} id="about" mt={{ base: "2em", lg: '0'}}>
                 <Grid gridTemplateColumns={{ base: "1fr", lg: "1.25fr 0.75fr"}} flexDir="column" gap="2em" align="start" justify="start">
                     {description && 
                     <Flex flexDir="column" gap="2em">
@@ -37,12 +37,16 @@ const About = ({
                     {target &&
                     <Flex flexDir="column" align="start" w="fit-content" gap="2em">
                         <Heading fontSize="24px" fontWeight="medium">Who this course is for</Heading>
-                        <PortableText value={target} />
+                        <Text pl="1.25em">
+                            <PortableText value={target} style={{color: "red"}}/>
+                        </Text>
                     </Flex>}
                     {agenda && 
                     <Flex flexDir="column" gap="2em">
                         <Heading fontSize="24px" fontWeight="medium">What you'll learn</Heading>
-                        <PortableText value={agenda} />
+                        <Text pl="1.25em">
+                            <PortableText value={agenda} />
+                        </Text>
                     </Flex>}
                 </Grid>
             </Flex>

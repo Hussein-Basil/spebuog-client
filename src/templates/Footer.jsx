@@ -40,10 +40,10 @@ const Footer = () => {
                                 </Text> - We strive to make our members the most distinguished in oil and gas worldwide.
                             </Text>
                             <Flex columnGap="20px">
-                                <Link href="https://fb.com/spebuog"><Icon as={Facebook} w="40px" h="40px" fill="white" /></Link>
-                                <Link href="https://www.instagram.com/spebuog"><Icon as={Instagram} w="40px" h="40px" fill="white" /></Link>
-                                <Link href="https://t.me/SPEBUOG"><Icon as={Telegram} w="40px" h="40px" fill="white" /></Link>
-                                <Link href="https://www.linkedin.com/company/buog-spe-student-chapter"><Icon as={Linkedin} w="40px" h="40px" fill="white" /></Link>
+                                <Link target="_blank"  href="https://fb.com/spebuog"><Icon as={Facebook} w="40px" h="40px" fill="white" /></Link>
+                                <Link target="_blank"  href="https://www.instagram.com/spebuog"><Icon as={Instagram} w="40px" h="40px" fill="white" /></Link>
+                                <Link target="_blank"  href="https://t.me/SPEBUOG"><Icon as={Telegram} w="40px" h="40px" fill="white" /></Link>
+                                <Link target="_blank"  href="https://www.linkedin.com/company/buog-spe-student-chapter"><Icon as={Linkedin} w="40px" h="40px" fill="white" /></Link>
                             </Flex>
                         </Flex>
                     </Show>
@@ -53,6 +53,7 @@ const Footer = () => {
                         <Link href="/about">About</Link>
                         <Link href="/courses">Courses</Link>
                         <Link href="/contact">Contact</Link>
+                        <Link href="/certificate">Verify Certificate</Link>
                     </Flex>
                     {/* <Flex flexDir="column" gap="0.5em" fontSize={{ base: "16px", lg: "18px" }}>
                         <Heading fontSize={{ base: "18px", lg: "20px" }} size="md" mb="10px" color="#F6BB43" fontWeight="medium">CONTACTS</Heading>
@@ -99,10 +100,10 @@ const Footer = () => {
                 </Flex>
                 <Hide above="lg">
                     <Flex columnGap="20px" alignSelf="center">
-                        <Link href="https://fb.com/spebuog"><Icon as={Facebook} w="40px" h="40px" fill="white" /></Link>
-                        <Link href="https://www.instagram.com/spebuog"><Icon as={Instagram} w="40px" h="40px" fill="white" /></Link>
-                        <Link href="https://t.me/SPEBUOG"><Icon as={Telegram} w="40px" h="40px" fill="white" /></Link>
-                        <Link href="https://www.linkedin.com/company/buog-spe-student-chapter"><Icon as={Linkedin} w="40px" h="40px" fill="white" /></Link>
+                        <Link target="_blank" href="https://fb.com/spebuog"><Icon as={Facebook} w="40px" h="40px" fill="white" /></Link>
+                        <Link target="_blank" href="https://www.instagram.com/spebuog"><Icon as={Instagram} w="40px" h="40px" fill="white" /></Link>
+                        <Link target="_blank" href="https://t.me/SPEBUOG"><Icon as={Telegram} w="40px" h="40px" fill="white" /></Link>
+                        <Link target="_blank" href="https://www.linkedin.com/company/buog-spe-student-chapter"><Icon as={Linkedin} w="40px" h="40px" fill="white" /></Link>
                     </Flex>
                 </Hide>
             </Flex>

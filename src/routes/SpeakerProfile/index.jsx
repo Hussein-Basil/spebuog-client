@@ -20,23 +20,16 @@ const SpeakerProfile = () => {
     const { urlFor } = useUser()
     const [speaker, setSpeaker] = useState(null)
     const responsiveSlides =  useBreakpointValue({ base: 1, md:2, lg: 3, xl: 4})
-    const [loading, setLoading] = useState(true)
+    const paddingBottom = useBreakpointValue({ base: '5em', xl: '' })
 
-    const { data } = useSWR(`
+    const { data, isLoading } = useSWR(`
         *[_type == 'instructor' && slug.current == '${params.id}'][0]
-        {..., 'events': *[ _type == 'event' && references(^._id)]{..., 'speakers': instructors[]->} }
+        {..., 'events': *[ _type == 'event' && references(^._id)]{..., 'instructors': instructors[]->} }
     `)
 
     useEffect(() => {
         setSpeaker(data || {})
     }, [data])
-
-    useEffect(() => {
-        if (speaker) {
-            setLoading(false)
-        }
-    }, [speaker])
-
 
     useEffect(() => {
         if (speaker?.name) {
@@ -50,7 +43,7 @@ const SpeakerProfile = () => {
         </SwiperSlide>
     ))
 
-    if (!loading && !speaker?.name) {
+    if (!isLoading && !speaker?.name) {
         return <NotFound />
     }
 
@@ -123,14 +116,12 @@ const SpeakerProfile = () => {
                         <Swiper
                             modules={[Autoplay, Pagination, EffectFade]}
                             effect
-                            autoplay={{
-                                delay: 2500,
-                                disableOnInteraction: true,
-                            }}
                             speed={800}
                             style={{
                                 width: '100%',
                                 height: "530px",
+                                paddingBottom: paddingBottom,
+                                gap: "1em"
                             }}
                             slidesPerView={responsiveSlides}
                             slidesPerGroup={responsiveSlides}
@@ -139,9 +130,9 @@ const SpeakerProfile = () => {
                                 clickable: true,
                             }}
                         >
-                            {loading ? nullSlides : speaker?.events?.map((group, idx) => (
-                                <SwiperSlide style={{ display: "flex", gap: "1em" }}>
-                                    <Course course={group} key={idx} />
+                            {isLoading ? nullSlides : speaker?.events?.map((group, idx) => (
+                                <SwiperSlide key={idx} style={{ display: "flex", gap: "1em" }}>
+                                    <Course course={group}  />
                                 </SwiperSlide>
                             )) || <Text>No results found</Text>}
                         </Swiper>
