@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from './Navbar'
+import Navbar from './NavbarSLB'
 import Footer from './Footer'
 import { Grid, Box } from '@chakra-ui/react'
 import { useUser } from '../contexts/UserContext'

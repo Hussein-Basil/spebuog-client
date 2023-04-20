@@ -7,29 +7,14 @@ import 'swiper/css/navigation'
 import 'swiper/css/effect-fade'
 import 'swiper/css'
 
-import useSWR from 'swr'
+import useGetCoursesPreview from '../../../hooks/useGetCoursesPreview'
 
 const CoursesPreview = () => {
     const responsiveSlides = useBreakpointValue({ base: 'auto', lg: 3, xl: 4})
     const centeredSlides = useBreakpointValue({ base: true, lg: false })
     const initialSlide = useBreakpointValue({ base: 1, md: 0 })
-    const [categories, setCategories] = useState([])
 
-    const { data, isLoading } = useSWR(`
-        *[_type == 'category']{ 
-            title,
-            description,
-            'children': *[_type == 'event' && references(^._id)]{
-                ...,
-                instructors[]->, 
-                parent->,
-            }
-        }
-    `)
-
-    useEffect(() => {
-        setCategories(data?.length ? data : [])
-    }, [data])
+    const {categories, isLoading } = useGetCoursesPreview()
 
     const nullSlides = [...Array(4)].map((_, key) => (
         <SwiperSlide style={{ display: "flex", justifyContent: "center" }} key={key}>

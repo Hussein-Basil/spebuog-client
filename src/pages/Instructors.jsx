@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useBreakpointValue, Flex, Divider } from '@chakra-ui/react'
-import useSWR from 'swr'
 import SearchBar from '../features/instructors/SearchBar'
 import ViewControl from '../features/instructors/ViewControl'
 import View from '../features/instructors/View'
+import useGetInstructors from '../hooks/useGetInstructors'
 
 const Speakers = () => {
     const [searchQuery, setSearchQuery] = useState("")
@@ -11,26 +11,16 @@ const Speakers = () => {
     const [filterPosition, setFilterPosition] = useState("")
     const [filterCompany, setFilterCompany] = useState("")
     const responsiveGridView = useBreakpointValue({ base: false, lg: true })
-    const [speakers, setSpeakers] = useState(null)
     const [filteredSpeakers, setFilteredSpeakers] = useState([])
     const [sortOrder, setSortOrder] = useState('desc')
     
-    const { data, isLoading } = useSWR(`
-        *[_type == 'instructor'] | score(
-            name match '*${searchQuery}*' ||
-            position match '*${filterPosition}*' ||
-            position match '*${searchQuery}*' ||
-            organization match '*${filterPosition}*' ||
-            organization match '*${searchQuery}*'
-        )[_score > 0] | order(latestEvent ${sortOrder || 'desc'})
-    `)
+    const { speakers, isLoading } = useGetInstructors({
+        searchQuery,
+        filterPosition,
+        sortOrder
+    })
 
     document.title = 'Instructors - SPE BUOG'
-    
-    useEffect(() => {
-        setSpeakers(data?.length ? data : [])
-    }, [data])
-
 
     return (
         <Flex 

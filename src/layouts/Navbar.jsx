@@ -5,6 +5,8 @@ import Logo from '../assets/shared/spe-logo-2020.png'
 import './styles.css'
 import ResponsiveWidth from './ResponsiveWidth'
 
+import NavbarSLB from './NavbarSLB'
+
 const Navbar = () => {
     const navRef = useRef(null)
 
@@ -23,6 +25,7 @@ const Navbar = () => {
             window.removeEventListener('scroll', handleWindowScroll)
         }
     })
+
     return (
         <Box 
             h={{ base: "75px" , lg: "95px"}}

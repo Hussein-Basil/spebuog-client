@@ -8,7 +8,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/effect-fade'
 import 'swiper/css/pagination'
 import 'swiper/css'
-import useSWR from 'swr'
+import useGetRelatedEvents from '../../../hooks/useGetRelatedEvents'
 
 const RelatedEvents = ({
     type, 
@@ -16,41 +16,15 @@ const RelatedEvents = ({
     categoryID,
     eventID
 }) => {
-    const [related, setRelated] = useState(null)
     const responsiveSlides = useBreakpointValue({ base: 1, md: 2, lg: 3, xl: 4})
     const paddingBottom = useBreakpointValue({ base: '5em', xl: ''})
     
-    const { data, isLoading } = useSWR(`
-        *[_type == 'event' && _id != '${eventID}'] | score(
-            boost(tags match '${tags?.at(0)}', 4),
-            title match '${tags?.at(0)}',
-            category._ref match '${categoryID}',
-            event_type == '${type}'
-        )[0..4]{
-            ...,
-            parent->,
-            event_type in ['course_lecture', 'webinar'] => {
-                instructors[]->,
-            },
-            event_type == 'course' => {
-                'children': *[_type == 'event' && references(^._id)]{..., instructors[]-> },
-                'instructors': *[_type == 'event' && references(^._id)].instructors[]->
-            },
-            event_type == 'internship' => {
-                'children': *[_type == 'event' && references(^._id)]{
-                    ..., 
-                    'instructors': *[_type == 'event' && references(^._id)].instructors[]-> 
-                },
-                'instructors': *[_type == 'event' && references(^._id)] {
-                    'children': *[_type == 'event' && references(^._id)]{ instructors[]-> }
-                }.children[].instructors[]
-            }
-        }
-    `)
-
-    useEffect(() => {
-        setRelated(data?.length ? data : [])
-    }, [data])
+    const {related, isLoading} = useGetRelatedEvents({
+        eventID,
+        tags,
+        categoryID,
+        type
+    })
 
     const nullSlides = [...Array(3)].map((_, key) => (
         <SwiperSlide style={{ display: "flex", justifyContent: "center" }} key={key}>
