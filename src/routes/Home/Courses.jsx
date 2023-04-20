@@ -4,7 +4,7 @@ import Course from '../../components/Course'
 import { useUser } from '../../auth/UserContext'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { EffectFade, Pagination } from 'swiper'
+import { EffectFade, FreeMode } from 'swiper'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-fade'
 import 'swiper/css'
@@ -39,9 +39,10 @@ const Courses = () => {
     useEffect(() => {
         setEvents(data?.map(event => {
             if (['course', 'internship'].includes(event?.event_type)) {
+                console.log(event.instructors.filter(ins=>!ins?._id))
                 return {
                     ...event,
-                    instructors: [...new Map(event.instructors.map(item => 
+                    instructors: [...new Map(event.instructors.filter(instructor => instructor).map(item => 
                         [item['_id'], item])).values()]
                 }
             } else return event
@@ -57,41 +58,32 @@ const Courses = () => {
     return (
         
         <Flex flexDir="column" align="center" my="3em" w={{
-            base: '90vw',
+            base: '100vw',
             lg: '1114px',
             xl: '1400px',
             '2xl': '1400px',
         }}>
-            <Heading fontSize="28px" fontWeight="medium" mb="0.5">Browse Our Courses</Heading>
-            <Text mb="1em" textAlign="center">Grow your skills by studying from our exciting courses</Text>
-            <LinkBox>
-                <LinkOverlay  href="/courses" w="fit-content">
-                    <Button mb="2em">View All Courses</Button>
-                </LinkOverlay>
-            </LinkBox>
+            <Heading fontSize="28px" fontWeight="medium" mb="0.5" alignSelf="start" ml="0.5em" >Browse Our Courses</Heading>
+            <Text mb="1em" textAlign="start" alignSelf="start" ml="1em">Grow your skills by studying from our exciting courses</Text>
             <Flex w="100%" align="center">
             {/* <BsChevronLeft cursor="pointer" onClick={() => swipe?.slidePrev()} /> */}
             <Swiper
-                modules={[Pagination, EffectFade]}
-                effect
                 speed={300}
                 style={{
-                    width: '100%',
-                    paddingBottom: "5em",
+                    width: '100%'
                     // minHeight: "480px",
                 }}
-                slidesPerView={useBreakpointValue({ base: 1, md:2, lg: 3, xl: 4})}
-                slidesPerGroup={useBreakpointValue({ base: 1, md: 2, lg: 3, xl: 4})}
-                spaceBetween={20}
-                pagination={{
-                    clickable: true,
-                }}
+                slidesPerView={useBreakpointValue({ base: 'auto', lg: 3, xl: 4})}
+                slidesPerGroup={1}
+                centeredSlides={true}
+                centeredSlidesBounds={true}
+                initialSlide={1}
             >
             {isLoading ? nullSlides : events?.slice(0, 10).map((event, idx) => (
-                <SwiperSlide style={{ display: "flex", justifyContent: "center" }}>
-                    <LinkBox>
-                    <LinkOverlay href={`/${["course_lecture", "webinar"].includes(event.event_type) ? 'lecture' : 'course'}/${event.id}`}>
-                        <Course course={event} key={idx} />
+                <SwiperSlide style={{ display: "flex", justifyContent: "center", width: '80vw', maxWidth: 'calc(320px + 1em)', minWidht: '80vw' }}>
+                    <LinkBox >
+                    <LinkOverlay  href={`/${["course_lecture", "webinar"].includes(event.event_type) ? 'lecture' : 'course'}/${event.id}`}>
+                        <Course course={event} key={idx} maxW="320px" minW="(80vw - 1em)" w="calc(80vw - 1em)" />
                     </LinkOverlay>
                     </LinkBox>
                 </SwiperSlide>

@@ -64,7 +64,15 @@ const Courses = () => {
                         </ResponsiveWidth>
                     </Flex>
                 </Flex>
-                <ResponsiveWidth>
+                <ResponsiveWidth
+                    w={{
+                        base: "100vw",
+                        md: "768px",
+                        lg: "1114px",
+                        xl: "1440px",
+                        '2xl': "1400px"
+                    }}
+                >
                     {(query.tag?.value || query.search) ? <FilterResults query={query} /> : <CoursesPreview />}
                 </ResponsiveWidth>
             </Flex>

@@ -25,12 +25,12 @@ const Navbar = () => {
     })
     return (
         <Box 
-            h="95px"
+            h={{ base: "75px" , lg: "95px"}}
         >
             <Flex
                 align="center"
                 color="black"
-                h="95px"
+                h={{ base: "75px", lg: "95px"}}
                 justify={{ base: "unset", md: "center" }}
                 w="100%"
                 ref={navRef}
@@ -55,11 +55,23 @@ const Navbar = () => {
                             fontWeight="semibold"
                             display={{ base: 'none', md: 'flex' }}
                             pr="2em"
+                            className="nav_ul"
                         >
-                            <Link href="/">Home</Link>
-                            <Link href="/courses">Courses</Link>
-                            <Link href="/instructors" >Instructors</Link>
-                            <Link href="/about" >About</Link>
+                            <li><Link href="/">Home</Link></li>
+                            <li className="courses_item">
+                                <Link href="/courses">Courses</Link>
+                                <ul className="dropdown" style={{
+                                    zIndex: 99, 
+                                    width: 'fit-content', 
+                                    whiteSpace: 'nowrap',
+                                    position: 'absolute'
+                                }}>
+                                    <li style={{ display: 'block' }}><Link href="/courses">Browse Courses</Link></li>
+                                    <li style={{ display: 'block' }}><Link href="/certificate">Certificates</Link></li>
+                                </ul>
+                            </li>
+                            <li><Link href="/instructors" >Instructors</Link></li>
+                            <li><Link href="/about" >About</Link></li>
                         </Flex>
                         {/* For Mobiles */}
                         <HStack display={{ base: "flex", md: "none" }}>

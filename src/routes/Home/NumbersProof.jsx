@@ -36,7 +36,7 @@ const NumbersProof = () => {
                 whileInView={{opacity: 1, scale: 1, x: 0}}
                 transition={{ x: {type: "tween"}}}
                 viewport={{ once: true }}
-                bg="#0D4C94" 
+                // bg="#0D4C94" 
                 pb="2em"
                 justify="center" 
                 color="white"
@@ -57,7 +57,14 @@ const NumbersProof = () => {
                 {numbers.map((number, idx) => (
                     <>
                     <Show above="lg">
-                        <Flex  whileHover={{ y: -5}} gap="1em" align="center" bg="#003C80" p="1em" borderRadius="10px">
+                        <Flex 
+                            whileHover={{ y: -5 }} 
+                            gap="1em" 
+                            align="center" 
+                            bg="#003C8099" 
+                            p="1em" 
+                            borderRadius="10px"
+                        >
                             <Icon as={number.icon} color="#5890D1" h="52px" w="52px" />
                             <Flex flexDir="column">
                                 <Text fontWeight="semibold" fontSize="24px">{number.value}</Text>

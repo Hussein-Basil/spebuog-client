@@ -19,3 +19,21 @@
   height: 28px;
   width: auto;
 }
+
+ul, .nav_ul {
+  list-style: none;
+  /* background-color: gray; */
+}
+
+ul li, .nav_ul li {
+  display: inline-block;
+  position: relative;
+}
+
+.courses_item ul.dropdown {
+  display: none;
+}
+
+.courses_item:hover ul.dropdown {
+  display: block;
+}

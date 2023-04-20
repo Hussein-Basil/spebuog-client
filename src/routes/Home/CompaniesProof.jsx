@@ -55,7 +55,17 @@ const CompaniesProof = () => {
                     {companies.map((company, idx) => (
                         <Box p="1em">
                             <Link href={company.website} target="_blank">
-                                <Image key={idx} src={company.logo} h="81px" maxW="150px"  objectFit="contain" filter="grayscale(1)" opacity="0.65" />
+                                <Image 
+                                    key={idx} 
+                                    src={company.logo} 
+                                    h="81px" 
+                                    maxW="150px"  
+                                    objectFit="contain" 
+                                    filter="grayscale(1)" 
+                                    _hover={{ filter: 'grayscale(0)', opacity: '1' }}
+                                    opacity="0.65" 
+                                    transition="opacity 0.5s, filter 0.5s"
+                                />
                             </Link>
                         </Box>
                     ))}

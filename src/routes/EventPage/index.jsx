@@ -76,7 +76,7 @@ const EventPage = () => {
         }
     }, [event?.title])
 
-    if (!isLoading && !event?.title) {
+    if (!isLoading && !data?.title) {
         return <NotFound />
     }
 
