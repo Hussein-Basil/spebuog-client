@@ -43,7 +43,7 @@ const FilterResults = ({ query }) => {
             if (['course', 'internship'].includes(event?.event_type)) {
                 return {
                     ...event,
-                    instructors: [...new Map(event.instructors.map(item => 
+                    instructors: [...new Map(event.instructors.filter(instructor => instructor).map(item => 
                         [item['_id'], item])).values()]
                 }
             } else return event
