@@ -3,24 +3,24 @@ import { Flex } from '@chakra-ui/react'
 import Layout from "../layouts/Layout";
 
 import {
-  About,
-  CompaniesProof,
-  Features,
   Hero,
+  Features,
   Courses,
-  Contact,
+  Services,
+  Stats,
+  Mission
 } from "../features/homepage";
 
 const Home = () => {
   return (
     <Flex direction="column" w="100vw">
       <Hero />
-      <Layout >
-        <About />
+      <Layout>
         <Features />
-        <CompaniesProof />
         <Courses />
-        <Contact />
+        <Services />
+        <Stats />
+        <Mission />
       </Layout>
     </Flex>
   );

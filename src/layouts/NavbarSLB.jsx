@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   Flex,
@@ -6,13 +6,6 @@ import {
   Link,
   Grid,
   Hide,
-  Image,
-  Heading,
-  HStack,
-  SimpleGrid,
-  Text,
-  VStack,
-  Box,
 } from "@chakra-ui/react";
 
 import RightArrowIcon from "../assets/arrow-right-blue.svg";
@@ -61,17 +54,33 @@ const NavbarSLB = () => {
             className="primary-links"
           >
             <Link className="selected-link" onClick={handleSelected} href="#">
-              Home
+              الرئيسية
             </Link>
             <Link onClick={handleSelected} href="#">
-              Careers
+              الدورات
             </Link>
             <Link onClick={handleSelected} href="#">
-              Investors
+              المحاضرين
             </Link>
             <Link onClick={handleSelected} href="#">
-              Partners
+              العضوية
             </Link>
+            <Link onClick={handleSelected} href="#">
+              تعرف علينا
+            </Link>
+          </GridItem>
+          <GridItem
+            as={Flex}
+            area="secondary"
+            justify="start"
+            align="center"
+            color="white"
+            className="secondary-links"
+          >
+            <Link href="#">هندسة المكامن</Link>
+            <Link href="#">هندسة الحفر</Link>
+            <Link href="#">هندسة الانتاج</Link>
+            <Link href="#">السلامة</Link>
           </GridItem>
         </Hide>
 
@@ -83,7 +92,7 @@ const NavbarSLB = () => {
           color="white"
           className="control-links"
         >
-          <Link onClick={handleSelected}>Contact</Link>
+          <Link onClick={handleSelected}>تواصل معنا</Link>
           <Link className="profile-link" onClick={handleSelected}></Link>
           <Link className="search-link" onClick={handleSelected}></Link>
         </GridItem>

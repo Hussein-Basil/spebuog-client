@@ -1,5 +1,33 @@
+@import 'globals';
+
 @import 'home';
 @import 'about';
 @import 'event';
 @import 'membership';
 @import 'navbar';
+
+* {
+    font-family: 'Noto Sans Arabic', sans-serif;
+}
+
+@include devices(large) {
+    
+    h1 {
+        font-size: 86px!important;
+    }
+
+    h2 {
+        font-size: 50px!important;
+    }
+}
+@include devices(medium) {
+    h1 {
+    font-size: 50px!important;
+    }
+}
+
+@include devices(small) {
+    h1 {
+    font-size: 36px!important;
+    }
+}

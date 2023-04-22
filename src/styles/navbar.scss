@@ -51,7 +51,7 @@ nav {
 
 .secondary-links {
     border-bottom: 1px solid var(--slb-grey-2);
-    color: var(--slb-blue);
+    color: $primary!important;
 
     & a {
         position: relative;
@@ -61,7 +61,7 @@ nav {
             content: '';
             width: calc(100% - 38px);
             height: 3px;
-            background-color: var(--slb-blue);
+            background-color: $primary;
             position: absolute;
             bottom: 3px;
         }
@@ -70,7 +70,7 @@ nav {
 
 
 .primary-links, .control-links {
-    background-color: #0D4C94;
+    background-color: $primary;
 
     & a {
         border-width: 0 1px 0 0;
@@ -80,7 +80,6 @@ nav {
 
         &:hover:not(.selected-link) {
             background-color: var(--slb-deep-blue)
-
         }
     }
 }
@@ -90,7 +89,7 @@ nav {
     border-top-width: 1px!important;
     border-top-style: solid;
     background-color: var(--slb-white)!important;
-    color: var(--slb-blue)!important;
+    color:$primary!important;
 }
 
 .control-links a {
@@ -108,8 +107,9 @@ nav {
     cursor: pointer;
 
     &:hover {
-        background-color: #0D4C94;
-        background-image: url('../assets/logo-white.svg')
+        background-color: $primary;
+        background-image: url('../assets/shared/spe-logo-2020.png');
+        background-size: contain;
     }
 }
 
@@ -150,7 +150,7 @@ nav {
 }
 
 .link {
-    color: var(--slb-blue)!important;
+    color: $primary!important;
 }
 
 #innovation {

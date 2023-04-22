@@ -43,7 +43,7 @@ const SearchBar = ({
 
         setFilteredSpeakers(newSpeakers)
 
-    }, [speakers, searchQuery, filterPosition, filterCompany])
+    }, [speakers, searchQuery, filterPosition, filterCompany, setFilteredSpeakers])
 
     return (<>
         <FilterModal 

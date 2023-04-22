@@ -6,11 +6,11 @@ import { useUser } from '../contexts/UserContext'
 import Notification from './Notification'
 import { SWRConfig } from 'swr'
 
-const BasicLayout = ({ children }) => {
+const BasicLayout = ({ children, ...props }) => {
     const { notifications, setNotification, client } = useUser()
 
     return (
-        <Grid minH="100vh" maxW="100vw" style={{ overflowX: 'clip' }} gridTemplateRows="auto 1fr auto" >
+        <Grid minH="100vh" maxW="100vw" style={{ overflowX: 'clip' }} gridTemplateRows="auto 1fr auto" {...props}>
             <Navbar />
             <Box
             >

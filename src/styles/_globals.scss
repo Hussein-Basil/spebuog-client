@@ -1,0 +1,24 @@
+@mixin devices ($breakpoint) {
+
+  @if $breakpoint == large {
+    @media screen and (min-width: 1008px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == medium {
+    @media screen and (min-width: 641px) and (max-width: 1007px) {
+      @content;
+    }
+  }
+  
+    @if $breakpoint == small {    
+    @media only screen and (max-width: 640px) {
+      @content;
+    }
+  }
+}
+
+// Colors
+$primary: #0D4C94;
+$secondary: #F6BB43;
