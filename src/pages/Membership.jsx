@@ -1,20 +1,37 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {  Flex, Heading, Image, Link, Text } from '@chakra-ui/react'
 import ResponsiveWidth from '../layouts/ResponsiveWidth'
 
 const Membership = () => {
     document.title = 'Membership - SPE BUOG'
     return (
-        <ResponsiveWidth gap="1em" my="3em">
-            <Flex flexDir="column" gap="1em" maxW={{ base: "90vw", lg: "850px"}}>
+        <ResponsiveWidth gap="1em" my="3em" sx={{
+            '.membership-container': {
+                maxW: { 
+                    base: "90vw", 
+                    lg: "850px"
+                }
+            },
+            '.embeded-video': {
+                width: {
+                    base: "90%",
+                    lg: "560px"
+                },
+                height: {
+                    base: "calc(0.56*90vw)",
+                    lg: "315px",
+                }
+            }
+        }}>
+            <div className="membership-container">
                 <Heading size="md" fontWeight="semibold">SPE Membership</Heading>
                 <Text>In order to get membership in our student chapter, there are two cases:</Text>
-                <Flex as='ol' ml="2em"  gap="1em" flexDir="column">
+                <ol>
                     <Text as="li"><b>Creating Membership:</b> If you are not already registered in our student chapter, you may follow the steps of the video below to create a membership.</Text>
-                    <Flex as="iframe" width={{ base: "90%", lg: "560px" }} height={{base: "calc(0.56*90vw)", lg: "315px"}} src="https://www.youtube-nocookie.com/embed/Yt9tMJoLOa8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+                    <Flex as="iframe" className="embeded-video" src="https://www.youtube-nocookie.com/embed/Yt9tMJoLOa8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
                     <Text as="li"><b>Membership Renewal:</b> If you are a member in the student chapter, you should renew your membership annually. Please follow the steps in the video below to renew your membership.</Text>
-                    <Flex as="iframe" width={{ base: "90%", lg: "560px" }} height={{base: "calc(0.56*90vw)", lg: "315px"}} src="https://www.youtube-nocookie.com/embed/ztdU1NqxgaM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
-                </Flex>
+                    <Flex as="iframe" className="embeded-video" src="https://www.youtube-nocookie.com/embed/ztdU1NqxgaM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen />
+                </ol>
                 <Text>After you have created or renewed your membership in the student chapter, you may fill the Student Chapter Data Form right below:</Text>
                 <Text color="#0D4C94" textDecor="underline"><Link href="https://forms.gle/W25aogBHvr1WQTKx8">https://forms.gle/W25aogBHvr1WQTKx8</Link></Text>
                 <Text><Text fontWeight="medium">*Before filling the form please notice that:</Text> Form may be filled only by students who have a membership card that is valid until the end of the current year. {'(Expires: 12/31/2022) - Not expired membership'}</Text>
@@ -32,8 +49,7 @@ const Membership = () => {
                     <Link href="https://t.me/+HbT8hUOGua5lMTMy" textDecor="underline" color="#0D4C94">Telegram channel</Link>{' '}
                     in order respond to you later.
                 </Text>
-            </Flex>
-            
+            </div>
         </ResponsiveWidth>
     )
 }

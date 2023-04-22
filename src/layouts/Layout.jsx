@@ -4,10 +4,13 @@ import { Flex } from '@chakra-ui/react'
 const Layout = ({ children, ...props }) => {
     return (
         <Flex
-            pt="5em"
+            // pt="5em"
+            // pb="5em"
+            py="0"
             flexDir="column"
             align="center"
-            pb="5em"
+            position="relative" 
+            gap="0" 
             {...props}
         >
             {children}

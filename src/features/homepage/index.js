@@ -1,0 +1,8 @@
+export { default as About } from './components/About'
+export { default as CompaniesProof } from './components/CompaniesProof'
+export { default as Courses } from './components/Courses'
+export { default as Features } from './components/Features'
+export { default as Hero } from './components/Hero'
+export { default as NumbersProof } from './components/NumbersProof'
+export { default as Upcoming } from './components/Upcoming'
+export { default as Contact } from './components/Contact'

@@ -7,7 +7,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/effect-fade'
 import 'swiper/css'
 
-import './styles.css'
+import '../styles.css'
 import useGetHomeCourses from '../../../hooks/useGetHomeCourses'
 
 const Courses = () => {

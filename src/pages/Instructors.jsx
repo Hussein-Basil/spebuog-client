@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { useBreakpointValue, Flex, Divider } from '@chakra-ui/react'
-import SearchBar from '../features/instructors/SearchBar'
-import ViewControl from '../features/instructors/ViewControl'
-import View from '../features/instructors/View'
+import { SearchBar , ViewControl, View } from '../features/instructors'
 import useGetInstructors from '../hooks/useGetInstructors'
 
 const Speakers = () => {

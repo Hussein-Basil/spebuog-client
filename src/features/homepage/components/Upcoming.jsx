@@ -4,7 +4,7 @@ import { Button, Heading, Text, LinkOverlay, LinkBox } from '@chakra-ui/react'
 import 'swiper/css/navigation'
 import 'swiper/css/effect-fade'
 import 'swiper/css'
-import ResponsiveWidth from '../../layouts/ResponsiveWidth'
+import ResponsiveWidth from '../../../layouts/ResponsiveWidth'
 
 const Upcoming = () => {
   return (

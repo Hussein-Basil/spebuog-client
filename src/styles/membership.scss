@@ -1,0 +1,13 @@
+.membership-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    & ol {
+        display: flex;
+        flex-direction: column;
+        margin-left: 2em;
+        gap: 1em;
+    }
+    
+}

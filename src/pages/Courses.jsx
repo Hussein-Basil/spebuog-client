@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Flex, Heading, Text, CloseButton } from '@chakra-ui/react'
 
 import TagSelector from '../features/courses/components/TagSelector'
@@ -6,7 +6,6 @@ import Search from '../features/courses/components/Search'
 import CoursesPreview from '../features/courses/components/CoursesPreview'
 import FilterResults from '../features/courses/components/FilterResults'
 
-import '../features/courses/styles.css'
 import ResponsiveWidth from '../layouts/ResponsiveWidth'
 
 const Courses = () => {

@@ -9,8 +9,6 @@ import 'swiper/css/navigation'
 import 'swiper/css/effect-fade'
 import 'swiper/css'
 
-import '../styles.css'
-
 function importAll(r) {
     let images = []
     r.keys().forEach((item) => { images.push(r(item)) });
