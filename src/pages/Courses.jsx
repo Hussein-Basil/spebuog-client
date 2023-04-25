@@ -5,21 +5,23 @@ import TagSelector from '../features/courses/components/TagSelector'
 import Search from '../features/courses/components/Search'
 import CoursesPreview from '../features/courses/components/CoursesPreview'
 import FilterResults from '../features/courses/components/FilterResults'
-
+import { useUser } from '../contexts/UserContext'
 import ResponsiveWidth from '../layouts/ResponsiveWidth'
 
 const Courses = () => {
     const stickyRef = useRef(null)
+    const { language } = useUser()
     const [query, setQuery] = useState({
         search: '',
         tag: {}
     })
     document.title = 'Courses - SPE BUOG'
 
+
     return (
             <Flex py={{ base: "1em", lg: "3em" }} flexDir="column" gap="0.5em" w="100vw">
                 <ResponsiveWidth>
-                    <Heading fontSize="42px" letterSpacing={-1} fontWeight="semibold">Courses</Heading>
+                    <Heading fontSize="42px" letterSpacing={-1} fontWeight="semibold">{language.COURSES.HEADLINE}</Heading>
                     <Text 
                         fontSize="16px"
                         mt="0.25em" 
@@ -27,7 +29,7 @@ const Courses = () => {
                         maxW="600px"
                         minW="50%"
                     >
-                        Grow your skills by studying from our exciting courses. We aim to give our members the most enriching lectures with Oil & Gas top experts.
+                        {language.COURSES.SUBHEADLINE}
                     </Text>
                 </ResponsiveWidth>
                 <Flex h={{ base: "134px", lg: query.tag?.value ? "134px" : "200px" }} >
@@ -42,7 +44,7 @@ const Courses = () => {
                         w="99vw"
                     >
                         <ResponsiveWidth>
-                            <Search query={query} setQuery={setQuery} />
+                            <Search query={query} setQuery={setQuery} language={language} />
                             {query.tag?.value ? (
                                 <Flex
                                     bg="#dadce0"
@@ -58,7 +60,7 @@ const Courses = () => {
                                     <CloseButton onClick={() => setQuery({...query, tag: {}})} />
                                 </Flex>
                             ) : (
-                                <TagSelector setQuery={setQuery} />
+                                <TagSelector setQuery={setQuery} language={language} />
                             )}
                         </ResponsiveWidth>
                     </Flex>
@@ -72,8 +74,8 @@ const Courses = () => {
                         '2xl': "1400px"
                     }}
                 >
-                    {(query.tag?.value || query.search) ? <FilterResults query={query} /> : <CoursesPreview />}
-                </ResponsiveWidth>
+                    {(query.tag?.value || query.search) ? <FilterResults query={query}/> : <CoursesPreview />}
+                </ResponsiveWidth>\
             </Flex>
     )
 }

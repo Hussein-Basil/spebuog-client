@@ -1,0 +1,32 @@
+#mission {
+  margin: 8rem auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  max-width: 1000px;
+  gap: 2rem;
+
+  @include devices(small) {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  img {
+    width: 400px;
+    height: 400px;
+  }
+
+  .mission-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+  }
+
+  h3 {
+    // font-size: 50px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+}

@@ -28,7 +28,7 @@ const ScrollToTop = ({ children }) => {
 const App = () => {
   return (
     <Router forceRefresh={true}>
-      <BasicLayout dir="rtl">
+      <BasicLayout>
         <ScrollToTop>
           <Routes>
             <Route path="/" element={<Home />} />

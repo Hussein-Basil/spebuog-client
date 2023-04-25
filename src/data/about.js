@@ -35,7 +35,5 @@ export const OFFICERS = [
         name: 'Muhammed Salah Abd',
         position: 'Webmaster',
         image: ''
-    }, {
-        
     }
 ]

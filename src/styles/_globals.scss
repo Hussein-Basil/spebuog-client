@@ -1,24 +1,64 @@
 @mixin devices ($breakpoint) {
 
   @if $breakpoint == large {
-    @media screen and (min-width: 1008px) {
+    @media screen and (min-width: 1440px) {
       @content;
     }
   }
 
   @if $breakpoint == medium {
-    @media screen and (min-width: 641px) and (max-width: 1007px) {
+    @media screen and (min-width: 768px) and (max-width: 1439px) {
       @content;
     }
   }
   
     @if $breakpoint == small {    
-    @media only screen and (max-width: 640px) {
+    @media only screen and (max-width: 767px) {
       @content;
     }
   }
 }
 
+@function em($px, $em: 16) {
+  @return math.div($px, $em) + em;
+}
+
 // Colors
 $primary: #0D4C94;
 $secondary: #F6BB43;
+
+$dark: #071540;
+$light: #f2f2f2;
+
+$spe-deep-blue: #001523;
+
+$success-1: #8CE4B2;
+$success-2: #5EDA94;
+$success-3: #2CBF6C;
+$success-4: #25A15B;
+$success-5: #1B7341;
+
+$failure-1: #E38580;
+$failure-2: #D95D56;
+$failure-3: #D0342C;
+$failure-4: #A62A23;
+$failure-5: #7D1F1A;
+
+$grey-1: #f0f0f0;
+$grey-2: #dce1e1;
+$grey-3: #c8cdcd;
+$grey-4: #aaa;
+$grey-5: #6c6969;
+
+$mobile-portrait-width: 375px;
+$mobile-landscape-width: 667px;
+$tablet-portrait-width: 834px;
+$tablet-landscape-width: 1194px;
+$desktop-regular-width: 1440px;
+$root-container-maximum-width: 1920px;
+
+$horizontal-padding-mobile: 24px;
+$horizontal-padding-tablet-portrait: 56px;
+$horizontal-padding-tablet-landscape: 94px;
+$horizontal-padding-desktop: 120px;
+

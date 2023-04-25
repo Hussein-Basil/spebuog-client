@@ -2,11 +2,11 @@ import React from 'react'
 import { InputGroup, Input, InputLeftElement } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
 
-const Search = ({ query, setQuery }) => {
+const Search = ({ query, setQuery, language }) => {
     return (
         <InputGroup mt="1em" mb="0.5em">
             <Input
-                placeholder="Search courses"
+                placeholder={language.COURSES.SEARCH_PLACEHOLDER}
                 onChange={e => setQuery({...query, search: e.target.value})}
                 value={query.search}
                 h="48px"

@@ -1,27 +1,24 @@
-import React from "react";
 import {
   Button,
   LinkBox,
   LinkOverlay,
 } from "@chakra-ui/react";
+import React from "react";
 
-import WatchButton from '../../../assets/home/watch-button.svg'
+import WatchButton from '../../../assets/home/watch-button.svg';
+import { useUser } from '../../../contexts/UserContext';
 
 const Hero = () => {
+  const { language } = useUser()
+
   return (
     <section id="hero">
         <div className="hero-content">
           <h1 className="hero-heading">
-            اكتسب معرفة عملية.
-            <br />
-            نّمي مهاراتك الشخصية.
-            <br />
-            <span>انضم لفعالياتنا!</span>
+            {language.HOMEPAGE.HERO.HEADLINE_REGULAR.split('.').slice(0,-1).map(text => <>{text}.<br /></>)}
+            <span>{language.HOMEPAGE.HERO.HEADLINE_HIGHLIGHTED}</span>
           </h1>
-          <p className="hero-subheading">
-            نطمح لاعطاء اعضائنا محاضرات غنية بالمعلومات
-            مقدمة من مهندسين وخبراء في القطاع النفطي
-          </p>
+          <p className="hero-subheading">{language.HOMEPAGE.HERO.SUBHEADING}</p>
           <LinkBox>
             <LinkOverlay href="/membership">
               <Button
@@ -35,14 +32,14 @@ const Hero = () => {
                 height="52px"
                 className="primary-button"
               >
-                انضم كعضو
+                {language.HOMEPAGE.HERO.CTA_BUTTON}
               </Button>
             </LinkOverlay>
           </LinkBox>
         </div>
         <div className="hero-video">
             <img src={WatchButton} alt="Watch Video" fill="white" />
-            <span>شاهد الفيديو</span>
+            <span>{language.HOMEPAGE.HERO.WATCH_VIDEO}</span>
         </div>
         <div className="grid-lines"></div>
         <div className="hero-swoop"></div>

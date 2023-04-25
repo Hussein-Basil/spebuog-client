@@ -3,9 +3,21 @@ import UserContext from './UserContext'
 import sanityClient from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
 
+import arabic from '../data/ar.json'
+import english from '../data/en.json'
+
 const AuthProvider = (props) => {
     const [user, setUser] = useState({})
     const [notifications, setNotification] = useState([])
+    const [language, setLanguage] = useState(arabic)
+
+    const toggleLanguage = () => {
+        if (language === arabic) {
+          setLanguage(english)
+        } else {
+          setLanguage(arabic)
+        }
+      }
 
     const client = sanityClient({
         projectId: 'q6fpo8mv',
@@ -51,7 +63,9 @@ const AuthProvider = (props) => {
         setUser,
         notifications,
         setNotification,
-        urlFor
+        urlFor,
+        language,
+        toggleLanguage,
     }
 
     return (

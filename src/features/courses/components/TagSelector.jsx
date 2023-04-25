@@ -3,37 +3,37 @@ import { Flex, Icon, Text } from '@chakra-ui/react'
 import { MdList } from 'react-icons/md'
 import {motion} from 'framer-motion'
 
-const TagSelector = ({ setQuery }) => {
+const TagSelector = ({ setQuery, language }) => {
     const tags = [
         {
-            name: 'All Courses',
+            name: language.COURSES.ALL_COURSES,
             value: '*',
             icon: MdList,
-            description: 'Everything, online webinars and courses'
+            description: language.COURSES.ALL_COURSES_DESC
         },
         {
-            name: 'Completion',
+            name: language.COURSES.COMPLETION,
             value: 'completion',
             icon: MdList,
-            description: 'All about well completion, cementing and intervention'
+            description: language.COURSES.COMPLETION_DESC
         },
         {
-            name: 'Drilling',
+            name: language.COURSES.DRILLING,
             value: 'drilling',
             icon: MdList,
-            description: 'Follow the drilling lectures to start your journey!'
+            description: language.COURSES.DRILLING_DESC
         },
         {
-            name: 'Reservoir',
+            name: language.COURSES.RESERVOIR,
             value: 'reservoir',
             icon: MdList,
-            description: 'Reservoir engineering, simulation and other advance topics'
+            description: language.COURSES.RESERVOIR_DESC
         },
         {
-            name: 'Others',
+            name: language.COURSES.OTHERS,
             value: 'others',
             icon: MdList,
-            description: 'Other petroleum related lectures like the future of oil & gas'
+            description: language.COURSES.OTHERS_DESC
         },
     ]
 
@@ -72,8 +72,6 @@ const TagSelector = ({ setQuery }) => {
                     whiteSpace={{ base: "nowrap", lg: "unset" }}
                     userSelect="none"
                     mb="1em"
-                    
-                    
                 >
                     <Flex justify="space-between" align="center">
                         <Text 

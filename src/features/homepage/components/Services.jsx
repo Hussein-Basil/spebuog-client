@@ -1,35 +1,42 @@
 import React from 'react'
+import { useUser } from '../../../contexts/UserContext'
+import competition from '../../../assets/home/spe_competition.jpg'
+import trip from '../../../assets/home/spe_field_trip.jpg'
+import conference from '../../../assets/home/spe_conference.jpg'
 
 const Services = () => {
+    const { language } = useUser()
+
     return (
-        <section id="services">
-            <h2>ماذا نقدم أيضاً؟</h2>
+        <section id="services" className="responsive-width">
+            <h2>{language.HOMEPAGE.SERVICES.HEADLINE}</h2>
             <div className="services-container">
                 <div className="service-item">
-                    <img />
+                    <picture>
+                        <img src={competition} loading="lazy" alt="Student Competition 2023"/>
+                    </picture>
                     <div className="service-content">
-                        <h3>مسابقات طلابية</h3>
-                        <p>
-                        نقيم سنوياً مسابقات عروض تقديمية طلابية تركز على مواضيع علمية حديثة في مجال النفط والغاز والطاقة المتجددة. يعمل الطلاب فيها على صقل مهارات الالقاء والبحث العلمي بعد تلقيهم ملاحظات لجنة التحكيم المكونة من مهندسين واساتذة جامعيين
-                        </p>
+                        <h3>{language.HOMEPAGE.SERVICES.S1_HEADLINE}</h3>
+                        <p>{language.HOMEPAGE.SERVICES.S1_TEXT}</p>
                     </div>
                 </div>
                 <div className="service-item">
-                    <img />
+                    <picture>
+                        <img src={trip} loading="lazy" alt="SLB Field Trip 2022" />
+                    </picture>
                     <div className="service-content">
-                        <h3>رحلات حقلية</h3>
-                        <p>
-                        من خلال اشتراكك بدوراتنا التدريبية الصيفية يمكنك التأهل لزيارة أحد حقول النفط والغاز في البصرة لرؤية المنشئات والمعدات عن قرب مما يعزز معرفتك المكتسبة نظرياً من الدورة
-                        </p>
+                        <h3>{language.HOMEPAGE.SERVICES.S2_HEADLINE}</h3>
+                        <p>{language.HOMEPAGE.SERVICES.S2_TEXT}</p>
                     </div>
+
                 </div>
                 <div className="service-item">
-                    <img />
+                    <picture>
+                        <img src={conference} loading="lazy" alt="GOTECH Conference 2023" />
+                    </picture>
                     <div className="service-content">
-                        <h3>خدمات عضوية SPE</h3>
-                        <p>
-                        بمجرد امتلاكك عضوية جمعية مهندسي النفط العالمية في فرعنا الطلابي يمكنك الوصول الى العديد من الخدمات المجانية المفيدة مثل منصة onepetro البحثية ومجلة JPT النفطية وغيرهم
-                        </p>
+                        <h3>{language.HOMEPAGE.SERVICES.S3_HEADLINE}</h3>
+                        <p>{language.HOMEPAGE.SERVICES.S3_TEXT}</p>
                     </div>
                 </div>
                 

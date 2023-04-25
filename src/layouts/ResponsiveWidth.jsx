@@ -5,10 +5,8 @@ const ResponsiveWidth = ({ children, ...props }) => {
     return <Flex
         w={{
             base: "90%",
-            md: "768px",
-            lg: "1114px",
-            xl: "1440px",
-            '2xl': "1400px"
+            tablet: 768,
+            desktop: 1440,
         }}
         mx="auto"
         flexDir="column"
