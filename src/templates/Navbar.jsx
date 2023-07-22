@@ -61,13 +61,22 @@ const Navbar = () => {
                             <li className="courses_item">
                                 <Link href="/courses">Courses</Link>
                                 <ul className="dropdown" style={{
-                                    zIndex: 99, 
+                                    display: "flex",
+                                    zIndex: 99,
                                     width: 'fit-content', 
                                     whiteSpace: 'nowrap',
-                                    position: 'absolute'
+                                    position: 'absolute',
+                                    gap: "1vh",
+                                    background: "rgb(240,240,240)",
+                                    borderTopRightRadius: "7%",
+                                    borderBottomRightRadius: "7%",
+                                    padding: "10px 4px 10px 7px",
+                                    borderLeft: "#F6BB43 solid 5px",
+                                    flexDirection: 'column'
+                                    
                                 }}>
-                                    <li style={{ display: 'block' }}><Link href="/courses">Browse Courses</Link></li>
-                                    <li style={{ display: 'block' }}><Link href="/certificate">Certificates</Link></li>
+                                    <li style={{ display: 'block', borderLeft: "2px solid #2196F3", padding: "5px 0px  0px 4px" }}><Link href="/courses">Browse Courses</Link></li>
+                                    <li style={{ display: 'block', borderLeft: "2px solid #2196F3", padding: "5px 0px 0px 4px" }}><Link href="/certificate">Certificates</Link></li>
                                 </ul>
                             </li>
                             <li><Link href="/instructors" >Instructors</Link></li>

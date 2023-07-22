@@ -29,11 +29,14 @@ ul li, .nav_ul li {
   display: inline-block;
   position: relative;
 }
-
+/* using display : none and display : block or display : flex doesn't work
+and the menu stays hidden even after hovering,
+so i'm using opacity instead */
 .courses_item ul.dropdown {
-  display: none;
+  opacity: 0;
 }
 
 .courses_item:hover ul.dropdown {
-  display: block;
+  opacity: 1 !important;
+  
 }
