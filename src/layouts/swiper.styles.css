@@ -1,17 +1,17 @@
 #card-container {
-    display: flex;
-    overflow-x: hidden;
+  display: flex;
+  overflow-x: hidden;
 }
 
 .card {
-    flex: 0 0 100%;
-    width: 100%;
-    position: relative;
-    left: 0;
-    transition: left 0.5s ease;
-    user-select: none;
+  flex: 0 0 100%;
+  width: 100%;
+  position: relative;
+  left: 0;
+  transition: left 0.5s ease;
+  user-select: none;
 }
 
 .card.hidden {
-    left: -100%;
+  left: -100%;
 }

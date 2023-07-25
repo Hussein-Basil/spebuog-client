@@ -20,12 +20,14 @@
   width: auto;
 }
 
-ul, .nav_ul {
+ul,
+.nav_ul {
   list-style: none;
   /* background-color: gray; */
 }
 
-ul li, .nav_ul li {
+ul li,
+.nav_ul li {
   display: inline-block;
   position: relative;
 }

@@ -1,16 +1,14 @@
 import React from 'react'
 import { Heading, Text, Flex, Grid, Link, Image } from '@chakra-ui/react'
 
-import yousif from '../../../assets/officers/yousif_resize.png'
-import yaman from '../../../assets/officers/yaman_resize.png'
-import khalil from '../../../assets/officers/khalil_resize.png'
-import abdullah from '../../../assets/officers/abdullah_resize.png'
-import askar from '../../../assets/officers/askar_resize.png'
-import hisham from '../../../assets/officers/hisham_resize.png'
-import basil from '../../../assets/officers/basil.png'
-import ali from '../../../assets/officers/ali_resize.png'
-import nooraldeen from '../../../assets/officers/nooraldeen_resize.png'
-import fatima from '../../../assets/officers/fatima_resize.png'
+import hussein from '../../../assets/officers/hussein_basil.png'
+import ahmed from '../../../assets/officers/ahmed_waleed.png'
+import muna from '../../../assets/officers/muna.png'
+import ali from '../../../assets/officers/ali_salim.png'
+import muqtada from '../../../assets/officers/muqtada_ameen.png'
+import fatima from '../../../assets/officers/fatima.png'
+import yousif from '../../../assets/officers/yousif_raad.png'
+import mohammed from '../../../assets/officers/mohammed_salah.png'
 
 import ResponsiveWidth from '../../../layouts/ResponsiveWidth'
 
@@ -19,67 +17,53 @@ import { motion } from 'framer-motion'
 const Team = () => {
     const team = [
         {
-            image: yousif,
-            name: 'Yousif Taha Yaseen',
+            image: hussein,
+            name: 'Hussein Basil Abdulkhaleq',
             position: 'President',
-            profile: "http://linkedin.com/in/yousif-taha-yaseen92598a1b4"
+            profile: "http://linkedin.com/in/hubasil"
         },
         {
-            image: yaman,
-            name: 'Yaman Raed Mohammed',
+            image: ahmed,
+            name: 'Ahmed Waleed Hameed',
             position: 'Vice President',
-            profile: "https://www.linkedin.com/in/yaman-raed-b5168a211"
+            profile: "https://www.linkedin.com/in/ahmed-waleed-25044422a/"
         },
         {
-            image: khalil,
-            name: 'Khalil Ahmed Khalil',
+            image: muna,
+            name: 'Muna Jazaa Khalaf',
             position: 'Membership Chairperson',
-            profile: "https://www.linkedin.com/in/khalil-ahmed-6bb04721a"
+            profile: "https://www.linkedin.com/in/munajazaa/"
         },
         {
-            image: abdullah,
-            name: 'Abdullah Ali Khalid',
+            image: ali,
+            name: 'Ali Salim Jaber',
             position: 'Secretary',
-            profile: "https://www.linkedin.com/in/ACoAADlpMxgBaer0RVGAr7NyJ0E14Xgn9GJaDaw"
+            profile: ""
         },
         {
-            image: askar,
-            name: 'Almurtaza Alaa Askar',
+            image: muqtada,
+            name: 'Muqtada Ameen Nadhim',
             position: 'Treasurer',
-            profile: "https://www.linkedin.com/in/al-murtaza-a-askar-6bb704218"
+            profile: ""
+        },
+        {
+            image: yousif,
+            name: 'Yousif Raad Saddam',
+            position: 'Program Chairperson',
+            profile: ""
         },
         {
             // image: "https://media-exp1.licdn.com/dms/image/C4E03AQEFRh7Bd1GDJQ/profile-displayphoto-shrink_800_800/0/1654026806432?e=1674086400&v=beta&t=GOYIuZcRMaCyr7Wf1Zsa3KuP1dOVg_qMWQFmmRtPo7g",
             image: fatima,
             name: "Fatima Aziz",
-            position: "Award and Recognition Chairperson",
-            profile: "https://www.linkedin.com/in/fatima-azeez-b3643922a/"
+            position: "Social Activites Chair",
+            profile: "https://www.linkedin.com/in/fatima-hadi-b3643922a/"
         },
         {
-            // image: "https://media-exp1.licdn.com/dms/image/D5603AQGegoSHa6PL0Q/profile-displayphoto-shrink_800_800/0/1666886956352?e=1674086400&v=beta&t=rNRZyOQPSNBfetcpNNExbhin3MEE1vpfN0HujQ_29c4",
-            image: ali,
-            name: "Ali Ahmed Namr",
-            position: "Officer",
-            profile: "https://www.linkedin.com/in/alialnamr/"
-        },
-        {
-            image: hisham,
-            name: 'Hisham Ibrahim Abdullah',
-            position: 'Program Chairperson',
-            profile: "https://www.linkedin.com/in/hisham-ibraheem-00197a1b4"
-        },
-        {
-            // image: "https://media-exp1.licdn.com/dms/image/C5603AQGHlqubjVoYPQ/profile-displayphoto-shrink_200_200/0/1629495037236?e=1674086400&v=beta&t=TNcOnNrGUqUHK2oz_3fnH-BBVQQXSrS2rIwJIEXxteI",
-            image: nooraldeen,
-            name: "Nooraldeen Shawki Alasady",
-            position: "Social Activities Chair",
-            profile: "https://www.linkedin.com/in/nooraldeen-alasady-30290921a/"
-        },
-        {
-            image: basil,
-            name: "Hussein Basil",
+            image: mohammed,
+            name: "Mohammed Salah",
             position: "Webmaster",
-            profile: "https://www.linkedin.com/in/hubasil"
+            profile: "https://www.linkedin.com/in/mohamed-salah-270a44271/"
         },
     ]
 
@@ -100,7 +84,7 @@ const Team = () => {
         <ResponsiveWidth align="center" gap="3em">
             <Heading fontSize="28px" fontWeight="semibold">Meet Our Officers</Heading>
             <Grid 
-                gridTemplateColumns={{ base: "1fr", md: "1fr 1fr", lg: "repeat(4, 1fr)", xl: "repeat(5, 1fr)"}}
+                gridTemplateColumns={{ base: "1fr", md: "1fr 1fr", lg: "repeat(4, 1fr)"}}
                 gap="3em"
             >
                 {team.map((member, idx) => (
