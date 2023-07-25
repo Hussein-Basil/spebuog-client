@@ -1,0 +1,81 @@
+@media only screen and (min-width: 0) {
+    footer {
+        width: min(1000px, 90%);
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        
+        .about-spe {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 0.5rem;
+      
+          img {
+            object-fit: contain;
+            width: math.clamp(50px, 72px, 100px);
+            height: math.clamp(50px, 72px, 100px);
+          }
+        }
+      
+        .fast-links {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      
+          h5 {
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: -0.04em;
+          }
+        }
+      
+        .social-links {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          gap: 0.5rem;
+          img {
+            width: 40px;
+            height: 40px;
+            fill: white;
+          }
+        }
+      }
+      
+}
+
+@media only screen and (min-width: $mobile-landscape-width) {
+}
+
+@media only screen and (min-width: $tablet-portrait-width) {
+    footer {
+        grid-template-columns: 1fr 1fr;
+        .fast-links {
+            align-items: start;
+        }
+        .about-spe {
+            flex-direction: row;
+            align-items: start;
+            text-align: start;
+            gap: 1rem;
+        }
+
+        img {
+            align-self: start;
+        }
+    }
+
+}
+
+@media only screen and (min-width: $tablet-landscape-width) {
+}
+
+@media only screen and (min-width: $desktop-regular-width) {
+}
+

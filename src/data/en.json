@@ -1,0 +1,90 @@
+{
+  "lang": "en",
+  
+  "NAVBAR": {
+    "HOME": "Home",
+    "COURSES": "Courses",
+    "INSTRUCTORS": "Instructors",
+    "MEMBERSHIP": "Membership",
+    "ABOUT": "About Us",
+    "CONTACT": "Contact Us",
+    "RESERVOIR": "Reservoir Engineering",
+    "DRILLING": "Drilling Engineering",
+    "PRODUCTION": "Production Engineering",
+    "SAFETY": "Safety"
+  },
+  "HOMEPAGE": {
+    "HERO": {
+      "HEADLINE_REGULAR": "Gain practical knowledge. Grow your personal skills.",
+      "HEADLINE_HIGHLIGHTED": "Join our events!",
+      "SUBHEADING": "We strive to provide our members with informative lectures delivered by engineers and experts in the oil and gas sector.",
+      "CTA_BUTTON": "Join as a member",
+      "WATCH_VIDEO": "Watch the video"
+    },
+    "FEATURES": {
+      "HEADLINE": "We make accessing oil and gas sector expertise easy",
+      "F1_HEADLINE": "Courses that enhance your skills",
+      "F1_TEXT": "You will notice your development and outperform your peers in both study and work",
+      "F2_HEADLINE": "Engineers, Leaders, and Professors",
+      "F2_TEXT": "You can benefit from their experiences and ask them about your inquiries",
+      "F3_HEADLINE": "Courses at various levels",
+      "F3_TEXT": "Whether you are a beginner or an expert, you will find what matters to you",
+      "F4_HEADLINE": "Advanced information easily accessible",
+      "F4_TEXT": "We provide advanced content that is not usually available for free"
+    },
+    "COURSES": {
+      "HEADLINE": "Latest Courses",
+      "REGISTER": "Register",
+      "VIEW": "View",
+      "BROWSE": "Browse more courses"
+    },
+    "SERVICES": {
+      "HEADLINE": "What else do we offer?",
+      "S1_HEADLINE": "Student Competitions",
+      "S1_TEXT": "We annually organize student presentations competitions that focus on modern scientific topics in the field of oil, gas and renewable energy. Students work on honing their skills in presentation and scientific research after receiving notes from the judging committee made up of engineers and professors.",
+      "S2_HEADLINE": "Field Trips",
+      "S2_TEXT": "By joining our summer training courses, you can qualify to visit an oil and gas field in Basra to see the facilities and equipment up close, which enhances your theoretically acquired knowledge from the course",
+      "S3_HEADLINE": "SPE Membership Services",
+      "S3_TEXT": "Once you have membership in the International Society of Petroleum Engineers in our student branch, you can access many useful free services such as the online technical library, webinars, and discounts on publications and conferences."
+    },
+    "STATS": {
+      "SUBHEADING": "Statistics",
+      "HEADING": "Big Impact Made By Students",
+      "YEARS_SUBHEADING": "We've Been Here",
+      "YEARS_HEADING": "For Two Years",
+      "LECTURES_SUBHEADING": "Where We've Organized",
+      "LECTURES_HEADING": "+200 Lectures",
+      "INSTRUCTORS_SUBHEADING": "By Hosting",
+      "INSTRUCTORS_HEADING": "+100 Speakers"
+    },
+    "MISSION": {
+      "HEADING": "Towards a Better Future",
+      "TEXT1": "To enhance students' skills and empower them professionally to engage in the workforce and gain exceptional experiences that they can share with their peers in the classroom.",
+      "TEXT2": "We strive to provide high-quality courses offered by professors from different nationalities, companies, and universities to enrich the oil and gas content and increase students' awareness of the latest topics."
+    }
+  },
+  "FOOTER": {
+    "ABOUT_TEXT": "The student branch of the Society of Petroleum Engineers at the University of Basrah for Oil and Gas is a platform run by petroleum engineering students to disseminate scientific knowledge in energy specialties.",
+    "FASTLINKS": "Quick Links",
+    "HOME": "Home",
+    "COURSES": "Courses",
+    "INSTRUCTORS": "Instructors",
+    "MEMBERSHIP": "Membership",
+    "ABOUT": "About Us"
+  },
+  "COURSES": {
+    "HEADLINE": "Courses",
+    "SUBHEADLINE": "Grow your skills by studying from our exciting courses. We aim to give our members the most enriching lectures with Oil & Gas top experts.",
+    "SEARCH_PLACEHOLDER": "Search courses",
+    "ALL_COURSES": "All Courses",
+    "ALL_COURSES_DESC": "Everything, online webinars and courses",
+    "COMPLETION": "Completion",
+    "COMPLETION_DESC": "All about completion, cementing and intervention",
+    "DRILLING": "Drilling",
+    "DRILLING_DESC": "Follow the drilling lectures to start your jounrey!",
+    "RESERVOIR": "Reservoir",
+    "RESERVOIR_DESC": "Reservoir engineering, simulation and other advanced topics",
+    "OTHERS": "Others",
+    "OTHERS_DESC": "Other petroleum related lectures like the future of oil & gas"
+  }
+}

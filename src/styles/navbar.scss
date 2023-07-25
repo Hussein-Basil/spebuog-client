@@ -1,0 +1,266 @@
+// Mobile Portrait
+@media only screen and (min-width: 0) {
+  nav {
+    width: 100vw;
+
+    .desktop-only {
+      display: none;
+    }
+
+    .small-device {
+      display: unset;
+    }
+  }
+
+  .navbar-logo.small-device {
+    flex: 1;
+    float: right;
+    height: em(56, 16);
+    padding: 8px 0;
+
+    img {
+      padding: 0;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    img.onhover {
+      display: none;
+    }
+
+    &:hover {
+      img.onhover {
+        display: block;
+      }
+      img.nohover {
+        display: none;
+      }
+    }
+  }
+
+  .navbar-menu {
+    display: flex;
+    white-space: nowrap;
+    justify-content: start;
+    align-items: center;
+    font-size: em(16, 16);
+    background-color: $primary;
+    color: white;
+    height: auto;
+
+    li {
+      padding: em(14, 16) em(19, 16);
+      height: em(56);
+      cursor: pointer;
+
+      &.selected-button {
+        background-color: $spe-deep-blue;
+      }
+
+      &.language-link a {
+        display: flex;
+      }
+    }
+
+    &.active {
+      flex-wrap: wrap;
+      align-items: start;
+      justify-content: space-between;
+      height: auto;
+      box-shadow: 5px 5px 10px black;
+
+      li,
+      .navbar-logo {
+        border-bottom: 0.5px solid rgb(162, 164, 187, 0.5);
+      }
+
+      .navbar-logo {
+        flex: 1;
+        order: -1;
+      }
+
+      .desktop-only {
+        display: unset;
+      }
+      .primary {
+        width: 100%;
+        display: flex;
+        order: 3;
+      }
+
+      .hamburger-menu {
+        // float: left;
+        order: 1;
+      }
+
+      .contact-link,
+      .language-link,
+      .search-link {
+        display: none;
+      }
+
+      .home ul {
+        display: none;
+      }
+      // order: 2;
+    }
+  }
+
+  .hamburger-menu {
+    display: block;
+    color: white;
+  }
+}
+
+// Mobile Landscape
+@media only screen and (min-width: $mobile-landscape-width) {
+}
+
+// Tablet Portrait
+@media only screen and (min-width: $tablet-portrait-width) {
+  nav {
+    border-bottom: 1px solid $grey-2;
+    .desktop-only {
+      display: unset;
+    }
+
+    .small-device {
+      display: none;
+    }
+
+    height: 100%;
+  }
+
+  div[dir="ltr"] {
+    .navbar-logo.desktop-only {
+      float: left;
+    }
+
+    .home-submenu {
+      left: 0;
+    }
+
+    li.language-link {
+      margin-right: 0;
+      margin-left: auto;
+    }
+  }
+
+  .navbar-logo.desktop-only {
+    height: 110px;
+    border: 1px solid $grey-2;
+    border-width: 0 0 0 1px;
+    margin-right: 16px;
+
+    float: right;
+    height: em(110, 16);
+    padding: 8px 0;
+
+    img {
+      padding: 1rem;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    img.onhover {
+      display: none;
+    }
+
+    &:hover {
+      img.onhover {
+        display: block;
+      }
+      img.nohover {
+        display: none;
+      }
+    }
+  }
+
+  .navbar-menu {
+    position: relative;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    li {
+      &.language-link {
+        margin-right: auto;
+      }
+    }
+
+    .primary {
+        border-left: 1px solid #aaaa;
+    }
+
+    &.active {
+      flex-wrap: nowrap;
+      align-items: start;
+      justify-content: flex-start;
+      height: auto;
+
+      li {
+        border-bottom: 0.5px solid rgba(120, 120, 120, 0.7);
+      }
+
+      .navbar-logo {
+        flex: unset;
+        order: unset;
+      }
+
+      .primary {
+        width: unset;
+        display: unset;
+        order: unset;
+      }
+
+      .hamburger-menu {
+        // float: left;
+        order: unset;
+      }
+
+      .contact-link,
+      .language-link,
+      .search-link {
+        display: unset;
+      }
+
+      .home ul {
+        display: flex;
+      }
+      // order: 2;
+    }
+  }
+
+  .home-submenu {
+    position: absolute;
+    right: 0;
+    top: em(56);
+    display: flex;
+    color: $primary;
+  }
+
+  
+  div[dir="ltr"] {
+    .navbar-logo.desktop-only {
+        border-width: 0 1px 0 0;
+        margin-right: 0;
+        margin-left: 8px;
+        
+    }
+
+    .navbar-menu {
+        .primary {
+            border-left: none;
+            border-right: 1px solid #aaaa;
+        }
+    }
+    
+}
+
+}
+
+@media only screen and (min-width: $tablet-landscape-width) {
+}
+
+// Desktop Regular
+@media only screen and (min-width: $desktop-regular-width) {
+
+}

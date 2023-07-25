@@ -4,19 +4,19 @@ import {
   Routes,
   Route,
 } from 'react-router-dom'
-import BasicLayout from './templates/BasicLayout'
+import BasicLayout from './layouts/BasicLayout'
 
-import Home from './routes/Home'
-import Speakers from './routes/Speakers'
-import Contact from './routes/Contact'
-import NotFound from './routes/Errors/NotFound'
-import SpeakerProfile from './routes/SpeakerProfile'
-import About from './routes/About'
+import Home from './pages/Home'
+import Speakers from './pages/Instructors'
+import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
+import SpeakerProfile from './pages/InstructorProfile'
+import About from './pages/About'
 
-import EventPage from './routes/EventPage'
-import Courses from './routes/Courses'
-import Membership from './routes/Membership'
-import Certificate from './routes/Certificate'
+import EventPage from './pages/EventPage'
+import Courses from './pages/Courses'
+import Membership from './pages/Membership'
+import Certificate from './pages/Certificate'
 
 const ScrollToTop = ({ children }) => {
   useEffect(() => {
