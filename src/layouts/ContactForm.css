@@ -142,7 +142,7 @@ color: #000000;
 
 @media screen and (max-width: 1600px) {
     .main-flex-container{
-        padding: 10px;
+        padding: 20px 60px;
     }
     .contact-form{
         width: 100%;
@@ -152,8 +152,12 @@ color: #000000;
     }
 }
 @media screen and (max-width: 600px) {
+    .main-flex-container{
+        padding: 10px;
+    }
     .main-flex-container>h2{
         font-size: 24px;
+        
     }
     .main-flex-container>h3{
         font-size: 20px;
