@@ -78,11 +78,9 @@ color: #FFFFFF;
 /* styling for the last field which is bigger than the other */
 .message-field{
 
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 10px 15px 10px 10px;
 
+padding: 10px 15px 10px 10px;
+text-align: start;
 height: 258px;
 
 background: #001828;
@@ -90,6 +88,7 @@ border: 1px solid #E2E1E5;
 border-radius: 5px;
 
 }
+
 
 /* image container styling */
 
