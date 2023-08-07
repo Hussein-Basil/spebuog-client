@@ -31,7 +31,6 @@ const ContactForm = () => {
               
           });
       };
-      console.log({shown})
     return (
         <div className="main-flex-container">
             <h2>أرسل لنا رسالة</h2>
@@ -51,13 +50,15 @@ const ContactForm = () => {
                         <p>الرسالة</p>
                         <input type="text" name="message"  className="message-field" placeholder="الرسالة" required/>
                     </div>
+                    {/* un comment this after you put in your keys, site won't load without the captcha keys
                     <ReCAPTCHA
                       sitekey= {process.env.REACT_APP_RECAPTCHA_PUBLIC_KEY}
                       onChange={() => setShown(true)}
                       ref={refCaptcha}  
                       style={{
                         margin: "10px 0px",
-                      }} />
+                      }} /> 
+                    */}
                     { shown ?
                     <button
                         type="submit"
