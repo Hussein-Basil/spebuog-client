@@ -1,0 +1,32 @@
+.Benefits-section{
+    background-color: #F5F5F5;
+    h2{
+        text-align: center;
+        padding:15px;
+        text-transform: capitalize;
+        color:black;
+    }
+    .benefits{
+        margin-inline: 20px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        .square{
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            margin:12px;
+            flex-grow: 1;
+            div{
+                background-color: red;
+                height:55px;
+                width:55px;
+                border-radius: 50%;
+                margin: {
+                    bottom:10px;
+                }
+            }
+        }
+    }
+}
