@@ -17,6 +17,7 @@ import EventPage from './pages/EventPage'
 import Courses from './pages/Courses'
 import Membership from './pages/Membership'
 import Certificate from './pages/Certificate'
+import ContactForm from './layouts/ContactForm'
 
 const ScrollToTop = ({ children }) => {
   useEffect(() => {

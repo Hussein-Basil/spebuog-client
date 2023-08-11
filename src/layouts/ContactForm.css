@@ -1,0 +1,168 @@
+.main-flex-container{
+
+    display: flex;
+    flex-direction: column;
+    background-color: #F0F3F4;
+    padding: 40px 104px 40px 40px;
+
+}
+
+.horizontal-flex-container{
+    display: flex;
+    direction: rtl ;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* form */
+
+.contact-form{
+
+display: flex;
+flex-direction: column;
+margin-top: 10px;
+padding: 20px 20px;
+width: 50%;
+height: fit-content;
+background: #001828;
+border-radius: 10px;
+color: white;
+font-size: 24px;
+
+}
+
+/* input elements */
+
+/* styles for the container */
+.text-field{
+
+display: flex;
+flex-direction: column;
+padding: 0px 0px;
+margin-bottom: 1vh;
+
+}
+
+/* styles to overwrite default css styling for input fields */
+.text-field>input{
+
+flex: none;
+order: 0;
+flex-grow: 0;
+background-color: #001828;
+border: 1px solid #E2E1E5;
+border-radius: 5px;
+margin-top: 1vh;
+padding: 10px 15px 10px 10px;
+
+}
+
+/* submit button */
+
+.submit-button{
+background-color: #0D4C94;
+
+width: 20%;
+padding: 10px 10px;
+border-radius: 10%;
+display: flex;
+align-items: center;
+text-align: center;
+justify-content: center;
+
+color: #FFFFFF;
+
+}
+
+/* styling for the last field which is bigger than the other */
+.message-field{
+
+
+padding: 10px 15px 10px 10px;
+text-align: start;
+height: 258px;
+
+background: #001828;
+border: 1px solid #E2E1E5;
+border-radius: 5px;
+
+}
+
+
+/* image container styling */
+
+.logo-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    flex-direction: row-reverse;
+    width: min-content;
+}
+
+/* Logo */
+
+.logo-image{
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 10px;
+
+width: 810px;
+height: 400px;
+
+}
+
+.logo-image>img{
+
+width: 355px;
+height: 178.39px;
+
+}
+
+.image-text>h2{
+
+width: 420px;
+height: 108px;
+
+font-family: 'Comfortaa';
+font-style: normal;
+font-weight: 400;
+font-size: 48px;
+line-height: 54px;
+display: flex;
+align-items: start;
+
+color: #000000;
+
+}
+
+@media screen and (max-width: 1600px) {
+    .main-flex-container{
+        padding: 20px 60px;
+    }
+    .contact-form{
+        width: 100%;
+    }
+    .logo-image {
+        display: none;
+    }
+}
+@media screen and (max-width: 600px) {
+    .main-flex-container{
+        padding: 10px;
+    }
+    .main-flex-container>h2{
+        font-size: 24px;
+        
+    }
+    .main-flex-container>h3{
+        font-size: 20px;
+    }
+    .contact-form {
+        width: 90vw;
+        font-size: 16px;
+    }
+}
