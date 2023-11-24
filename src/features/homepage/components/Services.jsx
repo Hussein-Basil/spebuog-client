@@ -6,9 +6,9 @@ import conference from '../../../assets/home/spe_conference.jpg'
 
 const Services = () => {
     const { language } = useUser()
+    
     const serviceItemByLang = language.lang === 'ar' ? "service-item" : "service-item-english-only"
 
-    console.log(serviceItemByLang, language)
     return (
         <section id="services" className="responsive-width">
             <h2>{language.HOMEPAGE.SERVICES.HEADLINE}</h2>
