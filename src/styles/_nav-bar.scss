@@ -1,0 +1,118 @@
+.padding{
+    padding: 0.8rem 1.3rem;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #001828;
+    .nav-berger{
+        background-color: transparent;
+        border: none;
+        outline:none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width:48px;
+        height:48px;
+        position: relative;
+        .nav-berger-line{
+            background-color: white;
+            width: 40px;
+            height: 6px;
+            border-radius: 8px;
+            &::after,&::before{
+                content: "";
+                @extend .nav-berger-line;
+                position: absolute;
+                left:4px;
+            }
+            &::after{
+                top: 9px;
+            }
+            &::before{
+               bottom: 9px;
+            }
+        }
+    }
+}
+%margin{
+    margin-top: 30px;
+}
+.Membership-content{
+    background-color: #0D4C94;
+    // height:20em;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    h1{
+        font-weight: bold;
+        color:white;
+        font-size:36px ;
+        padding:10px;
+        // position: relative;
+        // top:30px;
+        @extend %margin;
+    }
+    .first-paragraph{
+        // position: relative;
+        // top:42px;
+        font-size: 16.5px;
+        color:white;
+        @extend %margin;
+    }
+    .skew{
+        display: block;
+        width:100%;
+        // position: absolute;
+        // bottom:0;
+        transform: translateY(5px);
+    }
+}
+.buttons{
+    // position: relative;
+    // top:70px;
+    @extend %margin;
+    display: flex;
+    margin-inline: 20px;
+    justify-content: space-evenly;
+        a{
+            text-decoration: none;
+        }
+        button{
+            display:block;
+            outline: none;
+            border:none;
+            height: 40px;
+            width:110px;
+            background-color: #FFC107;
+            border-radius: 10px;
+            text-transform: capitalize;
+            cursor: pointer;
+        }
+}
+.video{
+    margin-top: 30px;
+    .icon{
+        background-color: #f0f012;
+        width:50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+        margin:auto;
+        margin-bottom: 10px;
+    }
+    p a {
+        color:white;
+        cursor: pointer;
+        display: inline-block;
+        transition: .5s;
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
+}

@@ -1,0 +1,74 @@
+footer{
+    padding:0 .9rem;
+    margin-top:20px;
+}
+.contact-us{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:10px 0;
+    figure{
+        @extend .contact-us;
+        img{
+            width:45px;
+            height:25px;
+            display: block;
+            margin-right: 6px;
+        }
+        figcaption{
+            width:80px;
+            font-size: 10.5px;
+        }
+    }
+    .form{
+        p{
+            font-size: 12px;
+            margin-top: 6px;;
+            a{
+               font-size: 12px;
+               text-decoration: none;
+               &:any-link{
+                    color:#0D4C94;
+                    cursor: pointer;
+               }
+           }
+        }
+    }
+}
+
+.follow-us{
+    margin:10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .social-media{
+        display: flex;
+        p{
+            font-size: 12.5px;
+            margin-left: 3px;
+        }
+        .icons{
+            display: flex;
+            a{
+                color:black;
+                ion-icon{
+                    display: block;
+                    margin-inline: 5px;
+                }
+            }
+        }
+    }
+    nav ul{
+        display: flex;
+        align-items: center;
+        list-style: none;
+        a{
+            display: block;
+            text-decoration: none;
+            color:black;
+            cursor: pointer;
+            font-size: 11.5px;
+            margin-inline:5px;
+        }
+    }
+}
