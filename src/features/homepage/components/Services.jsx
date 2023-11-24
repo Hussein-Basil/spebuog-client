@@ -6,12 +6,14 @@ import conference from '../../../assets/home/spe_conference.jpg'
 
 const Services = () => {
     const { language } = useUser()
+    const serviceItemByLang = language.lang === 'ar' ? "service-item" : "service-item-english-only"
 
+    console.log(serviceItemByLang, language)
     return (
         <section id="services" className="responsive-width">
             <h2>{language.HOMEPAGE.SERVICES.HEADLINE}</h2>
             <div className="services-container">
-                <div className="service-item">
+                <div className={serviceItemByLang}>
                     <picture>
                         <img src={competition} loading="lazy" alt="Student Competition 2023"/>
                     </picture>
@@ -20,7 +22,7 @@ const Services = () => {
                         <p>{language.HOMEPAGE.SERVICES.S1_TEXT}</p>
                     </div>
                 </div>
-                <div className="service-item">
+                <div className={serviceItemByLang}>
                     <picture>
                         <img src={trip} loading="lazy" alt="SLB Field Trip 2022" />
                     </picture>
@@ -30,7 +32,7 @@ const Services = () => {
                     </div>
 
                 </div>
-                <div className="service-item">
+                <div className={serviceItemByLang}>
                     <picture>
                         <img src={conference} loading="lazy" alt="GOTECH Conference 2023" />
                     </picture>
