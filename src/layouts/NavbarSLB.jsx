@@ -62,6 +62,7 @@ const NavbarSLB = () => {
           <img src={SPELogo} className="nohover" width="110" height="32" />
           <img src={SPELogoWhite} className="onhover" width="110" height="32" />
         </a>
+        {/*
         <li className="home selected-link primary desktop-only">
           <a href="/">{language.NAVBAR.HOME}</a>
           <ul className="home-submenu">
@@ -79,6 +80,7 @@ const NavbarSLB = () => {
             </li>
           </ul>
         </li>
+        */}
         <li className="primary desktop-only">
           <a href="/courses">{language.NAVBAR.COURSES}</a>
         </li>
@@ -93,7 +95,7 @@ const NavbarSLB = () => {
         </li>
         <li className="language-link" onClick={toggleLanguage}>
           <a>
-            <span className="desktop-only">
+            <span className="desktop-only language-switch">
               {language.lang === "ar" ? "English" : "العربية"}
             </span>
             <img
@@ -105,14 +107,16 @@ const NavbarSLB = () => {
             />
           </a>
         </li>
-        <li className="contact-link desktop-only" onClick={toggleSelect}>
+        <li className="contact-link desktop-only primary" onClick={toggleSelect}>
           <a href="/contact">{language.NAVBAR.CONTACT}</a>
         </li>
+        {/* search serves nothing so I removed it
         <li className="search-link" onClick={toggleSelect}>
           <a>
             <img src={SearchIcon} width="24" height="24" />
           </a>
         </li>
+        */}
         <li className="hamburger-menu small-device" onClick={toggleMenu}>
           <a>
             <img src={HamburgerIcon} width="24" height="24" />

@@ -1,0 +1,18 @@
+.navbar-menu{
+    height: 101% !important;
+    background-color: #0D4C94;
+    opacity: 0.95 ;
+    padding-left: 1rem;
+}
+.navbar-menu > li{
+    
+    font-size: 1.1rem;
+}
+.primary{
+    font-weight: bold;
+}
+.language-switch{
+    font-style: italic;
+    text-decoration: underline;
+}
+/* these css features are put in place because removing the navbar submenu makes it look ugly without unifying the color */
