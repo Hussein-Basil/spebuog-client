@@ -71,10 +71,13 @@ const SearchBar = ({
                     pl="3.5em"
                 />
                 <InputLeftElement h="65px" my="auto" ml="0.75em"><SearchIcon w="24px" h="24px" color="gray" /></InputLeftElement>
+                {/*
+                filter icon has buggy positioning in arabic so it's commented
                 <InputRightElement h="65px" my="auto" ml="0.75em" onClick={onOpen} cursor="pointer">
                     <Text display={{base: "none", lg: "unset"}}>Filters</Text>
                     <Icon mr={{base: 0, lg: "3.5em"}} ml={{base:0, lg: "0.5em"}} as={MdFilterList} w="24px" h="24px" color="black" />
                 </InputRightElement>
+                */}
             </InputGroup>
             <Flex gap="1em">
                 

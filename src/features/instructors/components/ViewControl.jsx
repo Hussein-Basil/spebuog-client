@@ -10,6 +10,7 @@ const ViewControl = ({
     setGridView,
 }) => (
     <Flex justify="space-between" w="100%" mt="1em" mb="1em">
+        {/* the filter icon is commented so the clear filters button is redundant
         <Button
             onClick={() => {
                 setSearchQuery('')
@@ -21,6 +22,7 @@ const ViewControl = ({
             _hover={{ bg: "#c8c8c8"}}
             _active={{ bg: "#c8c8c8"}}
         ><Icon as={MdCancel} w="24px" h="24px" mr="0.5em" />Clear Filters</Button>
+        */}
         <Flex gap="0.5em">
             <Show above="lg">
                 <Button bg={gridView ? "#a1a1a1" : "#c8c8c8"} onClick={() => setGridView(true)}><Icon as={MdGridView} /></Button> 
