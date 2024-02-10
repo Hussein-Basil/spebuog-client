@@ -106,7 +106,7 @@ const NavbarSLB = () => {
           </a>
         </li>
         <li className="contact-link desktop-only" onClick={toggleSelect}>
-          <a>{language.NAVBAR.CONTACT}</a>
+          <a href="/contact">{language.NAVBAR.CONTACT}</a>
         </li>
         <li className="search-link" onClick={toggleSelect}>
           <a>
