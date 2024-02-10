@@ -72,6 +72,10 @@
     "MEMBERSHIP": "Membership",
     "ABOUT": "About Us"
   },
+  "INSTRUCTORS": {
+    "HEADING": "Find Instructors",
+    "SUBHEADING" : "Explore instructors who presented lectures at our chapter"
+  },
   "COURSES": {
     "HEADLINE": "Courses",
     "SUBHEADLINE": "Grow your skills by studying from our exciting courses. We aim to give our members the most enriching lectures with Oil & Gas top experts.",

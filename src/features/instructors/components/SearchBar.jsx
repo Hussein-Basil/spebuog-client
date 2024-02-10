@@ -4,7 +4,7 @@ import { InputGroup, Input, InputLeftElement, InputRightElement, useDisclosure }
 import { SearchIcon } from '@chakra-ui/icons'
 import { MdFilterList } from 'react-icons/md'
 import FilterModal from './FilterModal'
-
+import { useUser } from "../../../contexts/UserContext";
 
 
 const SearchBar = ({ 
@@ -20,7 +20,9 @@ const SearchBar = ({
     setSortOrder
 }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-
+    // adding language switch functionality to the instructors page
+    const { language } = useUser();
+    console.log(language)
     useEffect(() => {
         let newSpeakers = speakers?.length ? speakers : []
         if (searchQuery) {
@@ -56,8 +58,12 @@ const SearchBar = ({
             sortOrder={sortOrder}
             setSortOrder={setSortOrder}
         />
-        <Heading fontSize="28px" fontWeight="medium">Find Instructors</Heading>
-        <Text fontSize="16px">Explore instructors who presented lectures at our chapter</Text>
+        <Heading fontSize="28px" fontWeight="medium">
+            {language.INSTRUCTORS.HEADING}
+        </Heading>
+        <Text fontSize="16px">
+            {language.INSTRUCTORS.SUBHEADING}
+        </Text>
         <Flex columnGap="1em" mt="1em" flexDir={{base: "column", lg: "row"}}>
             <InputGroup mt="1em" mb="0.5em" w="100%">
                 <Input
