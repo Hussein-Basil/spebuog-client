@@ -1,9 +1,8 @@
 .navbar-menu{
     height: 101% !important;
-    background-color: #0D4C94;
-    opacity: 0.95 ;
+    background-color: #0e488b !important;
     padding-left: 1rem;
-}
+}   
 .navbar-menu > li{
     
     font-size: 1.1rem;
