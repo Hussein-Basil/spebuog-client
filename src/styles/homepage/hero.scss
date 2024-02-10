@@ -8,6 +8,7 @@
     );
     padding-bottom: 50px;
     display: flex;
+    width: 100%;
 
     .hero-content {
       margin-left: auto;
@@ -160,16 +161,11 @@
   }
   div[dir="ltr"] {
     #hero {
-      margin-left: 8rem;
-      margin-right: auto;
-      .hero-video {
-        width: fit-content;
-        transform: unset;
-        left: unset;
-        right: 179px;
+      .hero-content{
+        // this effectavely centers the english text, weird fix for a weird bug
+        margin-right: 40%;
       }
-
-      .hero-swoop {
+            .hero-swoop {
         transform: matrix(-1, 0, 0, 1, 0, 0);
       }
     }

@@ -5,7 +5,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-import WatchButton from '../../../assets/home/watch-button.svg';
+
 import { useUser } from '../../../contexts/UserContext';
 
 const Hero = () => {
@@ -36,10 +36,6 @@ const Hero = () => {
               </Button>
             </LinkOverlay>
           </LinkBox>
-        </div>
-        <div className="hero-video">
-            <img src={WatchButton} alt="Watch Video" fill="white" />
-            <span>{language.HOMEPAGE.HERO.WATCH_VIDEO}</span>
         </div>
         <div className="grid-lines"></div>
         <div className="hero-swoop"></div>

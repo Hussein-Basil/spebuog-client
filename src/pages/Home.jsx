@@ -21,7 +21,12 @@ const Home = () => {
       <Hero />
       <Layout> 
         <Features />
+        {/*
+        commented because they're just empty placeholders for now
+        once a system to fetch courses from sanity is made they will be 
+        uncommented
         <Courses />
+        */}
         <Services />
         <Stats />
         <Mission />
