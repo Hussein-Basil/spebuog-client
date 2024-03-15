@@ -19,7 +19,7 @@ const Hero = () => {
             <span>{language.HOMEPAGE.HERO.HEADLINE_HIGHLIGHTED}</span>
           </h1>
           <p className="hero-subheading">{language.HOMEPAGE.HERO.SUBHEADING}</p>
-          <LinkBox>
+          <LinkBox zIndex={101}>
             <LinkOverlay href="/membership">
               <Button
                 // size={{ base: "md", lg: "huge" }}

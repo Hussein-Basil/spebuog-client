@@ -4,11 +4,13 @@ import { Heading, Text, Flex, Grid, Link, Image } from '@chakra-ui/react'
 import hussein from '../../../assets/officers/hussein_basil.png'
 import ahmed from '../../../assets/officers/ahmed_waleed.png'
 import muna from '../../../assets/officers/muna.png'
-import ali from '../../../assets/officers/ali_salim.png'
 import muqtada from '../../../assets/officers/muqtada_ameen.png'
 import fatima from '../../../assets/officers/fatima.png'
 import yousif from '../../../assets/officers/yousif_raad.png'
 import mohammed from '../../../assets/officers/mohammed_salah.png'
+import abdulwahhab from '../../../assets/officers/abdulwahhab.png'
+import ahmedzuhair from '../../../assets/officers/ahmedzuhair.png'
+import husseinkaram from '../../../assets/officers/husseinkaram.png'
 
 import ResponsiveWidth from '../../../layouts/ResponsiveWidth'
 
@@ -35,12 +37,6 @@ const Team = () => {
             profile: "https://www.linkedin.com/in/munajazaa/"
         },
         {
-            image: ali,
-            name: 'Ali Salim Jaber',
-            position: 'Secretary',
-            profile: ""
-        },
-        {
             image: muqtada,
             name: 'Muqtada Ameen Nadhim',
             position: 'Treasurer',
@@ -65,6 +61,24 @@ const Team = () => {
             position: "Webmaster",
             profile: "https://www.linkedin.com/in/mohamed-salah-270a44271/"
         },
+        {
+            image: abdulwahhab,
+            name: "Abdulwahhab Abdulmunem",
+            position:"Communication & Outreach",
+            profile: "http://linkedin.com/in/abdulwahab-abdulmonem"
+        },
+        {
+            image: ahmedzuhair,
+            name: "Ahmed Zuhair",
+            position:"Communication & Outreach",
+            profile: "http://www.linkedin.com/in/ahmed-zuhair"
+        },
+        {
+            image: husseinkaram,
+            name: "Hussein Karam",
+            position:"Secretary",
+            profile: "https://www.linkedin.com/in/hussein-karam/"
+        }
     ]
 
     const linkMotion = {
